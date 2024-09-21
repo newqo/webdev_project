@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+    
+}
+
+body {
+    background-image: linear-gradient(to top right,#329D9c, #cff4d2, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 100%; /* ปรับขนาดตาม container */
+    max-width: 400px; /* จำกัดความกว้างสูงสุดไม่เกิน 400px */
+    height: auto; /* ทำให้ขนาดโลโก้เป็นอัตราส่วนที่ถูกต้อง */
+    margin-top:30px;
+}
+
+h1 {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.input-login-user{
+    width: 100%; /* ใช้ขนาดเต็มความกว้างของ container */
+    max-width: 450px; /* จำกัดความกว้างสูงสุด */
+    height: 56px;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px; /* ขาดหน่วย px ใน font-size */
+    text-align: center;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 20px;
+    padding: 0 10px;
+}
+.input-login-password {
+    width: 100%; /* ใช้ขนาดเต็มความกว้างของ container */
+    max-width: 450px; /* จำกัดความกว้างสูงสุด */
+    height: 56px;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px; /* ขาดหน่วย px ใน font-size */
+    text-align: center;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 18px;
+    padding: 0 10px;
+}
+
+.login-btn {
+    background-color: transparent;
+    color: black;
+    width: 200px;
+    height: 56px;
+    font-size: 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+    font-weight: bolder;
+    border: solid;
+}
+
+.login-btn:hover {
+    background-color: #205072;
+    color: white;
+    font-weight: bolder;
+    border: solid white;
+}
+
+.register {
+    font-size: 15px;
+    margin-top: 20px;
+    font-weight: lighter;
+    margin-bottom: 20px;
+}
+
+
+/* Media query สำหรับหน้าจอขนาดเล็ก เช่น มือถือ */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 30px; /* ลดขนาดฟอนต์ */
+    }
+    
+    .input-login-user,
+    .input-login-password {
+        max-width: 100%; /* ให้ input เต็มความกว้างหน้าจอ */
+        font-size: 16px; /* ลดขนาดฟอนต์ */
+    }
+
+    .login-btn {
+        width: 100%; /* ปรับปุ่มเต็มความกว้างหน้าจอ */
+        max-width: 200px; /* จำกัดขนาดบนหน้าจอใหญ่ */
+        margin: 10px 10px;
+    }
+
+    .logo img {
+        max-width: 300px; /* ลดขนาดโลโก้บนหน้าจอมือถือ */
+    }
+}
+/* สำหรับหน้าจอ iPad และแท็บเล็ตขนาดกลาง */
+@media (min-width: 768px) and (max-width: 1024px) {
+    h1 {
+        font-size: 36px; /* ขนาดฟอนต์ใหญ่ขึ้นสำหรับ iPad */
+    }
+    
+    .input-login-user,
+    .input-login-password {
+        width: 80%; /* ลดความกว้างลงสำหรับหน้าจอ iPad */
+        max-width: 400px; /* จำกัดขนาด input */
+        font-size: 18px;
+    }
+
+    .login-btn {
+        width: 60%; /* ขยายปุ่มให้พอดีหน้าจอ */
+        max-width: 250px;
+        margin: 10px 10px;
+    }
+
+    .logo img {
+        max-width: 350px; /* ปรับขนาดโลโก้ให้เหมาะสม */
+    }
+
+    .register {
+        font-size: 16px; /* ปรับขนาดฟอนต์ของลิงก์สมัครสมาชิก */
+    }
+}
