@@ -181,7 +181,7 @@ VALUES
 ('1000000000019', 'สมหญิง', 'ใจดี', 'somying@example.com', '0812345696', '1990-07-15', 0, 0, 'password19'),
 ('1000000000020', 'สมฤทัย', 'สุขสันต์', 'somruethai@example.com', '0812345697', '1990-08-15', 0, 1, 'password20'),
 
-('Admin1', 'Admin', 'Admin', 'admin@example.com', '0000000000', '1990-01-01', 1, 0, 'adminpswd');
+('Admin1', 'Admin', 'Admin', 'admin@example.com', '-', '1990-01-01', 1, 0, 'adminpswd');
 
 INSERT INTO Parent_status (parent_status_id, status_description)
 VALUES 
