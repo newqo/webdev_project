@@ -47,7 +47,10 @@ FROM Reservation
 JOIN Users ON Reservation.national_id = Users.national_id 
 JOIN Checklist ON Reservation.checklist_id = Checklist.checklist_id 
 JOIN Scholarship ON Checklist.scholarship_id = Scholarship.scholarship_id 
-JOIN Cost_of_living_status ON Checklist.cost_of_living_id = Cost_of_living_status.cost_of_living_id;
+JOIN Cost_of_living_status ON Checklist.cost_of_living_id = Cost_of_living_status.cost_of_living_id
+ORDER BY 
+Reservation.reserve_date DESC,
+Reservation.reserve_time DESC;
 
 -- q6 จำนวนผู้กู้ของแต่ละคณะ,สาขา
 SELECT Faculty.Faculty_name, Department.Department_name , COUNT(Reservation.reservation_id) AS "จำนวนผู้กู้" 
