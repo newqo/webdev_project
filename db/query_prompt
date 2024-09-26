@@ -1,0 +1,1 @@
+SELECT Parent.* , Users.firstname , Users.lastname FROM Parent JOIN User_Relationship ON User_Relationship.parent_id = Parent.parent_id JOIN Users ON Users.national_id = User_Relationship.national_id;
