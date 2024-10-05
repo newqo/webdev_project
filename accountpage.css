@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    padding-top: 80px;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to top right,#329D9c, #cff4d2, #ffffff);
+
+}
+
+/* nav bar */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #329D9c;
+    z-index: 1000; 
+    padding: 10px 0;
+}
+
+.menu-bar {
+    display: flex;
+    align-items: center;
+    padding: 0 20px; 
+    margin-left: 100px;
+    font-size: 14px;
+}
+
+.menu-text-bar {
+    display: flex;
+    gap: 20px; 
+}
+
+.menu-text-bar a {
+    position: relative;
+    text-decoration: none;
+    color: white; 
+    padding: 5px 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-text-bar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px; 
+    background-color: white; 
+    border-radius: 25px;
+    left: 50%; /* เริ่มต้นจากตรงกลาง */
+    bottom: 0;
+    transition: width 0.3s ease, left 0.3s ease; 
+}
+
+.menu-text-bar a:hover::after {
+    width: 50%; /* ขยายความกว้างเต็มคำ */
+    left: 25%; /* ย้ายจุดเริ่มจากตรงกลางไปทางซ้ายสุด */
+}
+
+.menu-text-bar a:hover {
+    transform: scale(1.1); /* ขยายตัวหนังสือเล็กน้อย */
+    color: white; /* ยังคงสีตัวหนังสือเป็นสีขาว */
+}
+
+.menu-user-bar {
+    margin-left: auto;
+    margin-right: 100px;
+}
+.menu-bar img {
+    margin-right: 20px;
+}
+
+
+/* main */
+
+main {
+    flex-grow: 1;
+    margin: 0px 100px;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: row; /* จัด layout ให้ aside กับ article เรียงกันในแนวนอน */
+    gap: 20px; /* เพิ่มระยะห่างระหว่าง aside กับ article */
+    justify-content: flex-start; /* จัดให้หมวดหมู่เริ่มจากซ้ายสุด */
+}
+
+/* data */
+article {
+    flex-grow: 1;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+}
+
+.form-row {
+    padding: 20px;
+}
+
+/* menu */
+aside {
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    border-radius: 12px;
+}
+.menu-side .section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.menu a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.menu a:hover {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+/* input */
+section {
+    width: 50%;
+    color: #000;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-left: 4px solid #56C596;
+    padding-left: 10px;
+    color: #56C596;
+}
+.section-title-menu {
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 10px;
+    color: black;
+    margin-bottom: 20px;
+}
+
+
+.form-row {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.form-group input, 
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #5DC0A6;
+}
+
+
+/* button */
+button {
+    width: 20%;
+    padding: 10px 0;
+    margin-top:20px;
+    background-color: #5DC0A6;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4DAE8F;
+}
+
+/* footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative; /* ใช้ relative เพื่อให้ footer ทำงานได้ดีกับ flexbox */
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 15px;
+}
