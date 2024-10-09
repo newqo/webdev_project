@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: "Kanit", sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+ul.menu-bar {
+    list-style-type: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    overflow: hidden;
+    background: linear-gradient(to right,#7BE495,#CFF4D2);
+    
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media (min-width : 1024px){
+    ul.menu-bar{
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+    .menu-bar {
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+    section.announcement-image{
+        height: 300px;
+        background-color: gray;
+    }
+
+    main{
+        margin: 100px;
+    }
+}
+
+.checklist ,.reservation{
+    border: 1px solid black;
+    margin-bottom: 2%;
+    padding: 2%;
+}
+
+/* section.reservation_and_checklist_announcement article.reservation{
+    padding: 2%;
+    border: 1px solid black;
+    margin-bottom: 2%;
+} */
+
+article a {
+    text-decoration: none;
+}
+
+
+.reservation_and_checklist_announcement, .service-broad , .contact-broad{
+    text-align: center;
+}
+
+.location , .Announce-box, .reservation ,.checklist{
+    text-align: left;
+}
+
+
+.location>h2 , .location>p{
+    text-align: center;
+}
+
+.contact-broad {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+}
+
+.contact-broad h1 {
+    flex-basis: 100%; 
+    text-align: center;
+}
+
+.location {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 30% ;
+    margin: 10px; 
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+.menu-bar li a img {
+    width: 48px;
+    height: 48px;
+    display: none;
+}
+
+footer {
+    background-color: green;
+}

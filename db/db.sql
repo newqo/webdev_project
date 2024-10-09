@@ -102,17 +102,30 @@ CREATE TABLE Cost_of_living_status (
     PRIMARY KEY (cost_of_living_id)
 );
 
+DROP TABLE IF EXISTS `Post_Duration`;
+CREATE TABLE Post_Duration (
+    Duration_id VARCHAR(2) NOT NULL,
+    Start_date DATETIME NOT NULL,
+    End_date DATETIME NOT NULL,
+    Checklist TINYINT(1) NOT NULL,
+    Reservation TINYINT(1) NOT NULL,
+
+    PRIMARY KEY (Duration_id)
+);
+
 DROP TABLE IF EXISTS `Checklist`;
 CREATE TABLE Checklist (
     checklist_id INT AUTO_INCREMENT NOT NULL,
     national_id VARCHAR(13) NOT NULL,
     scholarship_id VARCHAR(10) NOT NULL,
     cost_of_living_id TINYINT(1) NOT NULL,
+    duration_id VARCHAR(2) NOT NULL,
 
     PRIMARY KEY (checklist_id),
     Foreign Key (national_id) REFERENCES Users(national_id),
     Foreign Key (scholarship_id) REFERENCES Scholarship(scholarship_id),
-    Foreign Key (cost_of_living_id) REFERENCES Cost_of_living_status(cost_of_living_id)
+    Foreign Key (cost_of_living_id) REFERENCES Cost_of_living_status(cost_of_living_id),
+    Foreign key (duration_id) REFERENCES Post_Duration(Duration_id)
 );
 
 DROP TABLE IF EXISTS `Reservation`;
@@ -123,33 +136,12 @@ CREATE TABLE Reservation (
     queue_no INT NOT NULL,
     checklist_id INT NOT NULL,
     national_id VARCHAR(13) NOT NULL,
+    duration_id VARCHAR(2) NOT NULL,
 
     PRIMARY KEY (reservation_id),
     Foreign Key (checklist_id) REFERENCES Checklist(checklist_id),
-    Foreign Key (national_id) REFERENCES Users(national_id)
-);
-
-DROP TABLE IF EXISTS `Announcement_category`;
-CREATE TABLE Announcement_category (
-    announcement_category_id INT AUTO_INCREMENT NOT NULL,
-    announcement_category_desc VARCHAR(100) COLLATE utf8_unicode_ci NOT NULL,
-
-    PRIMARY KEY (announcement_category_id)
-);
-
-DROP TABLE IF EXISTS `Announcement`;
-CREATE TABLE Announcement (
-    announcement_id INT AUTO_INCREMENT NOT NULL,
-    announcement_title VARCHAR(100) NOT NULL,
-    announcement_cate INT,
-    announcement_detail VARCHAR(1000),
-    announcement_time DATETIME,
-    announcement_status INT NOT NULL,
-    national_id VARCHAR(13) NOT NULL,
-
-    PRIMARY KEY (announcement_id),
-    Foreign Key (announcement_cate) REFERENCES Announcement_category(announcement_category_id),
-    Foreign Key (national_id) REFERENCES Users(national_id)
+    Foreign Key (national_id) REFERENCES Users(national_id),
+    Foreign key (duration_id) REFERENCES Post_Duration(Duration_id)
 );
 
 -- INSERT VALUE INTO User_category Table
@@ -188,8 +180,7 @@ VALUES
 ('0', 'อาศัยอยู่กับบิดา'),
 ('1', 'อาศัยอยู่กับมารดา'),
 ('2', 'อาศัยอยู่ร่วมกับบิดาและมารดา'),
-('3','อาศัยอยู่กับผู้ปกครอง'),
-('4','ปกครองตนเอง');
+('3','อาศัยอยู่กับผู้ปกครอง');
 
 INSERT INTO Parent (firstname, lastname, phone_num, career, income, parent_status_id)
 VALUES
@@ -198,7 +189,7 @@ VALUES
 ('เนตร', 'พิมพ์', '0812345680', 'ครู', 40000, 2),
 ('แป้ง', 'หอมหวล', '0812345681', 'นักธุรกิจ', 70000, 2),
 ('ดีใจ', 'รัตนา', '0812345683', 'พยาบาล', 48000, 3),
-('อิ่ม', 'สุขสม', '0812345684', 'ช่างยนต์', 52000, 4),
+('อิ่ม', 'สุขสม', '0812345684', 'ช่างยนต์', 52000, 1),
 ('ดิน', 'ดีเลิศ', '0812345685', 'ศิลปิน', 65000, 0),
 ('อารมณ์', 'ขันทอง', '0812345686', 'พ่อค้า', 49000, 3),
 ('พลอย', 'สวยงาม', '0812345688', 'นักวิทยาศาสตร์', 71000, 2),
@@ -208,15 +199,15 @@ VALUES
 ('สบาย', 'สุขใจ', '0812345693', 'นักกีฬา', 51000, 0),
 ('มิตร', 'สัมพันธ์', '0812345694', 'เกษตรกร', 44000, 2),
 ('กุลธิดา', 'ประทุม', '0812345695', 'ธุรกิจส่วนตัว', 80000, 2),
-('ยิ้ม', 'สันติ', '0812345696', 'ผู้จัดการ', 60000, 4),
+('ยิ้ม', 'สันติ', '0812345696', 'ผู้จัดการ', 60000, 1),
 ('สมศรี', 'ดีใจ', '0812345698', 'นักกฎหมาย', 60000, 2),
 ('สมนึก', 'สุขใจ', '0812345699', 'นักดนตรี', 45000, 2),
 ('สายฟ้า', 'รวี', '0812345700', 'นักบิน', 70000, 1),
 ('ชล', 'สุขสม', '0812345702', 'นักพัฒนา', 60000, 0),
-('พรชัย', 'ปรีดา', '0812345703', 'วิศวกรโยธา', 55000, 4),
+('พรชัย', 'ปรีดา', '0812345703', 'วิศวกรโยธา', 55000, 1),
 ('วาสนา', 'สมบัติ', '0812345704', 'นักบัญชี', 49000, 3),
 ('ชุติมา', 'ศรีสวัสดิ์', '0812345705', 'เภสัชกร', 68000, 3),
-('วรชัย', 'รุ่งโรจน์', '0812345706', 'ทนายความ', 72000, 4);
+('วรชัย', 'รุ่งโรจน์', '0812345706', 'ทนายความ', 72000, 1);
 
 INSERT INTO User_Relationship (national_id, parent_id)
 VALUES
@@ -258,12 +249,6 @@ INSERT INTO Cost_of_living_status (Cost_of_living_id,amount)
 VALUES
 (0,0),
 (1,3000);
-
-INSERT INTO Announcement_category (announcement_category_desc)
-VALUES 
-("ประกาศ Checklist"),
-("ประกาศการจอง"),
-("ประกาศข่าวสาร");
 
 INSERT INTO Faculty (Faculty_id,Faculty_name)
 VALUES
@@ -417,55 +402,54 @@ INSERT INTO Education (std_ID, std_education_year, national_id, Faculty_id, Depa
 ('6504020001', 1, '1000000000019', '04', '0402'),
 ('6504020002', 1, '1000000000020', '04', '0402');
 
-INSERT INTO Checklist (national_id, scholarship_id, cost_of_living_id) 
-VALUES
-('1000000000001', '1', 1),
-('1000000000002', '2', 1),
-('1000000000003', '3', 1),
-('1000000000004', '4', 1),
-('1000000000005', '5', 1),
-('1000000000006', '6', 1),
-('1000000000007', '1', 1),
-('1000000000008', '2', 1),
-('1000000000009', '3', 1),
-('1000000000010', '4', 1),
-('1000000000011', '5', 1),
-('1000000000012', '6', 1),
-('1000000000013', '1', 1),
-('1000000000014', '2', 1),
-('1000000000015', '3', 1),
-('1000000000016', '4', 1),
-('1000000000017', '5', 1),
-('1000000000018', '6', 1),
-('1000000000019', '1', 1),
-('1000000000020', '2', 1);
-
-
-INSERT INTO Reservation (reserve_date, reserve_time, queue_no, checklist_id, national_id)
-VALUES
-('2024-10-01', '09:00:00', 1, 1, '1000000000001'),
-('2024-10-01', '09:30:00', 2, 2, '1000000000002'),
-('2024-10-02', '10:00:00', 3, 3, '1000000000003'),
-('2024-10-02', '10:30:00', 4, 4, '1000000000004'),
-('2024-10-03', '11:00:00', 5, 5, '1000000000005'),
-('2024-10-04', '11:30:00', 6, 6, '1000000000006'),
-('2024-10-05', '12:00:00', 7, 1, '1000000000007'),
-('2024-10-06', '12:30:00', 8, 2, '1000000000008'),
-('2024-11-01', '13:00:00', 9, 3, '1000000000009'),
-('2024-11-01', '13:30:00', 10, 4, '1000000000010'),
-('2024-11-02', '14:00:00', 11, 5, '1000000000011'),
-('2024-11-03', '14:30:00', 12, 6, '1000000000012'),
-('2024-11-05', '15:00:00', 13, 1, '1000000000013'),
-('2024-11-07', '15:30:00', 14, 2, '1000000000014'),
-('2024-12-04', '09:00:00', 15, 3, '1000000000015'),
-('2024-12-05', '12:30:00', 16, 4, '1000000000016'),
-('2024-12-09', '13:00:00', 17, 5, '1000000000017'),
-('2024-12-12', '11:30:00', 18, 6, '1000000000018'),
-('2024-12-15', '10:00:00', 19, 1, '1000000000019'),
-('2024-12-16', '13:30:00', 20, 2, '1000000000020');
-
-INSERT INTO Announcement (announcement_title, announcement_cate, announcement_detail, announcement_time, announcement_status, national_id)
+INSERT INTO Post_Duration (Duration_id, Start_date, End_date, Checklist, Reservation)
 VALUES 
-('ประกาศ Checklist', 1, 'รายละเอียดสำหรับประกาศ Checklist นี้.', '2024-09-26 10:00:00', 1, 'Admin1'),
-('ประกาศการจอง', 2, 'รายละเอียดสำหรับประกาศการจองนี้.', '2024-09-20 15:30:00', 1, 'Admin1'),
-('ประกาศทั่วไป', 3, 'นี่คือประกาศทั่วไปเกี่ยวกับระบบ.', '2024-10-01 09:00:00', 1, 'Admin1');
+('C1', '2024-10-07 10:00:00', '2024-10-31 23:59:00', 1, 0),
+('R1', '2024-10-17 10:00:00', '2024-10-31 23:59:00', 0, 1);
+
+INSERT INTO Checklist (national_id, scholarship_id, cost_of_living_id,duration_id) 
+VALUES
+('1000000000001', '1', 1,'C1'),
+('1000000000002', '2', 1,'C1'),
+('1000000000003', '3', 1,'C1'),
+('1000000000004', '4', 1,'C1'),
+('1000000000005', '5', 1,'C1'),
+('1000000000006', '6', 1,'C1'),
+('1000000000007', '1', 1,'C1'),
+('1000000000008', '2', 1,'C1'),
+('1000000000009', '3', 1,'C1'),
+('1000000000010', '4', 1,'C1'),
+('1000000000011', '5', 1,'C1'),
+('1000000000012', '6', 1,'C1'),
+('1000000000013', '1', 1,'C1'),
+('1000000000014', '2', 1,'C1'),
+('1000000000015', '3', 1,'C1'),
+('1000000000016', '4', 1,'C1'),
+('1000000000017', '5', 1,'C1'),
+('1000000000018', '6', 1,'C1'),
+('1000000000019', '1', 1,'C1'),
+('1000000000020', '2', 1,'C1');
+
+
+INSERT INTO Reservation (reserve_date, reserve_time, queue_no, checklist_id ,national_id, duration_id)
+VALUES
+('2024-10-01', '09:00:00', 1, 1, '1000000000001','R1'),
+('2024-10-01', '13:00:00', 2, 2, '1000000000002','R1'),
+('2024-10-02', '09:00:00', 3, 3, '1000000000003','R1'),
+('2024-10-02', '13:00:00', 4, 4, '1000000000004','R1'),
+('2024-10-03', '09:00:00', 5, 5, '1000000000005','R1'),
+('2024-10-04', '13:00:00', 6, 6, '1000000000006','R1'),
+('2024-10-05', '09:00:00', 7, 7, '1000000000007','R1'),
+('2024-10-06', '13:00:00', 8, 8, '1000000000008','R1'),
+('2024-11-01', '09:00:00', 9, 9, '1000000000009','R1'),
+('2024-11-01', '13:00:00', 10, 10, '1000000000010','R1'),
+('2024-11-02', '09:00:00', 11, 11, '1000000000011','R1'),
+('2024-11-03', '13:00:00', 12, 12, '1000000000012','R1'),
+('2024-11-05', '09:00:00', 13, 13, '1000000000013','R1'),
+('2024-11-07', '13:00:00', 14, 14, '1000000000014','R1'),
+('2024-12-04', '09:00:00', 15, 15, '1000000000015','R1'),
+('2024-12-05', '13:00:00', 16, 16, '1000000000016','R1'),
+('2024-12-09', '09:00:00', 17, 17, '1000000000017','R1'),
+('2024-12-12', '13:00:00', 18, 18, '1000000000018','R1'),
+('2024-12-15', '09:00:00', 19, 19, '1000000000019','R1'),
+('2024-12-16', '13:00:00', 20, 20, '1000000000020','R1');

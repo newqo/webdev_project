@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+    
+}
+
+body {
+    background-image: linear-gradient(to top right,#329D9c, #cff4d2, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover; /* พื้นหลังครอบคลุม */
+    background-attachment: fixed; /* พื้นหลังคงที่ */
+    
+}
+
+.container {
+    width: 50%;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin:10px 0px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-left: 4px solid #56C596;
+    padding-left: 10px;
+    color: #56C596;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #5DC0A6;
+}
+
+select {
+    padding-right: 20px;
+}
+
+button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #5DC0A6;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4DAE8F;
+}
+
+.form-row img{
+    text-align: center;
+    width: 100%;
+}
+
+.radio-income{
+    margin:10px 0px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+/* Media Query for Mobile Devices */
+@media (max-width: 430px) {
+    .container {
+        width: 90%; /* Make container wider on small screens */
+        padding: 15px; /* Reduce padding */
+    }
+
+    h1 {
+        font-size: 24px; /* Smaller heading size */
+    }
+
+    .section-title {
+        font-size: 16px; /* Adjust section title size */
+    }
+
+    .form-row {
+        flex-direction: column; /* Stack form fields vertically */
+    }
+
+    .form-group {
+        width: 100%; /* Ensure full width */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select {
+        font-size: 12px; /* Smaller input font size */
+        padding: 6px 10px; /* Reduce padding in inputs */
+    }
+
+    button {
+        font-size: 14px; /* Smaller button font size */
+    }
+}
+
+/* Media Query for iPads (Portrait) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        width: 80%; /* Adjust container width for iPad */
+    }
+
+    h1 {
+        font-size: 26px; /* Slightly smaller heading size */
+    }
+
+    .section-title {
+        font-size: 17px; /* Adjust section title size */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select {
+        font-size: 14px; /* Keep input font size consistent */
+        padding: 8px 12px; /* Keep padding the same */
+    }
+
+    button {
+        font-size: 15px; /* Adjust button font size */
+    }
+}
+
+
+
+ 
+

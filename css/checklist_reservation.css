@@ -1,0 +1,140 @@
+*{
+    
+    font-family: 'Kanit', sans-serif;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+}
+
+body{
+    background-image: linear-gradient(to top right, #329D9c, #cff4d2, #ffffff);
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* ปรับให้สูงเต็มหน้าจอ */
+    background-repeat: no-repeat;
+    background-size: cover; /* พื้นหลังครอบคลุม */
+    background-attachment: fixed; /* พื้นหลังคงที่ */
+    align-content: center;
+}
+
+.container{
+    margin: 10px 100px;
+    padding: 12px 25px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+select{
+    width: 70%;
+    margin-left: 3%;
+    padding-left: 1%;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+input{
+    width: 80px;
+    margin-left: 50px;
+    border: 1px solid;
+    border-radius: 25px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.form-container+div+label{
+    display: inline-block;
+}
+
+div.setcenter {
+    margin-top: 2%;
+}
+
+.setcenter{
+    justify-content: center;
+    text-align: center;
+}
+
+.addInformation{
+    background-color: #329D9c;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding-left: 3%;
+    padding-right: 3%;
+    font-size: 16px;
+}
+
+table,th,td{
+    border: 1px solid black;
+    width: 100%;
+}
+
+table tr .sun ,.mon ,.tue ,.wed ,.thu ,.fri ,.sat{
+    width: 14%;
+    text-align: center;
+}
+
+th{
+    background-color: #80d2d1;
+    font-size: 18px;
+}
+
+table{
+    border-collapse: separate;
+    overflow: hidden;
+    border-spacing: 0;
+}
+
+.doc-column{
+    width: 60%;
+    padding-left: 1%;
+}
+
+.amount-column{
+    width: 10%;
+    text-align: center;
+}
+
+.condition-column{
+    width: 30%;
+    padding-left: 1%;
+}
+
+table#calendar td{
+    padding-bottom: 8%;
+}
+
+@media only screen and (max-width: 1024px){
+    .container{
+        margin: 10px 50px;
+    }
+    th,td{
+        font-size: 14px;
+    }
+    td{
+        padding-bottom: 5%;
+    }
+    
+}
+
+@media only screen and (max-width: 430px){
+    .container{
+        margin: 10px 25px;
+    }
+    th,td{
+        font-size: 12px;
+    }
+    td{
+        padding-bottom: 10%;
+    }
+    div #complete_reservation{
+        flex-direction: column;
+    }
+}
