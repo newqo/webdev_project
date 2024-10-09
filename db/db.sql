@@ -109,6 +109,7 @@ CREATE TABLE Post_Duration (
     End_date DATETIME NOT NULL,
     Checklist TINYINT(1) NOT NULL,
     Reservation TINYINT(1) NOT NULL,
+    Event_status TINYINT(1) NOT NULL,
 
     PRIMARY KEY (Duration_id)
 );
@@ -402,10 +403,10 @@ INSERT INTO Education (std_ID, std_education_year, national_id, Faculty_id, Depa
 ('6504020001', 1, '1000000000019', '04', '0402'),
 ('6504020002', 1, '1000000000020', '04', '0402');
 
-INSERT INTO Post_Duration (Duration_id, Start_date, End_date, Checklist, Reservation)
+INSERT INTO Post_Duration (Duration_id, Start_date, End_date, Checklist, Reservation, Event_status)
 VALUES 
-('C1', '2024-10-07 10:00:00', '2024-10-31 23:59:00', 1, 0),
-('R1', '2024-10-17 10:00:00', '2024-10-31 23:59:00', 0, 1);
+('C1', '2024-10-07 10:00:00', '2024-10-31 23:59:00', 1, 0, 1),
+('R1', '2024-10-17 10:00:00', '2024-10-31 23:59:00', 0, 1, 1);
 
 INSERT INTO Checklist (national_id, scholarship_id, cost_of_living_id,duration_id) 
 VALUES
