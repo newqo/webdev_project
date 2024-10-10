@@ -6,19 +6,30 @@ CREATE TABLE User_category(
     PRIMARY KEY (user_cate_id)
 );
 
+DROP TABLE IF EXISTS `Pre_name`;
+CREATE TABLE Pre_name(
+    Pre_name_id INT AUTO_INCREMENT NOT NULL,
+    Pre_name_desc VARCHAR(20) NOT NULL,
+
+    PRIMARY KEY (Pre_name_id)
+);
+
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE Users (
     national_id VARCHAR(13) NOT NULL,
+    Pre_name_id INT,
     firstname VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
     lastname VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
     Email VARCHAR(50) COLLATE utf8_unicode_ci,
     phone_num VARCHAR(10), 
     birthdate DATE,
+    Address VARCHAR(200),
     user_role TINYINT(1),
     user_cate_id TINYINT(1) NOT NULL,
     passwd VARCHAR(100),
 
     PRIMARY KEY (national_id),
+    FOREIGN KEY (Pre_name_id) REFERENCES Pre_name(Pre_name_id),
     FOREIGN KEY (user_cate_id) REFERENCES User_category(user_cate_id)
 );
 
@@ -40,18 +51,27 @@ CREATE TABLE Department (
     FOREIGN KEY (Faculty_id) REFERENCES Faculty(Faculty_id)
 );
 
+DROP TABLE IF EXISTS `Education_Level_Category`;
+CREATE TABLE Education_Level_Category(
+    ed_category_id INT AUTO_INCREMENT NOT NULL,
+    ed_desc VARCHAR(30) COLLATE utf8_unicode_ci NOT NULL,
+
+    PRIMARY KEY (ed_category_id)
+);
+
 DROP TABLE IF EXISTS `Education`;
 CREATE TABLE Education (
     std_ID VARCHAR(13),
-    std_education_year TINYINT CHECK (std_education_year BETWEEN 1 AND 8),
     national_id VARCHAR(13) NOT NULL,
     Faculty_id VARCHAR(2) NOT NULL,
     Department_id VARCHAR(4) NOT NULL,
+    Education_Level INT,
 
     PRIMARY KEY (std_ID),
     FOREIGN KEY (national_id) REFERENCES Users(national_id),
     FOREIGN KEY (Faculty_id) REFERENCES Faculty(Faculty_id),
-    Foreign Key (Department_id) REFERENCES Department(Department_id)
+    Foreign Key (Department_id) REFERENCES Department(Department_id),
+    FOREIGN KEY (Education_Level) REFERENCES Education_Level_Category(ed_category_id)
 );
 
 DROP TABLE IF EXISTS `Parent_status`;
@@ -62,18 +82,30 @@ CREATE TABLE Parent_status (
     PRIMARY KEY (parent_status_id)
 );
 
+DROP TABLE IF EXISTS `Income_Category`;
+CREATE TABLE Income_Category (
+    income_cate_id INT AUTO_INCREMENT NOT NULL,
+    income_cate_desc VARCHAR(30) NOT NULL,
+
+    PRIMARY KEY (income_cate_id)
+);
+
 DROP TABLE IF EXISTS `Parent`;
 CREATE TABLE Parent (
     parent_id INT AUTO_INCREMENT NOT NULL,
+    Pre_name_id INT,
     firstname VARCHAR(50) COLLATE utf8_unicode_ci,
     lastname VARCHAR(50) COLLATE utf8_unicode_ci,
     phone_num VARCHAR(10),
     career VARCHAR(50),
     income INT,
+    income_cate_id INT,
     parent_status_id VARCHAR(10) NOT NULL,
 
     PRIMARY KEY (parent_id),
-    Foreign Key (parent_status_id) REFERENCES Parent_status(parent_status_id)
+    FOREIGN KEY (Pre_name_id) REFERENCES Pre_name(Pre_name_id),
+    FOREIGN KEY (income_cate_id) REFERENCES Income_Category(income_cate_id),
+    FOREIGN Key (parent_status_id) REFERENCES Parent_status(parent_status_id)
 );
 
 DROP TABLE IF EXISTS `User_Relationship`;
@@ -145,36 +177,48 @@ CREATE TABLE Reservation (
     Foreign key (duration_id) REFERENCES Post_Duration(Duration_id)
 );
 
+INSERT INTO Pre_name(Pre_name_desc)
+VALUES
+('นาย'),
+('นางสาว'),
+('นาง');
+
 -- INSERT VALUE INTO User_category Table
 INSERT INTO User_category(user_cate_id,category_desc)
 VALUES 
 (0,"ผู้กู้รายใหม่"),
 (1,"ผู้กู้รายเก่า");
 
-INSERT INTO Users (national_id, firstname, lastname, Email, phone_num, birthdate, user_role, user_cate_id, passwd)
+INSERT INTO Users (national_id, pre_name_id, firstname, lastname, Email, phone_num, birthdate, user_role, user_cate_id, passwd)
 VALUES
-('1000000000001', 'สมชาย', 'ใจดี', 'somchai@example.com', '0812345678', '1990-01-01', 0, 0, 'password1'),
-('1000000000002', 'สมศรี', 'ใจงาม', 'somsri@example.com', '0812345679', '1990-02-01', 0, 1, 'password2'),
-('1000000000003', 'สมปอง', 'มีชัย', 'sompong@example.com', '0812345680', '1990-03-01', 0, 1, 'password3'),
-('1000000000004', 'สมหวัง', 'สุขสม', 'somwang@example.com', '0812345681', '1990-04-01', 0, 1, 'password4'), 
-('1000000000005', 'สมศักดิ์', 'เจริญรุ่ง', 'somsak@example.com', '0812345682', '1990-05-01', 0, 0, 'password5'),
-('1000000000006', 'สมบัติ', 'อยู่ดี', 'sombat@example.com', '0812345683', '1990-06-01', 0, 1, 'password6'),
-('1000000000007', 'สมควร', 'เจริญสุข', 'somkuan@example.com', '0812345684', '1990-07-01', 0, 0, 'password7'),
-('1000000000008', 'สมใจ', 'อยู่สุข', 'somjai@example.com', '0812345685', '1990-08-01', 0, 1, 'password8'),
-('1000000000009', 'สมคิด', 'รักดี', 'somkid@example.com', '0812345686', '1990-09-01', 0, 0, 'password9'),
-('1000000000010', 'สมหมาย', 'สวยงาม', 'sommai@example.com', '0812345687', '1990-10-01', 0, 1, 'password10'), 
-('1000000000011', 'สมจิต', 'สุขสันต์', 'somjit@example.com', '0812345688', '1990-11-01', 0, 0, 'password11'), 
-('1000000000012', 'สมร', 'ใจดี', 'somron@example.com', '0812345689', '1990-12-01', 0, 1, 'password12'),
-('1000000000013', 'สมฤดี', 'เจริญก้าวหน้า', 'somruedee@example.com', '0812345690', '1990-01-15', 0, 0, 'password13'), 
-('1000000000014', 'สมบุญ', 'อยู่สุข', 'sombun@example.com', '0812345691', '1990-02-15', 0, 1, 'password14'), 
-('1000000000015', 'สมบูรณ์', 'ใจกล้า', 'sombunr@example.com', '0812345692', '1990-03-15', 0, 0, 'password15'),
-('1000000000016', 'สมรัก', 'อยู่ดี', 'somrak@example.com', '0812345693', '1990-04-15', 0, 1, 'password16'), 
-('1000000000017', 'สมพงษ์', 'สมหมาย', 'somphong@example.com', '0812345694', '1990-05-15', 0, 1, 'password17'), 
-('1000000000018', 'สมชาย', 'เจริญสุข', 'somchai2@example.com', '0812345695', '1990-06-15', 0, 1, 'password18'), 
-('1000000000019', 'สมหญิง', 'ใจดี', 'somying@example.com', '0812345696', '1990-07-15', 0, 0, 'password19'),
-('1000000000020', 'สมฤทัย', 'สุขสันต์', 'somruethai@example.com', '0812345697', '1990-08-15', 0, 1, 'password20'),
+('1000000000001',1,'สมชาย', 'ใจดี', 'somchai@example.com', '0812345678', '1990-01-01', 0, 0, 'password1'),
+('1000000000002',2, 'สมศรี', 'ใจงาม', 'somsri@example.com', '0812345679', '1990-02-01', 0, 1, 'password2'),
+('1000000000003',1, 'สมปอง', 'มีชัย', 'sompong@example.com', '0812345680', '1990-03-01', 0, 1, 'password3'),
+('1000000000004',1, 'สมหวัง', 'สุขสม', 'somwang@example.com', '0812345681', '1990-04-01', 0, 1, 'password4'), 
+('1000000000005',1, 'สมศักดิ์', 'เจริญรุ่ง', 'somsak@example.com', '0812345682', '1990-05-01', 0, 0, 'password5'),
+('1000000000006',1, 'สมบัติ', 'อยู่ดี', 'sombat@example.com', '0812345683', '1990-06-01', 0, 1, 'password6'),
+('1000000000007',1, 'สมควร', 'เจริญสุข', 'somkuan@example.com', '0812345684', '1990-07-01', 0, 0, 'password7'),
+('1000000000008',1, 'สมใจ', 'อยู่สุข', 'somjai@example.com', '0812345685', '1990-08-01', 0, 1, 'password8'),
+('1000000000009',1, 'สมคิด', 'รักดี', 'somkid@example.com', '0812345686', '1990-09-01', 0, 0, 'password9'),
+('1000000000010',1, 'สมหมาย', 'สวยงาม', 'sommai@example.com', '0812345687', '1990-10-01', 0, 1, 'password10'), 
+('1000000000011',2, 'สมจิต', 'สุขสันต์', 'somjit@example.com', '0812345688', '1990-11-01', 0, 0, 'password11'), 
+('1000000000012',1, 'สมร', 'ใจดี', 'somron@example.com', '0812345689', '1990-12-01', 0, 1, 'password12'),
+('1000000000013',2, 'สมฤดี', 'เจริญก้าวหน้า', 'somruedee@example.com', '0812345690', '1990-01-15', 0, 0, 'password13'), 
+('1000000000014',2, 'สมบุญ', 'อยู่สุข', 'sombun@example.com', '0812345691', '1990-02-15', 0, 1, 'password14'), 
+('1000000000015',1, 'สมบูรณ์', 'ใจกล้า', 'sombunr@example.com', '0812345692', '1990-03-15', 0, 0, 'password15'),
+('1000000000016',1, 'สมรัก', 'อยู่ดี', 'somrak@example.com', '0812345693', '1990-04-15', 0, 1, 'password16'), 
+('1000000000017',1, 'สมพงษ์', 'สมหมาย', 'somphong@example.com', '0812345694', '1990-05-15', 0, 1, 'password17'), 
+('1000000000018',1, 'สมชาย', 'เจริญสุข', 'somchai2@example.com', '0812345695', '1990-06-15', 0, 1, 'password18'), 
+('1000000000019',2, 'สมหญิง', 'ใจดี', 'somying@example.com', '0812345696', '1990-07-15', 0, 0, 'password19'),
+('1000000000020',2, 'สมฤทัย', 'สุขสันต์', 'somruethai@example.com', '0812345697', '1990-08-15', 0, 1, 'password20'),
 
-('Admin1', 'Admin', 'Admin', 'admin@example.com', '-', '1990-01-01', 1, 0, 'adminpswd');
+('Admin1',NULL,'Admin', 'Admin', 'admin@example.com', '-', '1990-01-01', 1, 0, 'adminpswd');
+
+INSERT INTO Income_Category(income_cate_desc)
+VALUES
+('มีรายได้ประจำ'),
+('มีรายได้ไม่ประจำ'),
+('ไม่มีรายได้');
 
 INSERT INTO Parent_status (parent_status_id, status_description)
 VALUES 
@@ -183,32 +227,32 @@ VALUES
 ('2', 'อาศัยอยู่ร่วมกับบิดาและมารดา'),
 ('3','อาศัยอยู่กับผู้ปกครอง');
 
-INSERT INTO Parent (firstname, lastname, phone_num, career, income, parent_status_id)
+INSERT INTO Parent (pre_name_id, firstname, lastname, phone_num, career, income,income_cate_id, parent_status_id)
 VALUES
-('ก้อง', 'กรุณา', '0812345678', 'วิศวกร', 50000, 0),
-('ปาล์ม', 'นภัส', '0812345679', 'แพทย์', 60000, 1),
-('เนตร', 'พิมพ์', '0812345680', 'ครู', 40000, 2),
-('แป้ง', 'หอมหวล', '0812345681', 'นักธุรกิจ', 70000, 2),
-('ดีใจ', 'รัตนา', '0812345683', 'พยาบาล', 48000, 3),
-('อิ่ม', 'สุขสม', '0812345684', 'ช่างยนต์', 52000, 1),
-('ดิน', 'ดีเลิศ', '0812345685', 'ศิลปิน', 65000, 0),
-('อารมณ์', 'ขันทอง', '0812345686', 'พ่อค้า', 49000, 3),
-('พลอย', 'สวยงาม', '0812345688', 'นักวิทยาศาสตร์', 71000, 2),
-('เมฆ', 'จันทร์เจ้า', '0812345689', 'นักเขียน', 43000, 2),
-('น้ำฟ้า', 'มาลี', '0812345690', 'นักจิตวิทยา', 47000, 3),
-('ทราย', 'นิลรัตน์', '0812345691', 'ช่างภาพ', 60000, 1),
-('สบาย', 'สุขใจ', '0812345693', 'นักกีฬา', 51000, 0),
-('มิตร', 'สัมพันธ์', '0812345694', 'เกษตรกร', 44000, 2),
-('กุลธิดา', 'ประทุม', '0812345695', 'ธุรกิจส่วนตัว', 80000, 2),
-('ยิ้ม', 'สันติ', '0812345696', 'ผู้จัดการ', 60000, 1),
-('สมศรี', 'ดีใจ', '0812345698', 'นักกฎหมาย', 60000, 2),
-('สมนึก', 'สุขใจ', '0812345699', 'นักดนตรี', 45000, 2),
-('สายฟ้า', 'รวี', '0812345700', 'นักบิน', 70000, 1),
-('ชล', 'สุขสม', '0812345702', 'นักพัฒนา', 60000, 0),
-('พรชัย', 'ปรีดา', '0812345703', 'วิศวกรโยธา', 55000, 1),
-('วาสนา', 'สมบัติ', '0812345704', 'นักบัญชี', 49000, 3),
-('ชุติมา', 'ศรีสวัสดิ์', '0812345705', 'เภสัชกร', 68000, 3),
-('วรชัย', 'รุ่งโรจน์', '0812345706', 'ทนายความ', 72000, 1);
+(1,'ก้อง', 'กรุณา', '0812345678', 'วิศวกร', 50000, 1,0),
+(1,'ปาล์ม', 'นภัส', '0812345679', 'แพทย์', 60000,1, 1),
+(2,'เนตร', 'พิมพ์', '0812345680', 'ครู', 40000,2,2),
+(3,'แป้ง', 'หอมหวล', '0812345681', 'นักธุรกิจ', 70000,2, 2),
+(1,'ดีใจ', 'รัตนา', '0812345683', 'พยาบาล', 48000,1, 3),
+(1,'อิ่ม', 'สุขสม', '0812345684', 'ช่างยนต์', 52000,1, 1),
+(1,'ดิน', 'ดีเลิศ', '0812345685', 'ศิลปิน', 65000,1, 0),
+(1,'อารมณ์', 'ขันทอง', '0812345686', 'พ่อค้า', 49000,1, 3),
+(3,'พลอย', 'สวยงาม', '0812345688', 'นักวิทยาศาสตร์', 71000,1, 2),
+(1,'เมฆ', 'จันทร์เจ้า', '0812345689', 'นักเขียน', 43000,2, 2),
+(2,'น้ำฟ้า', 'มาลี', '0812345690', 'นักจิตวิทยา', 47000,2, 3),
+(2,'ทราย', 'นิลรัตน์', '0812345691', 'ช่างภาพ', 60000,1, 1),
+(1,'สบาย', 'สุขใจ', '0812345693', 'นักกีฬา', 51000,1, 0),
+(1,'มิตร', 'สัมพันธ์', '0812345694', 'เกษตรกร', 44000,1, 2),
+(3,'กุลธิดา', 'ประทุม', '0812345695', 'ธุรกิจส่วนตัว', 80000,2, 2),
+(1,'ยิ้ม', 'สันติ', '0812345696', 'ผู้จัดการ', 60000,2, 1),
+(1,'สมศรี', 'ดีใจ', '0812345698', 'นักกฎหมาย', 60000,1, 2),
+(1,'สมนึก', 'สุขใจ', '0812345699', 'นักดนตรี', 45000,1, 2),
+(1,'สายฟ้า', 'รวี', '0812345700', 'นักบิน', 70000,2, 1),
+(2,'ชล', 'สุขสม', '0812345702', 'นักพัฒนา', 60000,2, 0),
+(1,'พรชัย', 'ปรีดา', '0812345703', 'วิศวกรโยธา', 55000,1, 1),
+(1,'วาสนา', 'สมบัติ', '0812345704', 'นักบัญชี', 49000,1, 3),
+(3,'ชุติมา', 'ศรีสวัสดิ์', '0812345705', 'เภสัชกร', 68000,1, 3),
+(1,'วรชัย', 'รุ่งโรจน์', '0812345706', 'ทนายความ', 72000,2, 1);
 
 INSERT INTO User_Relationship (national_id, parent_id)
 VALUES
@@ -381,27 +425,34 @@ VALUES
 
 ("1801","เทคโนโลยียานยนต์สมัยใหม่และระบบอัตโนมัติ","18");
 
-INSERT INTO Education (std_ID, std_education_year, national_id, Faculty_id, Department_id) VALUES
-('6501010001', 1, '1000000000001', '01', '0100'),
-('6501010002', 1, '1000000000002', '01', '0100'),
-('6501010003', 1, '1000000000003', '01', '0101'),
-('6501020001', 1, '1000000000004', '01', '0101'),
-('6501020002', 1, '1000000000005', '01', '0100'),
-('6501020003', 1, '1000000000006', '01', '0101'),
-('6502010001', 1, '1000000000007', '02', '0201'),
-('6502010002', 1, '1000000000008', '02', '0201'),
-('6502020001', 1, '1000000000009', '02', '0202'),
-('6502020002', 1, '1000000000010', '02', '0202'),
-('6503010001', 1, '1000000000011', '03', '0301'),
-('6503010002', 1, '1000000000012', '03', '0301'),
-('6503010003', 1, '1000000000013', '03', '0301'),
-('6503020001', 1, '1000000000014', '03', '0302'),
-('6503020002', 1, '1000000000015', '03', '0302'),
-('6503020003', 1, '1000000000016', '03', '0302'),
-('6504010001', 1, '1000000000017', '04', '0401'),
-('6504010002', 1, '1000000000018', '04', '0401'),
-('6504020001', 1, '1000000000019', '04', '0402'),
-('6504020002', 1, '1000000000020', '04', '0402');
+INSERT INTO Education_Level_Category (ed_desc)
+VALUES 
+('ปวช.'),
+('ป.ตรี'),
+('ป.โท');
+
+INSERT INTO Education (std_ID, national_id, Faculty_id, Department_id) 
+VALUES
+('6501010001','1000000000001', '01', '0100'),
+('6501010002','1000000000002', '01', '0100'),
+('6501010003','1000000000003', '01', '0101'),
+('6501020001','1000000000004', '01', '0101'),
+('6501020002','1000000000005', '01', '0100'),
+('6501020003','1000000000006', '01', '0101'),
+('6502010001','1000000000007', '02', '0201'),
+('6502010002','1000000000008', '02', '0201'),
+('6502020001','1000000000009', '02', '0202'),
+('6502020002','1000000000010', '02', '0202'),
+('6503010001','1000000000011', '03', '0301'),
+('6503010002','1000000000012', '03', '0301'),
+('6503010003','1000000000013', '03', '0301'),
+('6503020001','1000000000014', '03', '0302'),
+('6503020002','1000000000015', '03', '0302'),
+('6503020003','1000000000016', '03', '0302'),
+('6504010001','1000000000017', '04', '0401'),
+('6504010002','1000000000018', '04', '0401'),
+('6504020001','1000000000019', '04', '0402'),
+('6504020002','1000000000020', '04', '0402');
 
 INSERT INTO Post_Duration (Duration_id, Start_date, End_date, Checklist, Reservation, Event_status)
 VALUES 
