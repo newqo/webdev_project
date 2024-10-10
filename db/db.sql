@@ -14,6 +14,7 @@ CREATE TABLE Users (
     Email VARCHAR(50) COLLATE utf8_unicode_ci,
     phone_num VARCHAR(10), 
     birthdate DATE,
+    Address VARCHAR(200) COLLATE utf8_unicode_ci,
     user_role TINYINT(1),
     user_cate_id TINYINT(1) NOT NULL,
     passwd VARCHAR(100),
