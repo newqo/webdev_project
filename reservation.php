@@ -84,7 +84,7 @@
 
             <form class="form-container" action="" method>
 
-                <div style="display: inline-block;">
+                <div class="reserve_time_select">
                     <input type="radio" id="time_9" name="reserve_time" value="09:00:00"><label for="time_9" class="radio-label">รอบเช้า 9:00 น.</label>
                     
                     <input type="radio" id="time_13" name="reserve_time" value="13:00:00"><label for="time_13" class="radio-label">รอบบ่าย 13:00 น.</label>

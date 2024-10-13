@@ -4,19 +4,19 @@
     box-sizing: border-box;
     word-wrap: break-word;
     overflow-wrap: break-word;
-
+    font-size: 18px;
 }
 
 body{
     background-image: linear-gradient(to top right, #329D9c, #cff4d2, #ffffff);
     /* display: flex; */
     justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* ปรับให้สูงเต็มหน้าจอ */
+    /* align-items: center; */
+    min-height: 100vh; 
     background-repeat: no-repeat;
-    background-size: cover; /* พื้นหลังครอบคลุม */
-    background-attachment: fixed; /* พื้นหลังคงที่ */
-    align-content: center;
+    background-size: cover;
+    background-attachment: fixed;
+    /* align-content: center; */
 }
 
 .container{
@@ -68,7 +68,6 @@ div.setcenter {
     border-radius: 25px;
     padding-left: 3%;
     padding-right: 3%;
-    font-size: 16px;
 }
 
 table,th,td{
@@ -83,7 +82,6 @@ table tr .sun ,.mon ,.tue ,.wed ,.thu ,.fri ,.sat{
 
 th{
     background-color: #80d2d1;
-    font-size: 18px;
 }
 
 table{
@@ -111,12 +109,20 @@ table#calendar td{
     padding-bottom: 8%;
 }
 
+.document-mobile{
+    display: none;
+}
+
 @media only screen and (max-width: 1024px){
+    *{
+        font-size: 16px;
+    }
     .container{
-        margin: 10px 50px;
+        margin: auto;
+        padding: 5%;
     }
     th,td{
-        font-size: 14px;
+        font-size: 16px;
     }
     td{
         padding-bottom: 5%;
@@ -125,16 +131,36 @@ table#calendar td{
 }
 
 @media only screen and (max-width: 430px){
+    *{
+        font-size: 14px;
+    }
     .container{
-        margin: 10px 25px;
+        margin: auto;
+        padding: 5%;
     }
     th,td{
-        font-size: 12px;
+        font-size: 14px;
     }
     td{
         padding-bottom: 10%;
     }
     div #complete_reservation{
         flex-direction: column;
+    }
+    .reserve_time_select{
+        margin: auto;
+        display: inline-block; 
+        /* margin-left: 0; */
+    }
+    table {
+        display: none;
+    }
+    .document-mobile{
+        display: initial;
+        .b-doc-mobile{
+            /* border-left: 4px solid #56C596; */
+            /* padding-left: 10px; */
+            color: #56C596;
+        }
     }
 }

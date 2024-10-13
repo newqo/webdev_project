@@ -12,8 +12,8 @@ body {
     justify-content: center;
     align-items: center;
     background-repeat: no-repeat;
-    background-size: cover; /* พื้นหลังครอบคลุม */
-    background-attachment: fixed; /* พื้นหลังคงที่ */
+    background-size: cover;
+    background-attachment: fixed;
     
 }
 
@@ -102,37 +102,36 @@ button:hover {
     background-color: #4DAE8F;
 }
 
-.form-row img{
-    text-align: center;
-    width: 100%;
-}
-
 .radio-income{
     margin:10px 0px;
     font-size: 14px;
     line-height: 1.6;
 }
+.img-income img{
+    text-align: center;
+    width: 100%;
+}
 /* Media Query for Mobile Devices */
 @media (max-width: 430px) {
     .container {
-        width: 90%; /* Make container wider on small screens */
-        padding: 15px; /* Reduce padding */
+        width: 90%;
+        padding: 15px;
     }
 
     h1 {
-        font-size: 24px; /* Smaller heading size */
+        font-size: 24px;
     }
 
     .section-title {
-        font-size: 16px; /* Adjust section title size */
+        font-size: 16px;
     }
 
     .form-row {
-        flex-direction: column; /* Stack form fields vertically */
+        flex-direction: column;
     }
 
     .form-group {
-        width: 100%; /* Ensure full width */
+        width: 100%;
     }
 
     input[type="text"],
@@ -140,27 +139,28 @@ button:hover {
     input[type="password"],
     input[type="date"],
     select {
-        font-size: 12px; /* Smaller input font size */
-        padding: 6px 10px; /* Reduce padding in inputs */
+        font-size: 12px;
+        padding: 6px 10px;
     }
 
     button {
-        font-size: 14px; /* Smaller button font size */
+        font-size: 14px;
     }
+    
 }
 
-/* Media Query for iPads (Portrait) */
-@media (min-width: 768px) and (max-width: 1024px) {
+/* Media Query for iPads */
+@media (min-width: 431px) and (max-width: 1024px) {
     .container {
-        width: 80%; /* Adjust container width for iPad */
+        width: 80%;
     }
 
     h1 {
-        font-size: 26px; /* Slightly smaller heading size */
+        font-size: 26px;
     }
 
     .section-title {
-        font-size: 17px; /* Adjust section title size */
+        font-size: 17px;
     }
 
     input[type="text"],
@@ -168,12 +168,12 @@ button:hover {
     input[type="password"],
     input[type="date"],
     select {
-        font-size: 14px; /* Keep input font size consistent */
-        padding: 8px 12px; /* Keep padding the same */
+        font-size: 14px;
+        padding: 8px 12px;
     }
 
     button {
-        font-size: 15px; /* Adjust button font size */
+        font-size: 15px;
     }
 }
 

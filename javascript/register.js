@@ -82,3 +82,18 @@ function showSection() {
         document.getElementById("mother-income-info").style.display = "block";
     }
 }
+
+var check_stdID;
+function send() {
+check_stdID = new XMLcheck_stdID();
+check_stdID.onreadystatechange = showstdID;
+var a = document.getElementById("user_stdID").value;
+var url= "register-validate.php?a=" + a + "&b=" + b;
+check_stdID.open("GET", url);
+check_stdID.send();
+}
+function showstdID() {
+if (check_stdID.readyState == 4 && check_stdID.status == 200) {
+document.getElementById("result").innerHTML = check_stdID.responseText;
+}
+}

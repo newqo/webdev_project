@@ -1,4 +1,3 @@
-<?php include "connect.php" ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,21 +32,23 @@
                 </div>
                 <div class="form-group">
                     <label>ชื่อจริง*</label>
-                    <input type="text" id="user_firstname" name="user_firstname" pattern="[A-Za-zก-๗]{2,}" required>
+                    <input type="text" id="user_firstname" name="user_firstname" pattern="[A-Za-zก-๗]{2,50}" required>
                 </div>
                 <div class="form-group">
                     <label>นามสกุล*</label>
-                    <input type="text" id="user_lastname" name="user_lastname" pattern="[A-Za-zก-๗]{2,}" required>
+                    <input type="text" id="user_lastname" name="user_lastname" pattern="[A-Za-zก-๗]{2,50}" required>
                 </div>
             </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>รหัสนักศึกษา*</label>
-                        <input type="text" id="user_stdID" name="user_stdID" pattern="[0-9]{13}" required>
+                        <input type="text" id="user_stdID" name="user_stdID" placeholder="6501234567890" pattern="[0-9]{13}" onkeyup="send()" required>
+                        <span id="std-id-result"></span>
                     </div>
                     <div class="form-group">
                         <label>เลขบัตรประชาชน*</label>
-                        <input type="text" id="user_id" name="user_id" pattern="[0-9]{13}" required>
+                        <input type="text" id="user_id" name="user_id" placeholder="1234567890123" pattern="[0-9]{13}" onkeyup="send()" required>
+                        <span id="id-result"></span>
                     </div>
                 </div>
                 <div class="form-row">
@@ -87,17 +88,17 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>E-mail*</label>
-                        <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                        <input type="email" id="email" name="email" placeholder="example@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                     </div>
                     <div class="form-group">
                         <label>เบอร์โทร*</label>
-                        <input type="text" id="phone_number" name="phone_number" pattern="[0-9]{10}" required>
+                        <input type="text" id="phone_number" name="phone_number" placeholder="0981234567" pattern="[0-9]{10}" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)</label>
-                        <input type="text" id="user_address" name="user_address" pattern="/d/w/s" required>
+                        <input type="text" id="user_address" name="user_address" pattern="/d/w/s {2,200}" required>
                     </div>
                 </div>
             </div>
@@ -109,11 +110,11 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>รหัสผ่าน*</label>
-                    <input type="password" id="password" name="password" pattern="\w{8,}" required>
+                    <input type="password" id="password" name="password" pattern="\w{8,20}" required>
                 </div>
                 <div class="form-group">
                     <label>กรอกรหัสผ่านอีกครั้ง*</label>
-                    <input type="password" id="re-password" name="password" pattern="\w{8,}" required>
+                    <input type="password" id="re-password" name="password" pattern="\w{8,20}" required>
                 </div>
             </div>
         </div>
@@ -149,15 +150,15 @@
                             </div>
                             <div class="form-group">
                                 <label>ชื่อจริง*</label>
-                                <input type="text" id="firstname_father" name="firstname_father" pattern="[A-Za-zก-ฮ-๗]{2,}" required>
+                                <input type="text" id="firstname_father" name="firstname_father" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
                             </div>
                             <div class="form-group">
                                 <label>นามสกุล*</label>
-                                <input type="text" id="lastname_father" name="lastname_father" pattern="[A-Za-zก-ฮ-๗]{2,}" required>
+                                <input type="text" id="lastname_father" name="lastname_father" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
                             </div>
                             <div class="form-group">
                                 <label>เบอร์โทร*</label>
-                                <input type="text" id="phone_number_father" name="phone_number_father" pattern="[0-9]{10}" required>
+                                <input type="text" id="phone_number_father" name="phone_number_father" placeholder="0981234567" pattern="[0-9]{10}" required>
                             </div>
                         </div>
                     </div>
@@ -165,16 +166,21 @@
         <!-- รายได้ของบิดา -->
         <div class="section" id="father-income-info" style="display: none;">
             <div class="section-title">รายได้ของบิดา</div>
-            <img src="img/income.png"><br>
+            <div class="img-income">
+                <img src="imgs/income.png"><br>
+            </div>
             <div class="radio-income">
-                <input type="radio" id="income_regular_father" name="income_father" value="regular"> มีรายได้ประจำ<br>
-                <input type="radio" id="income_irregular_father" name="income_father" value="irregular"> มีรายได้ไม่ประจำ<br>
-                <input type="radio" id="income_none_father" name="income_father" value="none"> ไม่มีรายได้<br>
+                <input type="radio" id="income_regular_father" name="income_father" value="regular">
+                <label for="income_regular_father"> มีรายได้ประจำ</label><br>
+                <input type="radio" id="income_irregular_father" name="income_father" value="irregular">
+                <label for="income_irregular_father"> มีรายได้ไม่ประจำ</label><br>
+                <input type="radio" id="income_none_father" name="income_father" value="none">
+                <label for="income_none_father"> ไม่มีรายได้</label><br>
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label>ระบุอาชีพ หรือรายละเอียดของงาน*</label>
-                    <input type="text" id="job_detail_father" name="job_detail_father" pattern="[A-Za-zก-ฮ-๗]{2,}" required>
+                    <input type="text" id="job_detail_father" name="job_detail_father" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
                 </div>
                 <div class="form-group">
                     <label>รายได้ของบิดา (ต่อปี)*</label>
@@ -199,15 +205,15 @@
                 </div>
                 <div class="form-group">
                     <label>ชื่อจริง*</label>
-                    <input type="text" id="firstname_mother" name="firstname_mother" pattern="[A-Za-zก-ฮ-๗]{2,}" required>
+                    <input type="text" id="firstname_mother" name="firstname_mother" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
                 </div>
                 <div class="form-group">
                     <label>นามสกุล*</label>
-                    <input type="text" id="lastname_mother" name="lastname_mother" pattern="[A-Za-zก-ฮ-๗]{2,}" required>
+                    <input type="text" id="lastname_mother" name="lastname_mother" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
                 </div>
                 <div class="form-group">
                     <label>เบอร์โทร*</label>
-                    <input type="text" id="phone_number_mother" name="phone_number_mother" pattern="[0-9]{10}" required>
+                    <input type="text" id="phone_number_mother" name="phone_number_mother" placeholder="0981234567" pattern="[0-9]{10}" required>
                 </div>
             </div>
         </div>
@@ -215,16 +221,21 @@
         <!-- รายได้ของมารดา -->
         <div class="section" id="mother-income-info" style="display: none;">
             <div class="section-title">รายได้ของมารดา</div>
-            <img src="img/income.png"><br>
+            <div class="img-income">
+                <img src="imgs/income.png"><br>
+            </div>
             <div class="radio-income">
-                <input type="radio" id="income_regular_mother" name="income_mother" value="regular"> มีรายได้ประจำ<br>
-                <input type="radio" id="income_irregular_mother" name="income_mother" value="irregular"> มีรายได้ไม่ประจำ<br>
-                <input type="radio" id="income_none_mother" name="income_mother" value="none"> ไม่มีรายได้<br>
+                <input type="radio" id="income_regular_mother" name="income_mother" value="regular">
+                <label for="income_regular_mother"> มีรายได้ประจำ</label><br>
+                <input type="radio" id="income_irregular_mother" name="income_mother" value="irregular">
+                <label for="income_irregular_mother"> มีรายได้ไม่ประจำ</label><br>
+                <input type="radio" id="income_none_mother" name="income_mother" value="none">
+                <label for="income_none_mother"> ไม่มีรายได้</label><br>
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label>ระบุอาชีพ หรือรายละเอียดของงาน*</label>
-                    <input type="text" id="job_detail_mother" name="job_detail_mother" pattern="[A-Za-zก-ฮ-๗]{2,}" required>
+                    <input type="text" id="job_detail_mother" name="job_detail_mother" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
                 </div>
                 <div class="form-group">
                     <label>รายได้ของมารดา (ต่อปี)*</label>
@@ -249,15 +260,15 @@
                 </div>
                 <div class="form-group">
                     <label>ชื่อจริง*</label>
-                    <input type="text" id="firstname_guardian" name="firstname_guardian" pattern="[A-Za-zก-ฮ-๗]{2,}" required>
+                    <input type="text" id="firstname_guardian" name="firstname_guardian" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
                 </div>
                 <div class="form-group">
                     <label>นามสกุล*</label>
-                    <input type="text" id="lastname_guardian" name="lastname_guardian" pattern="[A-Za-zก-ฮ-๗]{2,}" required>
+                    <input type="text" id="lastname_guardian" name="lastname_guardian" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
                 </div>
                 <div class="form-group">
                     <label>เบอร์โทร*</label>
-                    <input type="text" id="phone_number_guardian" name="phone_number_guardian" pattern="[0-9]{10}" required>
+                    <input type="text" id="phone_number_guardian" name="phone_number_guardian" placeholder="0981234567" pattern="[0-9]{10}" required>
                 </div>
             </div>
         </div>
@@ -265,16 +276,21 @@
         <!-- รายได้ของผู้ปกครอง -->
         <div class="section" id="guardian-income-info" style="display: none;">
             <div class="section-title">รายได้ของผู้ปกครอง</div>
-            <img src="img/income.png"><br>
+            <div class="img-income">
+                <img src="imgs/income.png"><br>
+            </div>
             <div class="radio-income">
-                <input type="radio" id="income_regular_guardian" name="income_guardian" value="regular"> มีรายได้ประจำ<br>
-                <input type="radio" id="income_irregular_guardian" name="income_guardian" value="irregular"> มีรายได้ไม่ประจำ<br>
-                <input type="radio" id="income_none_guardian" name="income_guardian" value="none"> ไม่มีรายได้<br>
+                <input type="radio" id="income_regular_guardian" name="income_guardian" value="regular">
+                <label for="income_regular_guardian"> มีรายได้ประจำ</label><br>
+                <input type="radio" id="income_irregular_guardian" name="income_guardian" value="irregular">
+                <label for="income_irregular_guardian"> มีรายได้ไม่ประจำ</label><br>
+                <input type="radio" id="income_none_guardian" name="income_guardian" value="none">
+                <label for="income_none_guardian"> ไม่มีรายได้</label><br>
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label>ระบุอาชีพ หรือรายละเอียดของงาน*</label>
-                    <input type="text" id="job_detail_guardian" name="job_detail_guardian" pattern="[A-Za-zก-ฮ-๗]{2,}" required>
+                    <input type="text" id="job_detail_guardian" name="job_detail_guardian" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
                 </div>
                 <div class="form-group">
                     <label>รายได้ของผู้ปกครอง (ต่อปี)*</label>
