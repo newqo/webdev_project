@@ -66,10 +66,10 @@ function showSection() {
 
     var selectedValue = document.getElementById("pattern_status").value;
     
-    if (selectedValue === "father") {
+    if (selectedValue === "0") {
         document.getElementById("father-info").style.display = "block";
         document.getElementById("father-income-info").style.display = "block";
-    } else if (selectedValue === "mother") {
+    } else if (selectedValue === "1") {
         document.getElementById("mother-info").style.display = "block";
         document.getElementById("mother-income-info").style.display = "block";
     } else if (selectedValue === "guardian") {

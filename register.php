@@ -1,3 +1,6 @@
+<?php
+    include "connect.php";
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,9 +28,14 @@
                     <label>คำนำหน้า</label>
                         <select name="" id="user_nametitle" name="user_nametitle" required>
                             <option value="">เลือกคำนำหน้า</option>
-                            <option value="mr">นาย</option>
-                            <option value="ms">นางสาว</option>
-                            <option value="mrs">นาง</option>
+                            <?php
+                                $stmt = $pdo->prepare("SELECT Pre_name_desc FROM Pre_name");
+                                $stmt->execute();
+                                $i = 1;
+                                while($row = $stmt->fetch()){
+                                    echo "<option value='". $i++ . "'>". $row["Pre_name_desc"] . "</option>";
+                                }
+                            ?>
                         </select>
                 </div>
                 <div class="form-group">
@@ -127,11 +135,20 @@
             <div class="form-row">
                 <div class="form-group">
                     <select name="pattern_status" id="pattern_status" onchange="showSection()">
+
                         <option value="">เลือกสถานภาพครอบครัว</option>
-                        <option value="father">อาศัยอยู่กับบิดา</option>
+                        <!-- <option value="father">อาศัยอยู่กับบิดา</option>
                         <option value="mother">อาศัยอยู่กับมารดา</option>
                         <option value="both">อาศัยอยู่ร่วมกับบิดาและมารดา</option>
-                        <option value="guardian">อาศัยอยู่กับผู้ปกครอง</option>
+                        <option value="guardian">อาศัยอยู่กับผู้ปกครอง</option> -->
+                        <?php
+                                $stmt = $pdo->prepare("SELECT status_description FROM Parent_status;");
+                                $stmt->execute();
+                                $i = 0;
+                                while($row = $stmt->fetch()){
+                                    echo "<option value='". $i++ . "'>". $row["status_description"] . "</option>";
+                                }
+                            ?>
                     </select>
                 </div>
             </div>
