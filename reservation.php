@@ -17,7 +17,7 @@
 <body>
     <section class="container">
         <article>
-            <label style="font-size: 20px; ">วันที่จอง</label>
+            <label style="font-size: 20px; display: flex; justify-content: center;">วันที่จอง</label>
             <table id="calendar">
                 <tr style="color: black;">
                     <th class="sun">SUN</th>
@@ -84,7 +84,7 @@
 
             <form class="form-container" action="" method>
 
-                <div style="display: inline-block;">
+                <div class="reserve_time_select">
                     <input type="radio" id="time_9" name="reserve_time" value="09:00:00"><label for="time_9" class="radio-label">รอบเช้า 9:00 น.</label>
                     
                     <input type="radio" id="time_13" name="reserve_time" value="13:00:00"><label for="time_13" class="radio-label">รอบบ่าย 13:00 น.</label>
@@ -116,13 +116,22 @@
         END, ' ',
         DATE_FORMAT(NOW(), '%Y')+543
     ) AS 'วัน',
-    DATE_FORMAT(reserve_time, '%H:%i') AS 'เวลา'
+    DATE_FORMAT(reserve_time, '%H:%i') AS 'เวลา' ,queue_no AS 'คิว'
 FROM `Reservation`
-ORDER BY reserve_date ASC;");
+ORDER BY reserve_date ASC;"); //WHERE national_id=?
                     $stmt->execute();
                     $row = $stmt->fetch();
                 ?>
-                <p>จองวัน <?=$row["วัน"]?> เวลา <?=$row["เวลา"]?></p>
+                <div id="complete_reservation" style="font-size: 20px; display:flex; justify-content:center; ">
+                    <p>จองวัน <?=$row["วัน"]?></p> 
+                    <p>เวลา <?=$row["เวลา"]?></p> 
+                    <p>คิวที่ <?=$row["คิว"]?></p>
+                </div>
+                <p>หมายเหตุ: หากนักศึกษาไม่อยู่รับบริการในช่วงเรียกคิว ทางกยศ.ขอสงวนสิทธิ์ในการข้ามคิว</p>
+
+                <div class="setcenter">
+                    <a href="homepage.php">กลับหน้าหลัก</a>
+                </div>
             </article>
 
 

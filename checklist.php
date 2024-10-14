@@ -26,9 +26,13 @@
             if (selectedValue === "0") {
                 document.getElementById("doc_column_grade").innerHTML = "ผลการเรียนจากสถานศึกษาเดิม";
                 document.getElementById("condition_column_grade").innerHTML = "รบ./ปพ./Transcript";
+                document.getElementById("doc_column_grade_mobile").innerHTML = "ผลการเรียนจากสถานศึกษาเดิม";
+                document.getElementById("condition_column_grade_mobile").innerHTML = "รบ./ปพ./Transcript";
             } else {
                 document.getElementById("doc_column_grade").innerHTML = "ผลการเรียนทุกเทอม";
                 document.getElementById("condition_column_grade").innerHTML = "พิมพ์จาก Reg.kmutnb.ac.th เท่านั้น";
+                document.getElementById("doc_column_grade_mobile").innerHTML = "ผลการเรียนทุกเทอม";
+                document.getElementById("condition_column_grade_mobile").innerHTML = "พิมพ์จาก Reg.kmutnb.ac.th เท่านั้น";
             }
             console.log(selectedValue);
         }
@@ -72,7 +76,8 @@
             </div>
 
             <div class="setcenter">
-                <button type="button" id="addInformation" class="addInformation" onclick="submitDetail(event)">เสร็จสิ้น</button>
+                <button type="submit" id="addInformation" class="addInformation" onclick="submitDetail(event)">เสร็จสิ้น</button>
+                
             </div>
 
         </form>
@@ -149,13 +154,81 @@
             </tr>
 
             <tr>
-                <td class="doc-column" id="doc_column_grade">รายการเอกสาร</td>
+                <td class="doc-column" id="doc_column_grade">รอการกดยืนยัน</td>
                 <td class="amount-column">คนละ 1 ชุด
                 </td>
-                <td class="condition-column" id="condition_column_grade">เงื่อนไข</td>
+                <td class="condition-column" id="condition_column_grade">รอการกดยืนยัน</td>
             </tr>
             
         </table>
+
+        <div class="document-mobile">
+            <br>
+            <b style="font-size: 15px; color: #56C596;">รายการเอกสาร</b>
+            <p style="font-size: 14px;">แบบยืนยันการเบิกเงินกู้ยืม จากระบบ DSL</p>
+            <b class="b-doc-mobile">จำนวน</b>
+            <p style="font-size: 14px;">2 แผ่น</p>
+            <b style="font-size: 15px;">เงื่อนไข</b>
+            <p style="font-size: 14px;">เริ่มทำได้หลังจากจองคิวใน Google From ไปแล้ว 48 ชม.</p>
+            <hr>
+            <b style="font-size: 15px;">รายการเอกสาร</b>
+            <p style="font-size: 14px;">สัญญากู้ยืมเงินกองทุน กยศ. จากระบบ DSL</p>
+            <b style="font-size: 15px;">จำนวน</b>
+            <p style="font-size: 14px;">2 ชุด</p>
+            <b style="font-size: 15px;">เงื่อนไข</b>
+            <p style="font-size: 14px;">-</p>
+            <hr>
+            <b style="font-size: 15px;">รายการเอกสาร</b>
+            <p style="font-size: 14px;">สำเนาบัตรประชาชนผู้กู้ยืม</p>
+            <b style="font-size: 15px;">จำนวน</b>
+            <p style="font-size: 14px;">2 แผ่น</p>
+            <b style="font-size: 15px;">เงื่อนไข</b>
+            <p style="font-size: 14px;">-</p>
+            <hr>
+            <b style="font-size: 15px;">รายการเอกสาร</b>
+            <p style="font-size: 14px;">เอกสารแสดงผลการลงทะเบียน 1/2567</p>
+            <b style="font-size: 15px;">จำนวน</b>
+            <p style="font-size: 14px;">1 ชุด</p>
+            <b style="font-size: 15px;">เงื่อนไข</b>
+            <p style="font-size: 14px;">ในระบบ reg.kmutnb.ac.th</p>
+            <hr>
+            <b style="font-size: 15px;">รายการเอกสาร</b>
+            <p style="font-size: 14px;">เอกสารแสดงค่าใช้จ่าย/ทุน 1/2567</p>
+            <b style="font-size: 15px;">จำนวน</b>
+            <p style="font-size: 14px;">1 แผ่น</p>
+            <b style="font-size: 15px;">เงื่อนไข</b>
+            <p style="font-size: 14px;">ในระบบ reg.kmutnb.ac.th</p>
+            <hr>
+            <b style="font-size: 15px;">รายการเอกสาร</b>
+            <p style="font-size: 14px;">สำเนาใบเสร็จรับเงินค่าเทอม 1/2567</p>
+            <b style="font-size: 15px;">จำนวน</b>
+            <p style="font-size: 14px;">1 แผ่น</p>
+            <b style="font-size: 15px;">เงื่อนไข</b>
+            <p style="font-size: 14px;">ในระบบ rco.kmutnb.ac.th</p>
+            <hr>
+            <b style="font-size: 15px;">รายการเอกสาร</b>
+            <p style="font-size: 14px;">บันทึกกิจกรรมจิตอาสาไม่น้อยกว่า 36 ชั่วโมง</p>
+            <b style="font-size: 15px;">จำนวน</b>
+            <p style="font-size: 14px;">1 แผ่น</p>
+            <b style="font-size: 15px;">เงื่อนไข</b>
+            <p style="font-size: 14px;">-</p>
+            <hr>
+            <b style="font-size: 15px;">รายการเอกสาร</b>
+            <p style="font-size: 14px;">หนังสือยินยอมเปิดเผยข้อมูล</p>
+            <b style="font-size: 15px;">จำนวน</b>
+            <p style="font-size: 14px;">1 ชุด</p>
+            <b style="font-size: 15px;">เงื่อนไข</b>
+            <p style="font-size: 14px;">-</p>
+            <hr>
+            <b style="font-size: 15px;">รายการเอกสาร</b>
+            <p id="doc_column_grade_mobile" style="font-size: 14px;">รอการกดยืนยัน</p>
+            <b style="font-size: 15px;">จำนวน</b>
+            <p style="font-size: 14px;">คนละ 1 ชุด</p>
+            <b style="font-size: 15px;">เงื่อนไข</b>
+            <p id="condition_column_grade_mobile" style="font-size: 14px;">รอการกดยืนยัน</p>
+            <hr>
+            
+        </div>
 
         <div class="setcenter">
             <a href="homepage.php">กลับหน้าหลัก</a>
