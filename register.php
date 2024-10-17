@@ -20,7 +20,7 @@
     <div class="container">
         <h1>ลงทะเบียน</h1>
         <!-- ข้อมูลส่วนตัววววว -->
-        <form action="" method="post">
+        <form action="register-validate.php" method="post">
             <div class="section">
                 <div class="section-title">ข้อมูลส่วนตัวนักเรียน/นักศึกษา</div>
                 <div class="form-row">
@@ -363,7 +363,7 @@
                     </div>
                 </div>
             </div>      
-            <button id="succesButton" type="submit">เสร็จสิ้น</button>
+            <button id="succesButton" type="submit" class="">เสร็จสิ้น</button>
         </form>
     </div>
 </body>

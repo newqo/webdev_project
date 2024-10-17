@@ -1,8 +1,11 @@
 <?php
-$std_id = $_GET["user_stdID"];
-echo "<p>รหัสนักศึกษาเคยถูกสมัครแล้ว</p>";
+    include "connect.php";
 
-$user_id = $_GET["user_id"];
-echo "<p>เลขบัตรประชาชนเคยถูกสมัครแล้ว</p>";
+    // insert Users
+    $stmt = $pdo->prepare("");
+    $stmt->execute();
 
-?>
+    // insert Education
+
+    // insert parent
+    

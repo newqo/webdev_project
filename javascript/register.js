@@ -74,6 +74,7 @@ function check_std_id(){
     std_id.onreadystatechange = std_query;
 
     var std_id_input = document.getElementById("user_stdID").value;
+    // console.log(std_id_input);
     var url = "check_std_id.php?std=" + std_id_input;
 
     std_id.open("GET",url);
@@ -82,8 +83,18 @@ function check_std_id(){
 
 function std_query(){
     if (std_id.readyState == 4 && std_id.status == 200){
-        console.log(std.responseText);
-        document.getElementById("std-id-result").style = std_id.responseText;
+        std_response = std_id.responseText;
+        // console.log(std_id.responseText);
+        // document.getElementById("std-id-result").className = std_id.responseText;
+        document.getElementById("std-id-result").className = std_response;
+
+        if(std_response == "notify-show"){
+            document.getElementById("succesButton").className = "disabled";
+        }
+        else{
+            document.getElementById("succesButton").className = "";
+        }
+        
     }
 }
 
@@ -101,6 +112,15 @@ function check_national_id(){
 
 function national_id_query(){
     if (national_id.readyState == 4 && national_id.status == 200){
-        document.getElementById("id-result").className = national_id.responseText;
+        national_id_response = national_id.responseText;
+
+        // document.getElementById("id-result").className = national_id.responseText;
+        document.getElementById("id-result").className = national_id_response;
+        if(national_id_response == "notify-show"){
+            document.getElementById("succesButton").className = "disabled";
+        }
+        else{
+            document.getElementById("succesButton").className = "";
+        }
     }
 }

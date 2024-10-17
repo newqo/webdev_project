@@ -6,7 +6,7 @@
     $stmt->execute();
     $found = $stmt->fetch();
 
-    if($found == 0){
+    if($found['found'] == 0){
         echo "notify-hide";
     }else{
         echo "notify-show";
