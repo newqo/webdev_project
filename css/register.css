@@ -111,6 +111,16 @@ button:hover {
     text-align: center;
     width: 100%;
 }
+
+.notify-hide{
+    display: none;
+}
+
+.notify-show{
+    display: flex;
+    color: red;
+}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 430px) {
     .container {

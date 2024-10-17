@@ -1,62 +1,46 @@
-const facultyByYear = {
-    'vc': ['วิทยาลัยเทคโนโลยีอุตสาหกรรม'],
-    'b': ['วิศวกรรมศาสตร์', 'ครุศาสตร์อุตสาหกรรม', 'วิทยาลัยเทคโนโลยีอุตสาหกรรม', 'วิทยาศาสตร์ประยุกต์', 'สถาปัตยกรรมและการออกแบบ', 'วิทยาลัยนานาชาติ', 'พัฒนาธุรกิจและอุตสาหกรรม', 'เทคโนโลยีสารสนเทศ'],
-    'm': ['วิทยาศาสตร์ประยุกต์', 'วิศวกรรมศาสตร์', 'วิทยาลัยเทคโนโลยีอุตสาหกรรม', 'เทคโนโลยีสารสนเทศ']
-};
+var faculty;
+function updateFaculty(){
+    faculty = new XMLHttpRequest();
+    faculty.onreadystatechange = Faculty_query;
 
-const majorByFacultyAndYear = {
-    'b': {
-        'วิศวกรรมศาสตร์': ['วิศวกรรมการผลิต','วิศวกรรมขนถ่ายวัสดุ','วิศวกรรมคอมพิวเตอร์','วิศวกรรมวัสดุ','วิศวกรรมวัสดุเชิงนวัตกรรม','วิศวกรรมหุ่นยนต์และระบบอัตโนมัติ','วิศวกรรมอุตสาหการ','วิศวกรรมเครื่องกล','วิศวกรรมเครื่องมือวัดและอัตโนมัติ','วิศวกรรมโลจิสติกส์','วิศวกรรมไฟฟ้า'],
-        'ครุศาสตร์อุตสาหกรรม': ['วิศวกรรมไฟฟ้า','เทคโนโลยีคอมพิวเตอร์','วิศวกรรมการผลิตและอุตสาหการ','วิศวกรรมแมคคาทรอนิกส์และหุ่นยนต์','วิศวกรรมโยธาและการศึกษา','วิศวกรรมไฟฟ้าและการศึกษา','วิชาวิศวกรรมเครื่องกล'],
-        'วิทยาลัยเทคโนโลยีอุตสาหกรรม': ['เทคโนโลยีการเชื่อม','เทคโนโลยีวิศวกรรมการทําความเย็นและการปรับอากาศ','เทคโนโลยีวิศวกรรมการออกแบบและผลิตเครื่องจักรกล','เทคโนโลยีวิศวกรรมซ่อมบำรุงอากาศยาน','เทคโนโลยีวิศวกรรมพอลิเมอร์และอุตสาหกรรมยาง','เทคโนโลยีวิศวกรรมอุตสาหการ','เทคโนโลยีวิศวกรรมแมคคาทรอนิกส์','เทคโนโลยีวิศวกรรมแม่พิมพ์และเครื่องมือ','เทคโนโลยีวิศวกรรมไฟฟ้าและอิเล็กทรอนิกส์กำลัง'],
-        'วิทยาศาสตร์ประยุกต์': ['คณิตศาสตร์ประยุกต์','คณิตศาสตร์เชิงวิทยาการคอมพิวเตอร์','นวัตกรรมและเทคโนโลยีความมั่นคง','ฟิสิกส์อุตสาหกรรมและอุปกรณ์การแพทย','วิทยาการคอมพิวเตอร์','วิทยาศาสตร์และเทคโนโลยีทางอาหาร','วิทยาศาสตร์และเทคโนโลยีสิ่งแวดล้อม','วิศวกรรมชีวการแพทย','สถิติธุรกิจและการประกันภัย','สถิติประยุกต์','เคมีอุตสาหกรรม','เทคโนโลยีชีวภาพ','เทคโนโลยีอุตสาหกรรมเกษตร','เทคโนโลยีอุตสาหกรรมเกษตรและนวัตกรรม'],
-        'สถาปัตยกรรมและการออกแบบ': ['สถาปัตยกรรม','การจัดการงานออกแบบภายในและพัฒนาธุรกิจ','ออกแบบผลิตภัณฑ์นวัตกรรมเซรามิกส์','ศิลปประยุกต์และออกแบบผลิตภัณฑ์'],
-        'วิทยาลัยนานาชาติ': ['การค้าระหว่างประเทศและธุรกิจโลจิสติกส์'],
-        'พัฒนาธุรกิจและอุตสาหกรรม': ['การบริหารอุตสาหกรรมการผลิตและบริการ','การพัฒนาธุรกิจอุตสาหกรรมและทรัพยากรมนุษย','การบริหารอุตสาหกรรมการผลิตและบริการ'],
-        'เทคโนโลยีสารสนเทศ': ['วิทยาการสารสนเทศเพื่อเศรษฐกิจดิจิทัล']
-    },
-    'm': {
-        'วิศวกรรมศาสตร์': ['วิศวกรรมการจัดการอุตสาหกรรม','วิศวกรรมอุตสาหการ','วิศวกรรมการบินและอวกาศ','วิศวกรรมเครื่องกล','วิศวกรรมไฟฟ้า'],
-        'วิทยาศาสตร์ประยุกต์': ['อุปกรณ์การแพทย์', 'วิทยาการคอมพิวเตอร์'],
-        'วิทยาลัยเทคโนโลยีอุตสาหกรรม': ['การบริหารงานก่อสร้าง','เทคโนโลยีวิศวกรรมยานยนต์และพลังงาน','เทคโนโลยีวิศวกรรมการก่อสร้าง','เทคโนโลยีวิศวกรรมเครื่องกล'],
-        'เทคโนโลยีสารสนเทศ': ['สารสนเทศและวิทยาศาสตร์ข้อมูล']
-    }
-};
-
-function updateFaculty() {
-    const year = document.getElementById('user_year').value;
-    const facultySelect = document.getElementById('faculty');
-    facultySelect.innerHTML = '<option value="">เลือกคณะ</option>';
-
-    if (year && facultyByYear[year]) {
-        facultyByYear[year].forEach(faculty => {
-            const option = document.createElement('option');
-            option.value = faculty;
-            option.textContent = faculty;
-            facultySelect.appendChild(option);
-        });
-    }
-
-    updateMajor();
+    var ed_level = document.getElementById("user_year").value;
+    // console.log(ed_level)
+    var url = "updateFaculty.php?ed_level=" + ed_level;
+    faculty.open("GET",url,true);
+    faculty.send()
 }
 
-function updateMajor() {
-    const year = document.getElementById('user_year').value;
-    const faculty = document.getElementById('faculty').value;
-    const majorSelect = document.getElementById('major');
-    majorSelect.innerHTML = '<option value="">เลือกสาขา</option>';
+function Faculty_query(){
+    if (faculty.readyState == 4 && faculty.status == 200){
+        var faculty_select = document.getElementById("faculty");
+        // console.log(faculty.responseText);
+        faculty_select.innerHTML = faculty.responseText;
+    }
+}
 
-    if (year && faculty && majorByFacultyAndYear[year] && majorByFacultyAndYear[year][faculty]) {
-        majorByFacultyAndYear[year][faculty].forEach(major => {
-            const option = document.createElement('option');
-            option.value = major;
-            option.textContent = major;
-            majorSelect.appendChild(option);
-        });
+var major;
+function updateMajor(){
+    major = new XMLHttpRequest();
+    major.onreadystatechange = Major_query;
+
+    var faculty_select = document.getElementById("faculty").value;
+    var ed_level = document.getElementById("user_year").value;
+    var url = "updateMajor.php?ed_level="+ ed_level + "&Faculty=" + faculty_select;
+
+    major.open("GET",url,true);
+    major.send();
+}
+
+function Major_query(){
+    if (major.readyState == 4 && major.status == 200){
+        var major_select = document.getElementById("major");
+        // console.log(major.responseText);
+        major_select.innerHTML = major.responseText;
     }
 }
 
 function showSection() {
+
     document.getElementById("father-info").style.display = "none";
     document.getElementById("mother-info").style.display = "none";
     document.getElementById("guardian-info").style.display = "none";
@@ -65,6 +49,7 @@ function showSection() {
     document.getElementById("guardian-income-info").style.display = "none";
 
     var selectedValue = document.getElementById("pattern_status").value;
+    console.log("Selected value: ", selectedValue);
     
     if (selectedValue === "0") {
         document.getElementById("father-info").style.display = "block";
@@ -72,10 +57,10 @@ function showSection() {
     } else if (selectedValue === "1") {
         document.getElementById("mother-info").style.display = "block";
         document.getElementById("mother-income-info").style.display = "block";
-    } else if (selectedValue === "guardian") {
+    } else if (selectedValue === "3") {
         document.getElementById("guardian-info").style.display = "block";
         document.getElementById("guardian-income-info").style.display = "block";
-    } else if (selectedValue === "both") {
+    } else if (selectedValue === "2") {
         document.getElementById("father-info").style.display = "block";
         document.getElementById("father-income-info").style.display = "block";
         document.getElementById("mother-info").style.display = "block";
@@ -83,17 +68,39 @@ function showSection() {
     }
 }
 
-var check_stdID;
-function send() {
-check_stdID = new XMLcheck_stdID();
-check_stdID.onreadystatechange = showstdID;
-var a = document.getElementById("user_stdID").value;
-var url= "register-validate.php?a=" + a + "&b=" + b;
-check_stdID.open("GET", url);
-check_stdID.send();
+var std_id;
+function check_std_id(){
+    std_id = new XMLHttpRequest();
+    std_id.onreadystatechange = std_query;
+
+    var std_id_input = document.getElementById("user_stdID").value;
+    var url = "check_std_id.php?std=" + std_id_input;
+
+    std_id.open("GET",url);
+    std_id.send();
 }
-function showstdID() {
-if (check_stdID.readyState == 4 && check_stdID.status == 200) {
-document.getElementById("result").innerHTML = check_stdID.responseText;
+
+function std_query(){
+    if (std_id.readyState == 4 && std_id.status == 200){
+        console.log(std.responseText);
+        document.getElementById("std-id-result").style = std_id.responseText;
+    }
 }
+
+var national_id;
+function check_national_id(){
+    national_id = new XMLHttpRequest();
+    national_id.onreadystatechange = national_id_query;
+
+    var national_id_input = document.getElementById("user_id").value;
+    var url = "check_national_id.php?national_id=" + national_id_input;
+
+    national_id.open("GET",url);
+    national_id.send();
+}
+
+function national_id_query(){
+    if (national_id.readyState == 4 && national_id.status == 200){
+        document.getElementById("id-result").className = national_id.responseText;
+    }
 }

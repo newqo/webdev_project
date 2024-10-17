@@ -17,9 +17,7 @@ function login_validation(){
 function validation(){
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         // console.log(xmlhttp.responseText);
-        if (xmlhttp.responseText == "successful") {
-            document.location = "homepage.php";
-        }else if (xmlhttp.responseText == "เลขบัตรประชาชนหรือรหัสผ่านไม่ถูกต้อง"){
+        if (xmlhttp.responseText == "เลขบัตรประชาชนหรือรหัสผ่านไม่ถูกต้อง"){
             document.getElementById("result").innerHTML = xmlhttp.responseText;
         }
     }
