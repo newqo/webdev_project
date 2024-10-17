@@ -21,31 +21,83 @@
     }
     div a{
         display: block;
+        margin: 10%;
+        text-decoration: none;
+        color: black;
     }
     nav{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 3%;
+        /* padding: 3%; */
         border-radius: 12px;
         margin-right: 1% ;
+    }
+    section{
+        width: 80%;
+        padding-left: 2%;
+    }
+    .showCountInfo{
+        display: flex;
+        flex-basis: 100%;
+    }
+    .boxShowCountInfo{
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 1%;
+        margin: 2%;
+        flex-basis: 25%;
+        text-align: center;
+        justify-items: center;
+        display: inline-block;
+    }
+    select{
+        font-size: 18px;
     }
 </style>
 <body>
     <div class="container">
-        <nav style="background-color: rgb(224, 221, 251); width: 20%;" >
+        <nav style="border: 1px solid black; width: 20%;" >
             <div>
                 <a href="#" >Dashboard</a>
-                <a href="#" >All Data</a>
-                <a href="#" >Manage Information</a>
+                <a href="#jkl" >User management</a>
+                <a href="#" >Information management</a>
             </div>
             <div>
-                <a href="#" >Setting</a>
+                <a href="#" >Log out</a>
             </div>
 
         </nav>
-        <section style="background-color: rgb(247, 205, 205); width: 80%;">
-            <h1 style="height: 450px;">ijhuiyguft</h1>
+        
+        <section>
+            <div class="showCountInfo">
+                <div class="boxShowCountInfo">
+                    <p>จำนวนรวมผู้กู้ทั้งหมด</p>
+                    <h2>132</h2>
+                </div>
+                <div class="boxShowCountInfo">
+                    <p>จำนวนรวมผู้กู้เทอมล่าสุด</p>
+                    <h2>132</h2>
+                </div>
+                <div class="boxShowCountInfo">
+                    <p>จำนวนผู้กู้รายใหม่เทอมล่าสุด</p>
+                    <h2>132</h2>
+                </div>
+                <div class="boxShowCountInfo">
+                    <p>จำนวนผู้กู้รายเก่าเทอมล่าสุด</p>
+                    <h2>132</h2>
+                </div>
+            </div>
+    
+            <form>
+                <h1>ประวัติการจอง</h1>
+                <select>
+                    <option>รายคน</option>
+                    <option>รายสัปดาห์</option>
+                    <option selected>รายเทอม</option>
+                </select>
+            </form>
+            
         </section>
 
     </div>
