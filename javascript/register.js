@@ -88,13 +88,13 @@ function std_query(){
         // document.getElementById("std-id-result").className = std_id.responseText;
         document.getElementById("std-id-result").className = std_response;
 
-        if(std_response == "notify-show"){
-            document.getElementById("succesButton").className = "disabled";
-        }
-        else{
-            document.getElementById("succesButton").className = "";
-        }
-        
+        // if(std_response == "notify-show"){
+        //     document.getElementById("succesButton").className = "disabled";
+        // }
+        // else{
+        //     document.getElementById("succesButton").className = "";
+        // }
+        Check_bt_Integrity();
     }
 }
 
@@ -116,11 +116,44 @@ function national_id_query(){
 
         // document.getElementById("id-result").className = national_id.responseText;
         document.getElementById("id-result").className = national_id_response;
-        if(national_id_response == "notify-show"){
-            document.getElementById("succesButton").className = "disabled";
+        // if(national_id_response == "notify-show"){
+        //     document.getElementById("succesButton").className = "disabled";
+        // }
+        // else{
+        //     document.getElementById("succesButton").className = "";
+        // }
+        Check_bt_Integrity();
+    }
+}
+
+var bt;
+function Check_bt_Integrity(){
+    bt = new XMLHttpRequest();
+    bt.onreadystatechange = Checking_span;
+
+    var std_class = document.getElementById("std-id-result").className;
+    var nid_class = document.getElementById("id-result").className;
+    console.log("std : " + std_class);
+    console.log("nid : " + nid_class);
+
+    var url = "bt_integrity.php?std_class=" + std_class + "&nid_class=" + nid_class;
+
+    bt.open("GET",url);
+    bt.send();
+}
+
+function Checking_span(){
+    if (bt.readyState == 4 && bt.status == 200){
+        var bt_submit = document.getElementById("succesButton")
+        var bt_response = bt.responseText;
+        bt_submit.className = bt_response;
+
+        if(bt_response == "disabled"){
+            bt_submit.diabled = true;
+        }else{
+            bt_submit.disabled = false;
         }
-        else{
-            document.getElementById("succesButton").className = "";
-        }
+        
+        console.log(bt.responseText);
     }
 }
