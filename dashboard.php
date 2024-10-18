@@ -79,6 +79,9 @@
     h2{
         font-size: 27px;
     }
+    h3{
+        font-size: 22px;
+    }
     table{
         border-collapse: collapse;
         width: 100%;
@@ -105,6 +108,12 @@
         *{
             font-size: 16px;
         }
+        h2{
+            font-size: 24px;
+        }
+        h3{
+            font-size: 19px;
+        }
         .container{
             padding: 5%;
         }
@@ -118,11 +127,17 @@
     @media only screen and (max-width: 430px){
         *{
             font-size: 14px;
-            text-align: -webkit-center;
+            text-align: center;
         }
         .container{
             display: inline-block;
             margin: auto;
+        }
+        h2{
+            font-size: 21px;
+        }
+        h3{
+            font-size: 16px;
         }
         nav{
             display: none;
@@ -145,6 +160,9 @@
             border: 1px solid rgb(0,0,0,0.3);
             
         }
+        section{
+            margin-left: 0%;
+        }
     }
 </style>
 <body>
@@ -153,7 +171,7 @@
             <div>
                 <a href="#showCountInfo" >Dashboard</a>
                 <a href="#user-management" >User Management</a>
-                <a href="#" >Information Management</a>
+                <a href="#information-management" >Information Management</a>
             </div>
             <div>
                 <a href="#" >Log out</a>
@@ -184,7 +202,7 @@
             </div>
     
             <form>
-                <h1>ประวัติการจอง</h1>
+                <h3>ประวัติการจอง</h3>
                 <select>
                     <option>รายคน</option>
                     <option>รายสัปดาห์</option>
@@ -231,7 +249,7 @@
                 <br>
                 
                 <form class="user-management" id="user-management">
-                    <h1>User Management</h1>
+                    <h3>User Management</h3>
                     <input type="text" name="keyword" />
                     <input type="submit" value="ค้นหา" />
                     <br>
@@ -280,6 +298,76 @@
                     echo "</table>"
                     
                     ?>
+                    </form>
+                
+                
+                <br>
+                
+                <form class="information-management" id="information-management">
+                    <h3>Information Management</h3>
+                    <br>
+                    <p>Checklist</p>
+                    <?php
+                  $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'C%';");
+                  $stmt3->execute();
+                  
+                  echo "<br>
+                  <table border='1'>
+                  <tr>
+                    <th>ID</th>
+                    <th>วันเวลาเริ่มต้น</th>
+                    <th>วันเวลาสิ้นสุด</th>
+                    <th>Status</th>
+                  </tr>
+                  ";
+                  while ($row = $stmt3->fetch()) {
+                      echo "
+                      <tr onclick='window.location.href=\"checklist.php\"'>
+                      <td>" .$row["ID"] ."</td>
+                      <td>" .$row["วันเวลาเริ่มต้น"] ."</td>
+                      <td>" .$row["วันเวลาสิ้นสุด"] ."</td>
+                      <td>" .$row["Status"] ."</td>
+                      <td><a class='editt btn' href='checklist.php'>แก้ไข</a></td>
+                      <td><a class='del btn' href='checklist.php'>ลบ</a></td>
+                      </tr>";
+                    }
+                    
+                    echo "</table>"
+                    
+                    ?>
+
+                    <br>
+                    <p>Reservation</p>
+                    <?php
+                  $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'R%';");
+                  $stmt3->execute();
+                  
+                  echo "<br>
+                  <table border='1'>
+                  <tr>
+                    <th>ID</th>
+                    <th>วันเวลาเริ่มต้น</th>
+                    <th>วันเวลาสิ้นสุด</th>
+                    <th>Status</th>
+                  </tr>
+                  ";
+                  while ($row = $stmt3->fetch()) {
+                      echo "
+                      <tr onclick='window.location.href=\"checklist.php\"'>
+                      <td>" .$row["ID"] ."</td>
+                      <td>" .$row["วันเวลาเริ่มต้น"] ."</td>
+                      <td>" .$row["วันเวลาสิ้นสุด"] ."</td>
+                      <td>" .$row["Status"] ."</td>
+                      <td><a class='editt btn' href='checklist.php'>แก้ไข</a></td>
+                      <td><a class='del btn' href='checklist.php'>ลบ</a></td>
+                      </tr>";
+                    }
+                    
+                    echo "</table>"
+                    
+                    ?>
+
+
                     </form>
                 
             
