@@ -169,9 +169,9 @@
     <div class="container">
         <nav  >
             <div>
-                <a href="#showCountInfo" >Dashboard</a>
-                <a href="#user-management" >User Management</a>
-                <a href="#information-management" >Information Management</a>
+                <a href="#showCountInfo_id" >Dashboard</a>
+                <a href="#user-management_id" >User Management</a>
+                <a href="#information-management_id" >Information Management</a>
             </div>
             <div>
                 <a href="#" >Log out</a>
@@ -180,7 +180,7 @@
         </nav>
         
         <section>
-            <div class="showCountInfo" id="showCountInfo">
+            <div class="showCountInfo" id="showCountInfo_id">
                 <div class="boxShowCountInfo">
                     <p>จำนวนรวมผู้กู้ทั้งหมด</p>
                     <h2>132</h2>
@@ -248,7 +248,7 @@
                 
                 <br>
                 
-                <form class="user-management" id="user-management">
+                <form class="user-management" id="user-management_id">
                     <h3>User Management</h3>
                     <input type="text" name="keyword" />
                     <input type="submit" value="ค้นหา" />
@@ -303,7 +303,7 @@
                 
                 <br>
                 
-                <form class="information-management" id="information-management">
+                <form class="information-management" id="information-management_id">
                     <h3>Information Management</h3>
                     <br>
                     <p>Checklist</p>
