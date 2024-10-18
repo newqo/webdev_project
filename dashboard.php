@@ -17,6 +17,10 @@
     body{
         background-image: linear-gradient(to top right, #329D9c, #cff4d2, #ffffff);
         min-height: 100vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
     }
     .container{
         margin: 10px 100px;
@@ -36,15 +40,17 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        /* padding: 3%; */
         border-radius: 12px;
         margin-right: 1% ;
         border: 2px solid rgb(0,0,0,0.3); 
         width: 20%;
+        height: 90vh;
+        position: fixed;
     }
     section{
         width: 80%;
-        padding-left: 2%;
+        padding-left: 10%;
+        margin-left: 20%;
     }
     form{
         box-sizing: border-box;
@@ -53,6 +59,8 @@
         padding: 1% 1%;
         text-align: center;
         justify-items: center;
+        overflow: auto;
+        white-space: nowrap;
     }
     .showCountInfo{
         display: flex;
@@ -89,9 +97,16 @@
     tr:not(:first-child):hover{
         background-color: rgb(0,0,0,0.1);
     }
+    /* .user-management{
+        overflow: auto;
+        white-space: nowrap;
+    } */
     @media only screen and (max-width: 1024px){
         *{
             font-size: 16px;
+        }
+        .container{
+            padding: 5%;
         }
         nav{
             border: 1px solid rgb(0,0,0,0.3); 
@@ -136,8 +151,8 @@
     <div class="container">
         <nav  >
             <div>
-                <a href="#" >Dashboard</a>
-                <a href="#jkl" >User Management</a>
+                <a href="#showCountInfo" >Dashboard</a>
+                <a href="#user-management" >User Management</a>
                 <a href="#" >Information Management</a>
             </div>
             <div>
@@ -147,7 +162,7 @@
         </nav>
         
         <section>
-            <div class="showCountInfo">
+            <div class="showCountInfo" id="showCountInfo">
                 <div class="boxShowCountInfo">
                     <p>จำนวนรวมผู้กู้ทั้งหมด</p>
                     <h2>132</h2>
@@ -175,12 +190,12 @@
                     <option>รายสัปดาห์</option>
                     <option selected>รายเทอม</option>
                 </select>
-                <input type="date" name="party" min="2024-10-12" max="2024-10-30" />
+                <input type="date" name="party" min="2024-10-12" max="2024-10-30" /><br>
                 <?php
               $stmt = $pdo->prepare("SELECT Reservation.national_id AS 'ID',Pre_name.Pre_name_desc AS 'คำนำหน้า',Users.firstname AS 'ชื่อ',Users.lastname AS 'นามสกุล',Reservation.reserve_date AS 'วัน',Reservation.reserve_time AS 'เวลา',Reservation.queue_no AS 'คิวที่' FROM Reservation INNER JOIN Users ON Reservation.national_id=Users.national_id INNER JOIN Pre_name ON Pre_name.Pre_name_id=Users.Pre_name_id ORDER BY วัน ASC, 'เวลา' ASC , 'คิวที่' ASC;");
               $stmt->execute();
               
-              echo "
+              echo "<br>
               <table border='1'>
               <tr>
                 <th>ID</th>
@@ -212,6 +227,61 @@
                 
                 ?>
                 </form>
+                
+                <br>
+                
+                <form class="user-management" id="user-management">
+                    <h1>User Management</h1>
+                    <input type="text" name="keyword" />
+                    <input type="submit" value="ค้นหา" />
+                    <br>
+                    <?php
+                  $stmt2 = $pdo->prepare("SELECT User_category.category_desc AS 'ประเภทผู้กู้',Users.national_id AS 'ID' , Pre_name.Pre_name_desc AS 'คำนำหน้า' ,Users.firstname AS 'ชื่อ',Users.lastname AS 'นามสกุล',Education_Level_Category.ed_desc AS 'ชั้นปี',Faculty.Faculty_name AS 'คณะ',Department.Department_name AS 'สาขา',Users.Email AS 'อีเมลล์',Users.phone_num AS 'เบอร์โทรศัพท์',Users.birthdate AS 'วันเดือนปีเกิด',Users.Address AS 'ที่อยู่' FROM Users INNER JOIN Pre_name ON Users.Pre_name_id=Pre_name.Pre_name_id INNER JOIN User_category ON Users.user_cate_id=User_category.user_cate_id INNER JOIN Education ON Users.national_id=Education.national_id INNER JOIN Education_Level_Category ON Education.Education_Level=Education_Level_Category.ed_category_id INNER JOIN Faculty ON Education.Faculty_id=Faculty.Faculty_id INNER JOIN Department ON Department.Department_id=Education.Department_id;");
+                  $stmt2->execute();
+                  
+                  echo "<br>
+                  <table border='1'>
+                  <tr>
+                    <th>ประเภทผู้กู้</th>
+                    <th>ID</th>
+                    <th>คำนำหน้า</th>
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    <th>ชั้นปี</th>
+                    <th>คณะ</th>
+                    <th>สาขา</th>
+                    <th>อีเมลล์</th>
+                    <th>เบอร์โทรศัพท์</th>
+                    <th>วันเดือนปีเกิด</th>
+                    <th>ที่อยู่</th>
+                   
+                  </tr>
+                  ";
+                  while ($row = $stmt2->fetch()) {
+                      echo "
+                      <tr onclick='window.location.href=\"checklist.php\"'>
+                      <td>" .$row["ประเภทผู้กู้"] ."</td>
+                      <td>" .$row["ID"] ."</td>
+                      <td>" .$row["คำนำหน้า"] ."</td>
+                      <td>" .$row["ชื่อ"] ."</td>
+                      <td>" .$row["นามสกุล"] ."</td>
+                      <td>" .$row["ชั้นปี"] ."</td>
+                      <td>" .$row["คณะ"] ."</td>
+                      <td>" .$row["สาขา"] ."</td>
+                      <td>" .$row["อีเมลล์"] ."</td>
+                      <td>" .$row["เบอร์โทรศัพท์"] ."</td>
+                      <td>" .$row["วันเดือนปีเกิด"] ."</td>
+                      <td>" .$row["ที่อยู่"] ."</td>
+                      <td><a class='editt btn' href='checklist.php'>แก้ไข</a></td>
+                      <td><a class='del btn' href='checklist.php'>ลบ</a></td>
+                      </tr>";
+                    }
+                    
+                    echo "</table>"
+                    
+                    ?>
+                    </form>
+                
             
         </section>
 
