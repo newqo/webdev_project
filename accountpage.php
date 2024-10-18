@@ -77,6 +77,7 @@
               <a href="#" id="parents" onclick="showContent(id)">ข้อมูลของครอบครัว</a>
               <a href="#" id="history" onclick="showContent(id)">ประวัติการจอง</a>
               <a href="#" id="changepassword" onclick="showContent(id)">เปลี่ยนแปลงรหัสผ่าน</a>
+              <a href="#">Dashboard</a>
               <a href="#">ออกจากระบบ</a>
             </div>
           </div>

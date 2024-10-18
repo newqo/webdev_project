@@ -69,7 +69,10 @@ function setRequiredAttributes(role) {
     };
 
     fields[role].forEach(fieldId => {
-        document.getElementById(fieldId).setAttribute("required", "required");
+        const fieldElements = document.getElementsByName(fieldId);
+        fieldElements.forEach(field => {
+            field.setAttribute("required", "required");
+        });
     });
 }
 
@@ -96,11 +99,15 @@ function removeRequiredAttributes() {
     ];
 
     allFields.forEach(fieldId => {
-        document.getElementById(fieldId).removeAttribute("required");
+        const fieldElements = document.getElementsByName(fieldId);
+        fieldElements.forEach(field => {
+            field.removeAttribute("required");
+        });
     });
 }
 
-function handleSelection(selectedValue) {
+function showSection(selectedValue) {
+    // console.log(selectedValue);
     document.getElementById("father-info").style.display = "none";
     document.getElementById("father-income-info").style.display = "none";
     document.getElementById("mother-info").style.display = "none";

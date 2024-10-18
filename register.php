@@ -140,7 +140,7 @@
                 <div class="section-title">สถานภาพครอบครัว</div>
                 <div class="form-row">
                     <div class="form-group">
-                        <select name="pattern_status_name" id="pattern_status" onchange="showSection()">
+                        <select name="pattern_status_name" id="pattern_status" onchange="showSection(this.value)">
 
                             <option value="">เลือกสถานภาพครอบครัว</option>
                             <!-- <option value="father">อาศัยอยู่กับบิดา</option>

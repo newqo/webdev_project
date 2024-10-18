@@ -19,7 +19,7 @@ body{
     /* align-content: center; */
 }
 
-.container{
+.container{ 
     margin: 10px 100px;
     padding: 12px 25px;
     background-color: white;
