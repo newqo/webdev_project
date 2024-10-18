@@ -1,351 +1,644 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Kanit", sans-serif;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(to top right, #329d9c, #cff4d2, #ffffff);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* nav bar */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #329d9c;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+.menu-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+.menu-text-bar {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.menu-text-bar{
+  display: flex;
+  flex-direction: row;
+}
+
+.menu-text-bar a{
+  position: relative;
+  text-decoration: none;
+  color: white;
+  padding: 5px 15px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-text-bar a:hover {
+  transform: scale(1.1);
+  color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+  .dropdown-menu {
+    float: left;
+    overflow: hidden;
   }
-  
-  body {
-    font-family: "Kanit", sans-serif;
-    padding-top: 80px;
-    display: flex;
-    flex-direction: column;
-    background-image: linear-gradient(to top right, #329d9c, #cff4d2, #ffffff);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-  }
-  
-  /* nav bar */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #329d9c;
-    z-index: 1000;
-    padding: 10px 0;
-  }
-  
-  .menu-bar {
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    font-size: 14px;
-  }
-  
-  .menu-text-bar {
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-  }
-  
-  .menu-text-bar ul li a{
-    position: relative;
-    text-decoration: none;
+
+  .dropdown-menu .drop-menu-btn {
+    cursor: pointer;
+    font-size: 14px; /* ให้ขนาด font เท่ากับในลิงก์ */
+    border: none;
+    outline: none;
     color: white;
-    padding: 5px 15px;
+    padding: 5px 15px; /* ปรับ padding ให้เท่ากันกับลิงก์ */
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    position: relative;
     transition: color 0.3s ease, transform 0.3s ease;
   }
-  
-  .menu-text-bar ul li a::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 3px;
-    background-color: white;
-    border-radius: 25px;
-    left: 50%;
-    bottom: 0;
-    transition: width 0.3s ease, left 0.3s ease;
-  }
-  
-  .menu-text-bar ul li a:hover::after {
-    width: 50%;
-    left: 25%;
-  }
-  
-  .menu-text-bar ul li a:hover {
+
+  .dropdown-menu .drop-menu-btn:hover {
     transform: scale(1.1);
     color: white;
+    transition: color 0.3s ease, transform 0.3s ease;
   }
-  .menu-text-bar ul{
-    display: flex;
-    flex-direction: row;
-  }
-  
-  
-  .menu-user-bar {
-    margin-left: auto;
-  }
-  .logo-menu {
-    margin-right: 20px;
-  }
-  .menu-toggle {
+
+  .dropdown-content {
     display: none;
-    font-size: 24px;
-    cursor: pointer;
+    position: absolute;
+    background-color: #329d9c;
+    min-width: 160px;
+    z-index: 1;
+    top: 100%;
+    margin-left:90px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
     color: white;
+    transform: none;
+    border-bottom: 1px solid rgba(221, 221, 221, 0.5);
   }
-  
-  .menu-toggle.active {
-    display: block;
+
+  .dropdown-content a:hover {
+    background-color: #575757;
+    color: white;
+    transform: none;
+    transition: color 0.5s ease;
   }
-  
-  .menu.mobile-menu.show {
-    display: flex;
+
+  .dropdown-content a::after {
+    content: none;
   }
-  .logo-menu {
-    display: block;
-  }
-  
-  .logo-menu.active {
-    display: none;
-  }
-  
-  /* main */
-  
-  main {
-    flex-grow: 1;
-    margin: 0px 100px;
-  }
-  
-  .content-container {
-    display: flex;
-    flex-direction: row; /* จัด layout ให้ aside กับ article เรียงกันในแนวนอน */
-    gap: 20px; /* เพิ่มระยะห่างระหว่าง aside กับ article */
-    justify-content: flex-start; /* จัดให้หมวดหมู่เริ่มจากซ้ายสุด */
-  }
-  
-  /* data */
-  article {
-    flex-grow: 1;
-    padding: 20px;
-    background: white;
-    border-radius: 12px;
-    flex-basis: 85%;
-  }
-  
-  .form-row {
-    padding: 20px;
-  }
-  
-  /* menu */
+
+.show {
+  display: block;
+}
+
+/* drop menu user */
+.dropdown-menu-user {
+  background-color: transparent;
+  margin-left: auto;
+  border: 3px solid #CFF4D2;
+  border-radius: 25px;
+  padding: 5px 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+.dropdown-menu-user a {
+  text-decoration: none;
+  color: white;
+}
+
+.dropdown-menu-user:hover {
+  background-color:#5db5b4;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content-user {
+  display: none;
+  position: absolute;
+  background-color: #329d9c;
+  min-width: 200px;
+  z-index: 1;
+  top: 155%;
+  right:0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content-user a {
+  float: none;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  transform: none;
+  border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+}
+
+.dropdown-content-user a:hover {
+  background-color: #575757;
+  color: white;
+  transform: none;
+  transition: color 0.5s ease;
+}
+
+.dropdown-content-user a::after {
+  content: none;
+}
+.show-user {
+  display: block;
+}
+
+.logo-menu {
+  margin-right: 20px;
+}
+.menu-toggle {
+  display: none;
+  font-size:20px;
+  cursor:pointer;
+  font-weight: bold;
+  color: white;
+}
+
+/* mobile */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 20px 8px 8px 52px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: -30px;
+  right: 10px;
+  font-size: 50px;
+}
+.section-title-menu-mobile{
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-left: 4px solid #56c596;
+  padding-left: 10px;
+  color: #56c596;
+  margin: 10px 0px 10px 30px;
+}
+
+/* dropdown menu mobile */
+.drop-content-mobile {
+  display: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.drop-content-mobile li {
+  padding: 8px 16px;
+}
+
+.drop-content-mobile li a {
+  text-decoration: none;
+  color: #818181;
+  display: block;
+}
+
+.drop-content-mobile li a:hover {
+  color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
+/* --------------------------------------------- */
+
+.logo-menu {
+  display: block;
+}
+
+.logo-menu.active {
+  display: none;
+}
+
+/* main */
+
+main {
+  flex-grow: 1;
+  margin: 0px 100px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row; /* จัด layout ให้ aside กับ article เรียงกันในแนวนอน */
+  gap: 20px;
+  justify-content: flex-start;
+  min-height: 100vh; /* ให้ความสูงของ container เท่ากับความสูงหน้าจอ */
+}
+
+/* data */
+article {
+  flex-grow: 1;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  flex-basis: 85%;
+  min-height: 100vh;
+  margin-bottom:10px;
+}
+
+.form-row {
+  padding: 20px;
+}
+
+/* menu */
+aside {
+  width: 25%;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 25%;
+  min-height: 100vh;
+  margin-bottom: 10px;
+}
+.menu-side .section-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.menu a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.menu a:hover {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+/* input */
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-left: 4px solid #56c596;
+  padding-left: 10px;
+  color: #56c596;
+}
+.section-title-menu-bar {
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 10px;
+  color: black;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-row {
+  display: grid;
+  grid-gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: #5dc0a6;
+}
+
+/* button */
+button {
+  width: 20%;
+  justify-content:center;
+  padding: 10px 0;
+  margin-top: 20px;
+  background-color: #5dc0a6;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: inherit;
+}
+
+button:hover {
+  background-color: #4dae8f;
+}
+
+.box{
+  font-size:14px;
+  border: 3px solid #56C596;
+  border-radius: 12px;
+  padding: 10px;
+  margin-top:20px;
+  /* box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); */
+}
+.box p{
+  /* margin-bottom:10px; */
+  padding:5px 10px;
+}
+.section-title-box{
+  font-size: 18px;
+  font-weight: bold;
+  padding:10px 10px;
+}
+
+/* footer */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 40px 0px 0px;
+  font-size: 14px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 0px 20px;
+}
+
+.footer-section {
+  flex-basis: 30%;
+  margin-bottom: 10px;
+}
+
+.footer-section h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #56c596;
+}
+
+.footer-section p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.footer-section a {
+  color: #56c596;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  background-color: #222;
+  padding: 20px;
+  font-size: 12px;
+  margin-top: 20px;
+  color: #bbb;
+}
+
+.footer-section i {
+  margin-right: 8px;
+}
+
+.footer-section .social a {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.footer-section .social a:hover {
+  color: #fff;
+}
+
+/* mobile query for mobile*/
+
+@media (max-width: 431px) {
+  .menu-text-bar,
+  .menu-user-bar,
   aside {
-    width: 25%;
-    background-color: white;
+    display: none; /* ซ่อนเมนูปกติทั้งหมด */
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu-bar {
+    justify-content: space-between;
+  }
+
+  .menu {
+    flex-direction: column;
+    font-size: 14px;
+  }
+
+  main {
+    margin: 0 10px;
+  }
+
+  .container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  article {
+    width: 100%;
+    color: #000;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    flex-basis: 25%;
   }
-  .menu-side .section-title {
+
+  h1 {
     font-size: 24px;
-    margin-bottom: 20px;
   }
-  
-  .menu a {
-    display: block;
-    padding: 10px;
-    color: #333;
-    text-decoration: none;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-  
-  .menu a:hover {
-    background-color: #ddd;
-    border-radius: 5px;
-  }
-  
-  /* input */
+
   .section-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    border-left: 4px solid #56c596;
-    padding-left: 10px;
-    color: #56c596;
+    font-size: 16px;
   }
-  .section-title-menu {
-    font-size: 18px;
-    font-weight: bold;
-    padding-left: 10px;
-    color: black;
-    margin-bottom: 20px;
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group {
     width: 100%;
   }
-  
-  .form-row {
-    display: grid;
-    grid-gap: 20px;
+
+  .dropdown-menu-user{
+    display:none;
   }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .form-group input,
-  .form-group select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-  }
+
   input[type="text"],
   input[type="email"],
   input[type="password"],
   input[type="date"],
   select {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s ease;
+    font-size: 12px;
+    padding: 6px 10px;
+    height: 34px;
   }
-  
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus,
-  input[type="date"]:focus,
-  select:focus {
-    border-color: #5dc0a6;
-  }
-  
-  /* button */
+
   button {
-    width: auto;
-    padding: 10px 0;
-    margin-top: 20px;
-    background-color: #5dc0a6;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #4dae8f;
-  }
-  
-  /* footer */
-  footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
     font-size: 14px;
-    margin-top: 15px;
   }
-  
-  /* mobile query for mobile*/
-  
-  @media (max-width: 431px) {
-    .menu-text-bar,
-    .menu-user-bar,
-    aside {
-      display: none; /* ซ่อนเมนูปกติทั้งหมด */
-    }
-  
-    .menu-toggle {
-      display: block; /* แสดง hamburger menu */
-    }
-  
-    .menu-bar {
-      justify-content: space-between;
-    }
-  
-    .menu {
-      flex-direction: column;
-      font-size: 14px;
-    }
-  
-    main {
-      margin: 0 10px;
-    }
-  
-    .container {
-      width: 100%;
-      padding: 15px;
-    }
-  
-    article {
-      width: 100%;
-      color: #000;
-      padding: 20px;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    }
-  
-    h1 {
-      font-size: 24px;
-    }
-  
-    .section-title {
-      font-size: 16px;
-    }
-  
-    .form-row {
-      flex-direction: column;
-    }
-  
-    .form-group {
-      width: 100%;
-    }
-  
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="date"],
-    select {
-      font-size: 12px;
-      padding: 6px 10px;
-      height: 34px;
-    }
-  
-    button {
-      font-size: 14px;
-    }
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
   }
-  
-  /* mobile query for ipads*/
-  @media (min-width: 432px) and (max-width: 1024px) {
-    .container {
-      width: 80%;
-    }
-  
-    h1 {
-      font-size: 26px;
-    }
-  
-    .section-title {
-      font-size: 17px;
-    }
-  
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="date"],
-    select {
-      font-size: 14px;
-      padding: 8px 12px;
-    }
-  
-    button {
-      font-size: 15px;
-    }
+
+  .footer-section {
+    flex-basis: 100%;
+    margin-bottom: 20px;
   }
-  
+
+  .footer-section h2 {
+    font-size: 16px;
+  }
+
+  .footer-section p,
+  .footer-section ul li {
+    font-size: 12px;
+  }
+
+  .footer-bottom {
+    font-size: 10px;
+  }
+
+  .footer-section .social a {
+    font-size: 14px;
+    margin: 0 5px;
+  }
+}
+
+/* mobile query for ipads*/
+@media (min-width: 432px) and (max-width: 1024px) {
+  .container {
+    width: 80%;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .section-title {
+    font-size: 17px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="date"],
+  select {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+  .menu-toggle {
+    display: none;
+  }
+}

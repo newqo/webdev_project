@@ -26,7 +26,7 @@ body {
     width: 100%; /* ปรับขนาดตาม container */
     max-width: 400px; /* จำกัดความกว้างสูงสุดไม่เกิน 400px */
     height: auto; /* ทำให้ขนาดโลโก้เป็นอัตราส่วนที่ถูกต้อง */
-    margin-top:30px;
+    margin: 30px 0px;
 }
 
 h1 {

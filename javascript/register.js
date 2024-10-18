@@ -15,6 +15,7 @@ function Faculty_query(){
         var faculty_select = document.getElementById("faculty");
         // console.log(faculty.responseText);
         faculty_select.innerHTML = faculty.responseText;
+        updateMajor();
     }
 }
 
@@ -39,32 +40,95 @@ function Major_query(){
     }
 }
 
-function showSection() {
+function setRequiredAttributes(role) {
+    const fields = {
+        father: [
+            "father_fst_name",
+            "father_lst_name",
+            "father_phone_num",
+            "father_career",
+            "father_annual_income",
+            "father_income_type"
+        ],
+        mother: [
+            "mother_fst_name",
+            "mother_lst_name",
+            "mother_phone_num",
+            "mother_career",
+            "mother_annual_income",
+            "mother_income_type"
+        ],
+        guardian: [
+            "guardian_fst_name",
+            "guardian_lst_name",
+            "guardian_phone_num",
+            "guardian_career",
+            "guardian_annual_income",
+            "guardian_income_type"
+        ]
+    };
 
+    fields[role].forEach(fieldId => {
+        document.getElementById(fieldId).setAttribute("required", "required");
+    });
+}
+
+function removeRequiredAttributes() {
+    const allFields = [
+        "father_fst_name",
+        "father_lst_name",
+        "father_phone_num",
+        "father_career",
+        "father_annual_income",
+        "father_income_type",
+        "mother_fst_name",
+        "mother_lst_name",
+        "mother_phone_num",
+        "mother_career",
+        "mother_annual_income",
+        "mother_income_type",
+        "guardian_fst_name",
+        "guardian_lst_name",
+        "guardian_phone_num",
+        "guardian_career",
+        "guardian_annual_income",
+        "guardian_income_type"
+    ];
+
+    allFields.forEach(fieldId => {
+        document.getElementById(fieldId).removeAttribute("required");
+    });
+}
+
+function handleSelection(selectedValue) {
     document.getElementById("father-info").style.display = "none";
-    document.getElementById("mother-info").style.display = "none";
-    document.getElementById("guardian-info").style.display = "none";
     document.getElementById("father-income-info").style.display = "none";
+    document.getElementById("mother-info").style.display = "none";
     document.getElementById("mother-income-info").style.display = "none";
+    document.getElementById("guardian-info").style.display = "none";
     document.getElementById("guardian-income-info").style.display = "none";
 
-    var selectedValue = document.getElementById("pattern_status").value;
-    console.log("Selected value: ", selectedValue);
-    
+    removeRequiredAttributes();
+
     if (selectedValue === "0") {
         document.getElementById("father-info").style.display = "block";
         document.getElementById("father-income-info").style.display = "block";
+        setRequiredAttributes("father");
     } else if (selectedValue === "1") {
         document.getElementById("mother-info").style.display = "block";
         document.getElementById("mother-income-info").style.display = "block";
+        setRequiredAttributes("mother");
     } else if (selectedValue === "3") {
         document.getElementById("guardian-info").style.display = "block";
         document.getElementById("guardian-income-info").style.display = "block";
+        setRequiredAttributes("guardian");
     } else if (selectedValue === "2") {
         document.getElementById("father-info").style.display = "block";
         document.getElementById("father-income-info").style.display = "block";
         document.getElementById("mother-info").style.display = "block";
         document.getElementById("mother-income-info").style.display = "block";
+        setRequiredAttributes("father");
+        setRequiredAttributes("mother");
     }
 }
 
@@ -126,6 +190,31 @@ function national_id_query(){
     }
 }
 
+var pw;
+function checkpassword(){
+    pw = new XMLHttpRequest();
+    pw.onreadystatechange = checking_password;
+
+    var password = document.getElementById("password").value;
+    var password2 = document.getElementById("re-password").value;
+    // console.log("ps1 : " + password + "\nps2 : " + password2);
+
+    var url = "check_password.php?ps1=" + password + "&ps2=" + password2;
+
+    pw.open("GET",url);
+    pw.send();
+}
+
+function checking_password(){
+    if (pw.readyState == 4 && pw.status == 200){
+        pw_response = pw.responseText;
+        document.getElementById("checkpw-result").className = pw_response;
+        // console.log("response pw :" + pw_response)
+
+        Check_bt_Integrity();
+    }
+}
+
 var bt;
 function Check_bt_Integrity(){
     bt = new XMLHttpRequest();
@@ -133,10 +222,11 @@ function Check_bt_Integrity(){
 
     var std_class = document.getElementById("std-id-result").className;
     var nid_class = document.getElementById("id-result").className;
-    console.log("std : " + std_class);
-    console.log("nid : " + nid_class);
+    var pw_class = document.getElementById("checkpw-result").className;
+    // console.log("std : " + std_class);
+    // console.log("nid : " + nid_class);
 
-    var url = "bt_integrity.php?std_class=" + std_class + "&nid_class=" + nid_class;
+    var url = "bt_integrity.php?std_class=" + std_class + "&nid_class=" + nid_class + "&pw_class=" + pw_class;
 
     bt.open("GET",url);
     bt.send();
@@ -154,6 +244,6 @@ function Checking_span(){
             bt_submit.disabled = false;
         }
         
-        console.log(bt.responseText);
+        // console.log(bt.responseText);
     }
 }

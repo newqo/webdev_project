@@ -26,46 +26,59 @@
         <div class="menu-bar">
           <div class="logo-menu">
             <a href="homepage.php"
-              ><img src="imgs/Student_Loan_logo.svg" alt="Logo" width="64px"
+              ><img src="imgs/logo kmutnb final.png" alt="Logo" width="64px"
             /></a>
           </div>
-          <div class="menu-toggle" id="menu-toggle">
-            <i class="fa-solid fa-bars"></i>
-            <div class="menu" id="mobile-menu" aria-hidden="true">
-              <ul>
-                <li><a href="#">หน้าหลัก</a></li>
-                <li>
-                  <a href="#" id="service" onclick="viewmore()">
-                    บริการ
-                    <ul id="sub-sevice-result">
-                      <li><a href="#">ผู้กู้รายใหม่</a></li>
-                      <li><a href="#">ผู้กู้รายเก่า</a></li>
-                    </ul>
-                  </a>
-                </li>
-                <li><a href="#">ติดต่อเรา</a></li>
-                <div class="section-title-menu">หมวดหมู่</div>
-                <li><a href="#">ข้อมูลส่วนตัวนักศึกษา</a></li>
-                <li><a href="#">ข้อมูลการศึกษา</a></li>
-                <li><a href="#">ข้อมูลของครอบครัว</a></li>
-                <li><a href="#">ประวัติการจอง</a></li>
-                <li><a href="#">เปลี่ยนแปลงรหัสผ่าน</a></li>
+          <span class="menu-toggle" onclick="openNav()">&#9776;</span>
+          <!-- mobile -->
+          <div id="sidebar-mobile" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+              >&times;</a
+            >
+            <a href="#">หน้าหลัก</a>
+            <div class="drop-mobile">
+              <a onmouseover="myFunctionMobile()">บริการ</a>
+              <ul class="drop-content-mobile" id="myDropdown-menu-mobile">
+                <li><a href="#">ผู้กู้รายใหม่</a></li>
+                <li><a href="#">ผู้กู้รายเก่า</a></li>
               </ul>
             </div>
+
+            <a href="#">ติดต่อเรา</a>
+            <div class="section-title-menu-mobile">หมวดหมู่</div>
+              <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
+              <a href="#" id="education" onclick="showContent(id)">ข้อมูลการศึกษา</a>
+              <a href="#" id="parents" onclick="showContent(id)">ข้อมูลของครอบครัว</a>
+              <a href="#" id="history" onclick="showContent(id)">ประวัติการจอง</a>
+              <a href="#" id="changepassword" onclick="showContent(id)">เปลี่ยนแปลงรหัสผ่าน</a>
+            <br/>
+            <a href="#">ออกจากระบบ</a>
           </div>
+
+          <!-- desktop -->
           <div class="menu-text-bar">
-            <ul>
-              <li><a href="#">หน้าหลัก</a></li>
-              <li><a href="#">บริการ</a>
-                <ul id="sub-sevice-result">
-                  <li><a href="#">ผู้กู้รายใหม่</a></li>
-                  <li><a href="#">ผู้กู้รายเก่า</a></li>
-                </ul></li>
-              <li><a href="#">ติดต่อเรา</a></li>
-            </ul>
+            <a href="#">หน้าหลัก</a>
+            <div class="dropdown-menu">
+              <button class="drop-menu-btn" onmouseover="myFunction()">
+                บริการ
+              </button>
+            </div>
+            <div class="dropdown-content" id="myDropdown-menu">
+              <a href="#">ผู้กู้รายใหม่</a>
+              <a href="#">ผู้กู้รายเก่า</a>
+            </div>
+            <a href="#">ติดต่อเรา</a>
           </div>
-          <div class="menu-user-bar">
-            <a href="">ชื่อผู้ใช้</a>
+          <div class="dropdown-menu-user">
+            <a onmouseover="myFunctionUser()">เข้าสู่ระบบ</a>
+            <div class="dropdown-content-user" id="myDropdown-menu-user">
+              <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
+              <a href="#" id="education" onclick="showContent(id)">ข้อมูลการศึกษา</a>
+              <a href="#" id="parents" onclick="showContent(id)">ข้อมูลของครอบครัว</a>
+              <a href="#" id="history" onclick="showContent(id)">ประวัติการจอง</a>
+              <a href="#" id="changepassword" onclick="showContent(id)">เปลี่ยนแปลงรหัสผ่าน</a>
+              <a href="#">ออกจากระบบ</a>
+            </div>
           </div>
         </div>
       </nav>
@@ -74,98 +87,49 @@
     <main>
       <div class="content-container">
         <aside>
-          <div class="section-title-menu">หมวดหมู่</div>
+          <div class="section-title-menu-bar">หมวดหมู่</div>
           <div class="menu">
-            <a href="#">ข้อมูลส่วนตัวนักศึกษา</a>
-            <a href="#">ข้อมูลการศึกษา</a>
-            <a href="#">ข้อมูลของครอบครัว</a>
-            <a href="#">ประวัติการจอง</a>
-            <a href="#">เปลี่ยนแปลงรหัสผ่าน</a>
+              <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
+              <a href="#" id="education" onclick="showContent(id)">ข้อมูลการศึกษา</a>
+              <a href="#" id="parents" onclick="showContent(id)">ข้อมูลของครอบครัว</a>
+              <a href="#" id="history" onclick="showContent(id)">ประวัติการจอง</a>
+              <a href="#" id="changepassword" onclick="showContent(id)">เปลี่ยนแปลงรหัสผ่าน</a>
           </div>
         </aside>
 
-        <article>
-          <div class="section-title">ข้อมูลส่วนตัวนักศึกษา</div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>คำนำหน้า</label>
-              <select name="user_nametitle" id="user_nametitle" required>
-                <option value="">เลือกคำนำหน้า</option>
-                <option value="mr">นาย</option>
-                <option value="ms">นางสาว</option>
-                <option value="mrs">นาง</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>ชื่อ</label>
-              <input
-                type="text"
-                id="user_firstname"
-                name="user_firstname"
-                pattern="[A-Za-zก-๗]{2,50}"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label>นามสกุล</label>
-              <input
-                type="text"
-                id="user_lastname"
-                name="user_lastname"
-                pattern="[A-Za-zก-๗]{2,50}"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label>เลขบัตรประชาชน</label>
-              <input
-                type="text"
-                id="user_id"
-                name="user_id"
-                pattern="[0-9]{13}"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label>วัน/เดือน/ปีเกิด</label>
-              <input type="date" id="birthdate" name="birthdate" required />
-            </div>
-            <div class="form-group">
-              <label>E-mail</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label>เบอร์โทร</label>
-              <input
-                type="text"
-                id="phone_number"
-                name="phone_number"
-                pattern="[0-9]{10}"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)</label>
-              <input
-                type="text"
-                id="user_address"
-                name="user_address"
-                pattern="/d/w/s{1,200}"
-                required
-              />
-            </div>
-            <button id="success-bt">แก้ไข</button>
-          </div>
+        <article id="article-content">
+      
         </article>
       </div>
     </main>
 
-    <footer></footer>
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section about">
+          <h2>เกี่ยวกับเรา</h2>
+          <p>
+            เว็บไซต์ของเราให้บริการจองและลงทะเบียนที่เกี่ยวข้องกับการกู้ยืม กยศ.มจพ
+          </p>
+        </div>
+    
+        <div class="footer-section contact">
+          <h2>ติดต่อเรา</h2>
+          <ul>
+            <li><i class="fas fa-envelope"></i> Email: info@website.com</li>
+            <li><i class="fas fa-phone"></i> โทรศัพท์: 02-555-2000 ต่อ 1150, 1161</li>
+          </ul>
+        </div>
+    
+        <div class="footer-section social">
+          <h2>ติดตามเรา</h2>
+          <a href="https://www.facebook.com/profile.php?id=100066829755038"><i class="fab fa-facebook-f"></i> กยศ_kmutnb</a><br>
+          <a href="https://liff.line.me/1645278921-kWRPP32q/?accountId=sa.kmutnb"><i class="fab fa-line"></i> กิจการนักศึกษา มจพ.</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2024 All Rights Reserved
+      </div>
+    </footer>
+    
   </body>
 </html>

@@ -15,6 +15,11 @@
     <script src="https://kit.fontawesome.com/9703a87d5d.js" crossorigin="anonymous"></script>
     <script src="javascript/register.js"></script>
     <title>ลงทะเบียน</title>
+    <script>
+        function print(id){
+            console.log(document.getElementById(id).value);
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -26,7 +31,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>คำนำหน้า</label>
-                            <select id="user_nametitle" name="user_nametitle" required>
+                            <select id="user_nametitle_student" name="user_nametitle" required onchange="print(id)">
                                 <option value="">เลือกคำนำหน้า</option>
                                 <?php
                                     $stmt = $pdo->prepare("SELECT Pre_name_id,Pre_name_desc FROM Pre_name");
@@ -49,12 +54,12 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>รหัสนักศึกษา*</label>
-                        <input type="text" id="user_stdID" name="user_stdID" placeholder="6501234567890" pattern="[0-9]{13}" onkeyup="check_std_id()" required>
+                        <input type="text" id="user_stdID" name="user_stdID" placeholder="6501234567890" pattern="[0-9]{13}" maxlength="13" onkeyup="check_std_id()" required>
                         <span id="std-id-result" class="notify-hide">รหัสนักศึกษานี้ถูกใช้ไปแล้ว</span>
                     </div>
                     <div class="form-group">
                         <label>เลขบัตรประชาชน*</label>
-                        <input type="text" id="user_id" name="user_id" placeholder="1234567890123" pattern="[0-9]{13}" onkeyup="check_national_id()" required>
+                        <input type="text" id="user_id" name="user_id" placeholder="1234567890123" pattern="[0-9]{13}" maxlength="13" onkeyup="check_national_id()" required>
                         <span id="id-result" class="notify-hide">เลขบัตรประชาชนนี้ถูกใช้ไปแล้ว</span>
                     </div>
                 </div>
@@ -105,27 +110,28 @@
                     </div>
                     <div class="form-group">
                         <label>เบอร์โทร*</label>
-                        <input type="text" id="phone_number" name="phone_number" placeholder="0981234567" pattern="[0-9]{10}" required>
+                        <input type="text" id="phone_number" name="phone_number" maxlength="10" placeholder="0981234567" pattern="[0-9]{10}" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
-                        <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)</label>
-                        <input type="text" id="user_address" name="user_address" pattern="/d/w/s {2,200}" required>
+                        <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)*</label>
+                        <input type="text" id="user_address" name="user_address" pattern="[A-Za-z0-9\s,.]{2,200}" maxlength="200" required>
                     </div>
                 </div>
             </div>   
             <!-- รหัสผ่าน -->
             <div class="section">
                 <div class="section-title">รหัสผ่าน</div>
+                <span id="checkpw-result" class="section-title notify-hide">รหัสผ่านไม่ตรงกัน</span>
                 <div class="form-row">
                     <div class="form-group">
                         <label>รหัสผ่าน*</label>
-                        <input type="password" id="password" name="password" pattern="\w{8,20}" required>
+                        <input type="password" id="password" name="password" maxlength="100" pattern="\w{8,100}" required>
                     </div>
                     <div class="form-group">
                         <label>กรอกรหัสผ่านอีกครั้ง*</label>
-                        <input type="password" id="re-password" name="password" pattern="\w{8,20}" required>
+                        <input type="password" id="re-password" name="re-password" maxlength="100" pattern="\w{8,100}" required onchange="checkpassword()">
                     </div>
                 </div>
             </div>
@@ -134,7 +140,7 @@
                 <div class="section-title">สถานภาพครอบครัว</div>
                 <div class="form-row">
                     <div class="form-group">
-                        <select name="pattern_status" id="pattern_status" onchange="showSection()">
+                        <select name="pattern_status_name" id="pattern_status" onchange="showSection()">
 
                             <option value="">เลือกสถานภาพครอบครัว</option>
                             <!-- <option value="father">อาศัยอยู่กับบิดา</option>
@@ -158,7 +164,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>คำนำหน้า</label>
-                            <select id="nametitle_father" name="nametitle_father" required>
+                            <select id="nametitle_father" name="father_pre_name" onchange="print(id)">
                                 <option value="">เลือกคำนำหน้า</option>
                                 <!-- <option value="mr">นาย</option> -->
                                 <?php
@@ -171,15 +177,15 @@
                     </div>
                     <div class="form-group">
                         <label>ชื่อจริง*</label>
-                        <input type="text" id="firstname_father" name="firstname_father" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
+                        <input type="text" id="firstname_father" name="father_fst_name" pattern="[A-Za-zก-ฮ-๗]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>นามสกุล*</label>
-                        <input type="text" id="lastname_father" name="lastname_father" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
+                        <input type="text" id="lastname_father" name="father_lst_name" pattern="[A-Za-zก-ฮ-๗]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>เบอร์โทร*</label>
-                        <input type="text" id="phone_number_father" name="phone_number_father" placeholder="0981234567" pattern="[0-9]{10}" required>
+                        <input type="text" id="phone_number_father" name="father_phone_num" placeholder="0981234567" maxlength="10" pattern="[0-9]{10}">
                     </div>
                 </div>
             </div>
@@ -204,7 +210,7 @@
                         $income_cate_arr_father = array("income_regular_father" , "income_irregular_father" , "income_none_father");
 
                         while($row = $stmt->fetch()){
-                            echo "<input type='radio' id='" .  $income_cate_arr_father[$row['income_cate_id'] - 1] ."' name='income_father' value='". $row["income_cate_id"] ."'>";
+                            echo "<input type='radio' id='" .  $income_cate_arr_father[$row['income_cate_id'] - 1] ."' name='father_income_type' value='". $row["income_cate_id"] ."'>";
                             echo "<label for='".  $income_cate_arr_father[$row['income_cate_id'] - 1] ."'>". $row["income_cate_desc"] ."</label><br>";
                         }
                     ?>
@@ -212,11 +218,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>ระบุอาชีพ หรือรายละเอียดของงาน*</label>
-                        <input type="text" id="job_detail_father" name="job_detail_father" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
+                        <input type="text" id="job_detail_father" name="father_career" pattern="[A-Za-zก-ฮ-๗]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>รายได้ของบิดา (ต่อปี)*</label>
-                        <input type="text" id="annual_income_father" name="annual_income_father" pattern="[0-9]{1,}" required>
+                        <input type="text" id="annual_income_father" name="father_annual_income" pattern="[0-9]{1,}">
                     </div>
                 </div>
             </div>
@@ -227,7 +233,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>คำนำหน้า</label>
-                            <select id="nametitle_mother" name="nametitle_mother" required>
+                            <select id="nametitle_mother" name="mother_pre_name">
                                 <option value="">เลือกคำนำหน้า</option>
                                 <?php
                                     $stmt = $pdo->prepare("SELECT Pre_name_id,Pre_name_desc FROM Pre_name WHERE Pre_name_desc LIKE 'นาง%';");
@@ -242,15 +248,15 @@
                     </div>
                     <div class="form-group">
                         <label>ชื่อจริง*</label>
-                        <input type="text" id="firstname_mother" name="firstname_mother" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
+                        <input type="text" id="firstname_mother" name="mother_fst_name" pattern="[A-Za-zก-ฮ-๗]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>นามสกุล*</label>
-                        <input type="text" id="lastname_mother" name="lastname_mother" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
+                        <input type="text" id="lastname_mother" name="mother_lst_name" pattern="[A-Za-zก-ฮ-๗]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>เบอร์โทร*</label>
-                        <input type="text" id="phone_number_mother" name="phone_number_mother" placeholder="0981234567" pattern="[0-9]{10}" required>
+                        <input type="text" id="phone_number_mother" name="mother_phone_num" placeholder="0981234567" maxlength="10" pattern="[0-9]{10}">
                     </div>
                 </div>
             </div>
@@ -275,7 +281,7 @@
                         $income_cate_arr_mother = array("income_regular_mother" , "income_irregular_mother" , "income_none_mother");
 
                         while($row = $stmt->fetch()){
-                            echo "<input type='radio' id='" .  $income_cate_arr_mother[$row['income_cate_id'] - 1] ."' name='income_mother' value='". $row["income_cate_id"] ."'>";
+                            echo "<input type='radio' id='" .  $income_cate_arr_mother[$row['income_cate_id'] - 1] ."' name='mother_income_type' value='". $row["income_cate_id"] ."'>";
                             echo "<label for='".  $income_cate_arr_mother[$row['income_cate_id'] - 1] ."'>". $row["income_cate_desc"] ."</label><br>";
                         }
                     ?>
@@ -283,11 +289,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>ระบุอาชีพ หรือรายละเอียดของงาน*</label>
-                        <input type="text" id="job_detail_mother" name="job_detail_mother" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
+                        <input type="text" id="job_detail_mother" name="mother_career" pattern="[A-Za-zก-ฮ-๗]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>รายได้ของมารดา (ต่อปี)*</label>
-                        <input type="text" id="annual_income_mother" name="annual_income_mother" pattern="[0-9]{1,}" required>
+                        <input type="text" id="annual_income_mother" name="mother_annual_income" pattern="[0-9]{1,}">
                     </div>
                 </div>
             </div>
@@ -298,7 +304,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>คำนำหน้า</label>
-                            <select id="nametitle_guardian" name="nametitle_guardian" required>
+                            <select id="nametitle_guardian" name="guardian_pre_name" >
                                 <option value="">เลือกคำนำหน้า</option>
                                 <?php
                                     $stmt = $pdo->prepare("SELECT Pre_name_id,Pre_name_desc FROM Pre_name");
@@ -314,15 +320,15 @@
                     </div>
                     <div class="form-group">
                         <label>ชื่อจริง*</label>
-                        <input type="text" id="firstname_guardian" name="firstname_guardian" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
+                        <input type="text" id="firstname_guardian" name="guardian_fst_name" pattern="[A-Za-zก-ฮ-๗]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>นามสกุล*</label>
-                        <input type="text" id="lastname_guardian" name="lastname_guardian" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
+                        <input type="text" id="lastname_guardian" name="guardian_lst_name" pattern="[A-Za-zก-ฮ-๗]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>เบอร์โทร*</label>
-                        <input type="text" id="phone_number_guardian" name="phone_number_guardian" placeholder="0981234567" pattern="[0-9]{10}" required>
+                        <input type="text" id="phone_number_guardian" name="guardian_phone_num" placeholder="0981234567" pattern="[0-9]{10}" maxlength="10">
                     </div>
                 </div>
             </div>
@@ -347,7 +353,7 @@
                         $income_cate_arr_guardian = array("income_regular_guardian" , "income_irregular_guardian" , "income_none_guardian");
 
                         while($row = $stmt->fetch()){
-                            echo "<input type='radio' id='" .  $income_cate_arr_guardian[$row['income_cate_id'] - 1] ."' name='income_guardian' value='". $row["income_cate_id"] ."'>";
+                            echo "<input type='radio' id='" .  $income_cate_arr_guardian[$row['income_cate_id'] - 1] ."' name='guardian_income_type' value='". $row["income_cate_id"] ."'>";
                             echo "<label for='".  $income_cate_arr_guardian[$row['income_cate_id'] - 1] ."'>". $row["income_cate_desc"] ."</label><br>";
                         }
                     ?>
@@ -355,11 +361,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>ระบุอาชีพ หรือรายละเอียดของงาน*</label>
-                        <input type="text" id="job_detail_guardian" name="job_detail_guardian" pattern="[A-Za-zก-ฮ-๗]{2,50}" required>
+                        <input type="text" id="job_detail_guardian" name="guardian_career" pattern="[A-Za-zก-ฮ-๗]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>รายได้ของผู้ปกครอง (ต่อปี)*</label>
-                        <input type="text" id="annual_income_guardian" name="annual_income_guardian" pattern="[0-9]{1,}" required>
+                        <input type="text" id="annual_income_guardian" name="guardian_annual_income" pattern="[0-9]{1,}" >
                     </div>
                 </div>
             </div>      

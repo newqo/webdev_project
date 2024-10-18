@@ -1,5 +1,5 @@
 <?php
-    if($_GET["std_class"] == "notify-hide" && $_GET["nid_class"] == "notify-hide"){
+    if($_GET["std_class"] == "notify-hide" && $_GET["nid_class"] == "notify-hide" && $_GET["pw_class"] == "notify-hide"){
         echo "";
     }else{
         echo "disabled";

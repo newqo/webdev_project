@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="logo">
-        <img src="imgs/Student_Loan_logo.svg">
+        <img src="imgs/logo kmutnb final.png">
         <h1>เข้าสู่ระบบ</h1>
         <div id="result"></div>
         <form action="login_validation.php" method="post">
