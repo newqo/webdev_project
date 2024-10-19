@@ -79,15 +79,26 @@ table{
     width: 100%;
 }
 .btn{
-    border: 1px solid;
+    /* border: 1px solid; */
     border-radius: 35px;
-    margin: 5px;
+    margin: 0% 10%;
 }
 .editt{
     color: #329D9c;
 }
 .del{
     color: #D75044;
+}
+.add_btn{
+    color: #0e9f4f;
+    border: 1px solid;
+    border-radius: 35px;
+    padding: 0.2% 2%;
+}
+.add_btn_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 tr:not(:first-child):hover{
     background-color: rgb(0,0,0,0.1);
