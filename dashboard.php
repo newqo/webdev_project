@@ -5,155 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link href=""
 </head>
-<style>
-    *{
-        box-sizing: border-box;
-        font-family: 'Kanit', sans-serif;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        font-size: 18px;
-    }
-    body{
-        background-image: linear-gradient(to top right, #329D9c, #cff4d2, #ffffff);
-        min-height: 100vh;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-        position: relative;
-    }
-    .container{
-        margin: 10px 100px;
-        padding: 12px 25px;
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        display: flex;
-    }
-    div a{
-        display: block;
-        margin: 10%;
-        text-decoration: none;
-        color: black;
-    }
-    nav{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border-radius: 12px;
-        margin-right: 1% ;
-        border: 2px solid rgb(0,0,0,0.3); 
-        width: 20%;
-        height: 90vh;
-        position: fixed;
-    }
-    section{
-        width: 80%;
-        padding-left: 10%;
-        margin-left: 20%;
-    }
-    form{
-        box-sizing: border-box;
-        border: 2px solid rgb(0,0,0,0.3);
-        border-radius: 5px;
-        padding: 1% 1%;
-        text-align: center;
-        justify-items: center;
-        overflow: auto;
-        white-space: nowrap;
-    }
-    .showCountInfo{
-        display: flex;
-        flex-basis: 100%;
-    }
-    .boxShowCountInfo{
-        border: 2px solid rgb(0,0,0,0.3);
-        border-radius: 5px;
-        padding: 1%;
-        margin: 2%;
-        flex-basis: 25%;
-        text-align: center;
-        justify-items: center;
-        display: inline-block;
-    }
-    h2{
-        font-size: 27px;
-    }
-    table{
-        border-collapse: collapse;
-        width: 100%;
-    }
-    .btn{
-        border: 1px solid;
-        border-radius: 35px;
-        margin: 5px;
-    }
-    .editt{
-        color: #329D9c;
-    }
-    .del{
-        color: #D75044;
-    }
-    tr:not(:first-child):hover{
-        background-color: rgb(0,0,0,0.1);
-    }
-    /* .user-management{
-        overflow: auto;
-        white-space: nowrap;
-    } */
-    @media only screen and (max-width: 1024px){
-        *{
-            font-size: 16px;
-        }
-        .container{
-            padding: 5%;
-        }
-        nav{
-            border: 1px solid rgb(0,0,0,0.3); 
-        }
-        .boxShowCountInfo{
-            border: 1px solid rgb(0,0,0,0.3);
-        }
-    }
-    @media only screen and (max-width: 430px){
-        *{
-            font-size: 14px;
-            text-align: -webkit-center;
-        }
-        .container{
-            display: inline-block;
-            margin: auto;
-        }
-        nav{
-            display: none;
-            width: 100%;
-            border: 1px solid rgb(0,0,0,0.3); 
-        }
-        .boxShowCountInfo{
-            border: 1px solid rgb(0,0,0,0.3);
-            border-radius: 15px;
-            padding: 10%;
-            margin: 10%;
-            flex: 1;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        .showCountInfo{
-            display: flex;
-            flex-wrap: wrap;
-        }
-        form{
-            border: 1px solid rgb(0,0,0,0.3);
-            
-        }
-    }
-</style>
+
 <body>
     <div class="container">
         <nav  >
             <div>
-                <a href="#showCountInfo" >Dashboard</a>
-                <a href="#user-management" >User Management</a>
-                <a href="#" >Information Management</a>
+                <a href="#showCountInfo_id" >Dashboard</a>
+                <a href="#user-management_id" >User Management</a>
+                <a href="#information-management_id" >Information Management</a>
             </div>
             <div>
                 <a href="#" >Log out</a>
@@ -162,7 +23,7 @@
         </nav>
         
         <section>
-            <div class="showCountInfo" id="showCountInfo">
+            <div class="showCountInfo" id="showCountInfo_id">
                 <div class="boxShowCountInfo">
                     <p>จำนวนรวมผู้กู้ทั้งหมด</p>
                     <h2>132</h2>
@@ -184,7 +45,7 @@
             </div>
     
             <form>
-                <h1>ประวัติการจอง</h1>
+                <h3>ประวัติการจอง</h3>
                 <select>
                     <option>รายคน</option>
                     <option>รายสัปดาห์</option>
@@ -230,8 +91,8 @@
                 
                 <br>
                 
-                <form class="user-management" id="user-management">
-                    <h1>User Management</h1>
+                <form class="user-management" id="user-management_id">
+                    <h3>User Management</h3>
                     <input type="text" name="keyword" />
                     <input type="submit" value="ค้นหา" />
                     <br>
@@ -280,6 +141,76 @@
                     echo "</table>"
                     
                     ?>
+                    </form>
+                
+                
+                <br>
+                
+                <form class="information-management" id="information-management_id">
+                    <h3>Information Management</h3>
+                    <br>
+                    <p>Checklist</p>
+                    <?php
+                  $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'C%';");
+                  $stmt3->execute();
+                  
+                  echo "<br>
+                  <table border='1'>
+                  <tr>
+                    <th>ID</th>
+                    <th>วันเวลาเริ่มต้น</th>
+                    <th>วันเวลาสิ้นสุด</th>
+                    <th>Status</th>
+                  </tr>
+                  ";
+                  while ($row = $stmt3->fetch()) {
+                      echo "
+                      <tr onclick='window.location.href=\"checklist.php\"'>
+                      <td>" .$row["ID"] ."</td>
+                      <td>" .$row["วันเวลาเริ่มต้น"] ."</td>
+                      <td>" .$row["วันเวลาสิ้นสุด"] ."</td>
+                      <td>" .$row["Status"] ."</td>
+                      <td><a class='editt btn' href='checklist.php'>แก้ไข</a></td>
+                      <td><a class='del btn' href='checklist.php'>ลบ</a></td>
+                      </tr>";
+                    }
+                    
+                    echo "</table>"
+                    
+                    ?>
+
+                    <br>
+                    <p>Reservation</p>
+                    <?php
+                  $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'R%';");
+                  $stmt3->execute();
+                  
+                  echo "<br>
+                  <table border='1'>
+                  <tr>
+                    <th>ID</th>
+                    <th>วันเวลาเริ่มต้น</th>
+                    <th>วันเวลาสิ้นสุด</th>
+                    <th>Status</th>
+                  </tr>
+                  ";
+                  while ($row = $stmt3->fetch()) {
+                      echo "
+                      <tr onclick='window.location.href=\"checklist.php\"'>
+                      <td>" .$row["ID"] ."</td>
+                      <td>" .$row["วันเวลาเริ่มต้น"] ."</td>
+                      <td>" .$row["วันเวลาสิ้นสุด"] ."</td>
+                      <td>" .$row["Status"] ."</td>
+                      <td><a class='editt btn' href='checklist.php'>แก้ไข</a></td>
+                      <td><a class='del btn' href='checklist.php'>ลบ</a></td>
+                      </tr>";
+                    }
+                    
+                    echo "</table>"
+                    
+                    ?>
+
+
                     </form>
                 
             

@@ -9,4 +9,8 @@
     $stmt->bindParam(3,$_POST["cost_of_living_id"]);
     $stmt->bindParam(4,$_POST["this_term"]);
 
-    $stmt->execute();
+    if($stmt->execute()){
+        header("location: checklist_edit.php");
+    }
+
+    

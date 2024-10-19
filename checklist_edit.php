@@ -6,7 +6,17 @@
     if (empty($_SESSION["national_id"]) ) { 
         header("location: login.php");
     }else{
-        
+        $term = $pdo->prepare("SELECT Duration_id FROM `Post_Duration` WHERE Checklist = 1 AND Event_status = 1 ORDER BY Start_date DESC");
+        $term->execute();
+        $this_term = $term->fetch();
+        $this_term_id = $this_term["Duration_id"];
+
+        $stmt = $pdo->prepare("SELECT * FROM `Checklist` 
+                        WHERE national_id = ? and duration_id = ?");
+        $stmt->bindParam(1,$_SESSION["national_id"]);
+        $stmt->bindParam(2,$this_term_id);
+        $stmt->execute();
+        $User = $stmt->fetch();
     }
 ?>
 
@@ -22,35 +32,67 @@
     <link href="css/checklist_reservation.css" rel="stylesheet">
     <script src="javascript/checklist.js"></script>
 </head>
-<body>
+<body onload="submitDetail(<?=$_SESSION['user_category']?>)">
     <section class="container">
         <article>
-        <form class="form-container" action="insert_checklist.php" method="post">
+        <form class="form-container" action="update_checklist.php" method="post">
+            <input type="hidden" name="this_term" id="" value="<?=$this_term_id?>">
+            <input type="hidden" name="checklist_id" id="" value="<?=$User["checklist_id"]?>">
+            <input type="hidden" name="national_id" id="" value="<?=$User["national_id"]?>">
             <div>
             <label>กลุ่ม</label>
             <br>
-            <input type="radio" name="user_cate_id" id="new_user" value="0" required/>
+            <!-- <select name="user_cate_selected" id="user_cate_id" onchange="submitDetail()" required>
+                <option value="">--กรุณาเลือกประเภทผู้กู้--</option>
+                <?php
+                    // $User_category = $_SESSION["user_category"];
+
+                    // $stmtU = $pdo->prepare("SELECT * FROM User_category");
+                    // $stmtU->execute();
+                    // while($row=$stmtU->fetch()){
+                    //     $IsSelected_user= ($row["user_cate_id"] == $User_category) ? 'selected' : '';
+                    //     echo "<option value='".$row["user_cate_id"]."'". $IsSelected_user .">". $row["category_desc"] ."</option>";
+                    // }
+                ?>
+            </select> -->
+            <!-- <input type="radio" name="user_cate_id" id="new_user" value="0"required/>
             <label for="new_user">ผู้กู้รายใหม่</label>
             <br>
-            <input type="radio" name="user_cate_id" id="old_user" value="1" required/>
-            <label for="old_user">ผู้กู้รายเก่า</label>
+            <input type="radio" name="user_cate_id" id="old_user" value="1"required/>
+            <label for="old_user" >ผู้กู้รายเก่า</label> -->
             <br><br>
             <label>ผู้กู้ประสงค์ขอกู้ยืมเงินค่าครองชีพ (รายเดือน)</label>
             <br>
-            <input type="radio" id="costofliving-yes" name="cost_of_living_id" value="1" required/>
+            <?php
+                $CostoflivingId_selected = $User["cost_of_living_id"];
+                
+            ?>
+            <input type="radio" id="costofliving-yes" name="cost_of_living_id" value="1"
+            <?php
+                echo ($CostoflivingId_selected == 1) ? 'checked' : '';
+            ?>
+            required/>
             <label for="costofliving-yes">ประสงค์รับค่าครองชีพ</label>
             <br>
-            <input type="radio" id="costofliving-no" name="cost_of_living_id" value="0" required/>
-            <label for="costofliving-no">ไม่ประสงค์รับค่าครองชีพ</label>
+            <input type="radio" id="costofliving-no" name="cost_of_living_id" value="0" 
+            <?php
+                echo ($CostoflivingId_selected == 0) ? 'checked' : '';
+            ?>
+            required/>
+            <label for="costofliving-no" >ไม่ประสงค์รับค่าครองชีพ</label>
+
             <br><br>
             <label>ทุน</label>
-            <select name="scholarship_select" id="scholarship_id" required>
+            <select name="scholarship_selected" id="scholarship_id" required>
                 <option value="">--กรุณาเลือกชื่อทุน--</option>
                 <?php
+                    $User_scholarship = $User["scholarship_id"];
+                    
                     $query = $pdo->prepare("SELECT * FROM Scholarship");
                     $query->execute();
                     while($option = $query->fetch()){
-                        echo "<option value='". $option["scholarship_id"] ."'>". $option["scholarship_name"] ."</option>";
+                        $IsSelected_scholarship = ($User_scholarship == $option["scholarship_id"]) ? 'selected' : '';
+                        echo "<option value='". $option["scholarship_id"] ."'". $IsSelected_scholarship .">". $option["scholarship_name"] ."</option>";
                     }
                 ?>
                 <!-- <option value="1">ทุนนักศึกษาที่สร้างชื่อเสียงดีเด่นให้แก่สถาบัน</option>
@@ -60,12 +102,9 @@
                 <option value="5">ทุนอุดมศึกษาเพื่อการพัฒนาจังหวัดชายแดนภาคใต้</option>
                 <option value="6">ทุนอุดหนุนการศึกษาประเภทขาดแคลนแก่นักศึกษาโครงการสมทบพิเศษ (เฉพาะคณะวิทยาศาสตร์ประยุกต์)</option> -->
             </select>
-
             </div>
-
             <div class="setcenter">
-                <button type="submit" id="addInformation" class="addInformation" onclick="submitDetail(event)">เสร็จสิ้น</button>
-                
+                <button type="submit" id="addInformation" class="addInformation">ลงทะเบียน</button>
             </div>
 
         </form>

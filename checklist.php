@@ -34,7 +34,7 @@
     <link href="css/checklist_reservation.css" rel="stylesheet">
     <script src="javascript/checklist.js"></script>
 </head>
-<body>
+<body onload="submitDetail(<?=$_SESSION['user_category']?>)">
     <section class="container">
         <article>
         <form class="form-container" action="insert_checklist.php" method="post">
@@ -42,11 +42,21 @@
             <div>
             <label>กลุ่ม</label>
             <br>
-            <input type="radio" name="user_cate_id" id="new_user" value="0"required/>
+            <!-- <select name="user_cate_selected" id="user_cate_id" onchange="submitDetail()" required>
+                <option value="">--กรุณาเลือกประเภทผู้กู้--</option>
+                <?php
+                    // $stmtU = $pdo->prepare("SELECT * FROM User_category");
+                    // $stmtU->execute();
+                    // while($row=$stmtU->fetch()){
+                    //     echo "<option value='".$row["user_cate_id"]."'>". $row["category_desc"] ."</option>";
+                    // }
+                ?>
+            </select> -->
+            <!-- <input type="radio" name="user_cate_id" id="new_user" value="0"required/>
             <label for="new_user">ผู้กู้รายใหม่</label>
             <br>
             <input type="radio" name="user_cate_id" id="old_user" value="1"required/>
-            <label for="old_user" >ผู้กู้รายเก่า</label>
+            <label for="old_user" >ผู้กู้รายเก่า</label> -->
             <br><br>
             <label>ผู้กู้ประสงค์ขอกู้ยืมเงินค่าครองชีพ (รายเดือน)</label>
             <br>
@@ -75,8 +85,7 @@
             </select>
             </div>
             <div class="setcenter">
-                <button type="submit" id="addInformation" class="addInformation" onclick="submitDetail(event)">เสร็จสิ้น</button>
-                
+                <button type="submit" id="addInformation" class="addInformation">ลงทะเบียน</button>
             </div>
 
         </form>

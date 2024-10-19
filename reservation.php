@@ -1,4 +1,10 @@
-<?php include "connect.php" ?>
+<?php include "connect.php" 
+    // if ($stmt->execute()) {
+    //     echo '<script>alert("เรียบร้อย");</script>';
+    // } else {
+    //     echo '<script>alert("ไม่สำเร็จ");</script>';
+    // }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,10 +17,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
     <link href="css/checklist_reservation.css" rel="stylesheet">
     <script>
-        
+        function func_confirm_reserve(date){
+            let ans = confirm("คุณต้องการยืนยันการจองในวัน "+date+"เวลา"+time+"หรือไม่");
+            //วัน +date+"เวลา"+time+ คิวเต็มแล้วค่ะ
+            //ขณะนี้ยังไม่เปิดให้จองค่ะ
+        }
     </script>
 </head>
-<body>
+<body> 
     <section class="container">
         <article>
             <label style="font-size: 20px; display: flex; justify-content: center;">วันที่จอง</label>
@@ -91,7 +101,7 @@
                     
                 </div>
                 <div class="setcenter"> 
-                    <button type="button" id="addInformation" class="addInformation" onclick="submitDetail(event)">ยืนยัน</button>
+                    <button type="button" id="addInformation" class="addInformation" onclick="func_confirm_reserve()">ยืนยัน</button>
                 </div>
             </form>
             </article>
@@ -126,6 +136,7 @@ ORDER BY reserve_date ASC;"); //WHERE national_id=?
                     <p>จองวัน <?=$row["วัน"]?></p> 
                     <p>เวลา <?=$row["เวลา"]?></p> 
                     <p>คิวที่ <?=$row["คิว"]?></p>
+                
                 </div>
                 <p>หมายเหตุ: หากนักศึกษาไม่อยู่รับบริการในช่วงเรียกคิว ทางกยศ.ขอสงวนสิทธิ์ในการข้ามคิว</p>
 
