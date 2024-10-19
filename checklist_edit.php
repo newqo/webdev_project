@@ -3,22 +3,10 @@
     
     session_start();
 
-    $term = $pdo->prepare("SELECT Duration_id FROM `Post_Duration` WHERE Checklist = 1 AND Event_status = 1 ORDER BY Start_date DESC");
-    $term->execute();
-    $this_term = $term->fetch();
-    $this_term_id = $this_term["Duration_id"];
-
     if (empty($_SESSION["national_id"]) ) { 
         header("location: login.php");
     }else{
-        $stmt = $pdo->prepare("SELECT COUNT(checklist_id) AS 'row' FROM Checklist WHERE duration_id = ? AND national_id = ?");
-        $stmt->bindParam(1,$this_term_id);
-        $stmt->bindParam(2,$_SESSION["national_id"]);
-        $stmt->execute();
-        $Isfound = $stmt->fetch();
-        if ($Isfound['row'] != 0){
-            header("location: checklist_edit.php");
-        }
+        
     }
 ?>
 
@@ -38,25 +26,14 @@
     <section class="container">
         <article>
         <form class="form-container" action="insert_checklist.php" method="post">
-            <input type="hidden" name="this_term" id="" value="<?=$this_term_id?>">
             <div>
             <label>กลุ่ม</label>
             <br>
-            <select name="user_cate_selected" id="user_cate_id" required>
-                <option value="">--กรุณาเลือกประเภทผู้กู้--</option>
-                <?php
-                    $stmtU = $pdo->prepare("SELECT * FROM User_category");
-                    $stmtU->execute();
-                    while($row=$stmtU->fetch()){
-                        echo "<option value='".$row["user_cate_id"]."'>". $row["category_desc"] ."</option>";
-                    }
-                ?>
-            </select>
-            <!-- <input type="radio" name="user_cate_id" id="new_user" value="0"required/>
+            <input type="radio" name="user_cate_id" id="new_user" value="0" required/>
             <label for="new_user">ผู้กู้รายใหม่</label>
             <br>
-            <input type="radio" name="user_cate_id" id="old_user" value="1"required/>
-            <label for="old_user" >ผู้กู้รายเก่า</label> -->
+            <input type="radio" name="user_cate_id" id="old_user" value="1" required/>
+            <label for="old_user">ผู้กู้รายเก่า</label>
             <br><br>
             <label>ผู้กู้ประสงค์ขอกู้ยืมเงินค่าครองชีพ (รายเดือน)</label>
             <br>
@@ -64,10 +41,10 @@
             <label for="costofliving-yes">ประสงค์รับค่าครองชีพ</label>
             <br>
             <input type="radio" id="costofliving-no" name="cost_of_living_id" value="0" required/>
-            <label for="costofliving-no" >ไม่ประสงค์รับค่าครองชีพ</label>
+            <label for="costofliving-no">ไม่ประสงค์รับค่าครองชีพ</label>
             <br><br>
             <label>ทุน</label>
-            <select name="scholarship_selected" id="scholarship_id" required>
+            <select name="scholarship_select" id="scholarship_id" required>
                 <option value="">--กรุณาเลือกชื่อทุน--</option>
                 <?php
                     $query = $pdo->prepare("SELECT * FROM Scholarship");
@@ -83,7 +60,9 @@
                 <option value="5">ทุนอุดมศึกษาเพื่อการพัฒนาจังหวัดชายแดนภาคใต้</option>
                 <option value="6">ทุนอุดหนุนการศึกษาประเภทขาดแคลนแก่นักศึกษาโครงการสมทบพิเศษ (เฉพาะคณะวิทยาศาสตร์ประยุกต์)</option> -->
             </select>
+
             </div>
+
             <div class="setcenter">
                 <button type="submit" id="addInformation" class="addInformation" onclick="submitDetail(event)">เสร็จสิ้น</button>
                 
