@@ -40,24 +40,6 @@
         <form class="form-container" action="insert_checklist.php" method="post">
             <input type="hidden" name="this_term" id="" value="<?=$this_term_id?>">
             <div>
-            <label>กลุ่ม</label>
-            <br>
-            <!-- <select name="user_cate_selected" id="user_cate_id" onchange="submitDetail()" required>
-                <option value="">--กรุณาเลือกประเภทผู้กู้--</option>
-                <?php
-                    // $stmtU = $pdo->prepare("SELECT * FROM User_category");
-                    // $stmtU->execute();
-                    // while($row=$stmtU->fetch()){
-                    //     echo "<option value='".$row["user_cate_id"]."'>". $row["category_desc"] ."</option>";
-                    // }
-                ?>
-            </select> -->
-            <!-- <input type="radio" name="user_cate_id" id="new_user" value="0"required/>
-            <label for="new_user">ผู้กู้รายใหม่</label>
-            <br>
-            <input type="radio" name="user_cate_id" id="old_user" value="1"required/>
-            <label for="old_user" >ผู้กู้รายเก่า</label> -->
-            <br><br>
             <label>ผู้กู้ประสงค์ขอกู้ยืมเงินค่าครองชีพ (รายเดือน)</label>
             <br>
             <input type="radio" id="costofliving-yes" name="cost_of_living_id" value="1" required/>
