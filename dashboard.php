@@ -5,169 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link href="css/dashboard.css" rel="stylesheet">
 </head>
-<style>
-    *{
-        box-sizing: border-box;
-        font-family: 'Kanit', sans-serif;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        font-size: 18px;
-    }
-    body{
-        background-image: linear-gradient(to top right, #329D9c, #cff4d2, #ffffff);
-        min-height: 100vh;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-        position: relative;
-    }
-    .container{
-        margin: 10px 100px;
-        padding: 12px 25px;
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        display: flex;
-    }
-    div a{
-        display: block;
-        margin: 10%;
-        text-decoration: none;
-        color: black;
-    }
-    nav{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border-radius: 12px;
-        margin-right: 1% ;
-        border: 2px solid rgb(0,0,0,0.3); 
-        width: 20%;
-        height: 90vh;
-        position: fixed;
-    }
-    section{
-        width: 80%;
-        padding-left: 10%;
-        margin-left: 20%;
-    }
-    form{
-        box-sizing: border-box;
-        border: 2px solid rgb(0,0,0,0.3);
-        border-radius: 5px;
-        padding: 1% 1%;
-        text-align: center;
-        justify-items: center;
-        overflow: auto;
-        white-space: nowrap;
-    }
-    .showCountInfo{
-        display: flex;
-        flex-basis: 100%;
-    }
-    .boxShowCountInfo{
-        border: 2px solid rgb(0,0,0,0.3);
-        border-radius: 5px;
-        padding: 1%;
-        margin: 2%;
-        flex-basis: 25%;
-        text-align: center;
-        justify-items: center;
-        display: inline-block;
-    }
-    h2{
-        font-size: 27px;
-    }
-    h3{
-        font-size: 22px;
-    }
-    table{
-        border-collapse: collapse;
-        width: 100%;
-    }
-    .btn{
-        border: 1px solid;
-        border-radius: 35px;
-        margin: 5px;
-    }
-    .editt{
-        color: #329D9c;
-    }
-    .del{
-        color: #D75044;
-    }
-    tr:not(:first-child):hover{
-        background-color: rgb(0,0,0,0.1);
-    }
-    /* .user-management{
-        overflow: auto;
-        white-space: nowrap;
-    } */
-    @media only screen and (max-width: 1024px){
-        *{
-            font-size: 16px;
-        }
-        h2{
-            font-size: 24px;
-        }
-        h3{
-            font-size: 19px;
-        }
-        .container{
-            padding: 5%;
-        }
-        nav{
-            border: 1px solid rgb(0,0,0,0.3); 
-        }
-        .boxShowCountInfo{
-            border: 1px solid rgb(0,0,0,0.3);
-        }
-    }
-    @media only screen and (max-width: 430px){
-        *{
-            font-size: 14px;
-            text-align: center;
-        }
-        .container{
-            display: inline-block;
-            margin: auto;
-        }
-        h2{
-            font-size: 21px;
-        }
-        h3{
-            font-size: 16px;
-        }
-        nav{
-            display: none;
-            width: 100%;
-            border: 1px solid rgb(0,0,0,0.3); 
-        }
-        .boxShowCountInfo{
-            border: 1px solid rgb(0,0,0,0.3);
-            border-radius: 15px;
-            padding: 10%;
-            margin: 10%;
-            flex: 1;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        .showCountInfo{
-            display: flex;
-            flex-wrap: wrap;
-        }
-        form{
-            border: 1px solid rgb(0,0,0,0.3);
-            
-        }
-        section{
-            margin-left: 0%;
-        }
-    }
-</style>
+
 <body>
     <div class="container">
-        <nav  >
+        <nav>
             <div>
                 <a href="#showCountInfo_id" >Dashboard</a>
                 <a href="#user-management_id" >User Management</a>
@@ -181,23 +24,43 @@
         
         <section>
             <div class="showCountInfo" id="showCountInfo_id">
+                <?php
+                    $query1 = $pdo->prepare("SELECT COUNT(Reservation.reservation_id) AS 'จำนวนรวมผู้กู้ทั้งหมด' FROM Reservation;");
+                    $query1->execute();
+                    $query_total=$query1->fetch();
+                ?>
                 <div class="boxShowCountInfo">
                     <p>จำนวนรวมผู้กู้ทั้งหมด</p>
-                    <h2>132</h2>
+                    <h2><?=$query_total["จำนวนรวมผู้กู้ทั้งหมด"]?></h2>
                 </div>
+                <?php
+                    $query2 = $pdo->prepare("SELECT COUNT(Reservation.Duration_id) AS 'จำนวนรวมผู้กู้เทอมล่าสุด' FROM Reservation INNER JOIN Post_Duration ON Reservation.duration_id=Post_Duration.Duration_id WHERE Post_Duration.Reservation = 1 AND Post_Duration.Event_status = 1 ORDER BY Post_Duration.Start_date DESC;");
+                    $query2->execute();
+                    $query_term = $query2->fetch();
+                ?>                
                 <div class="boxShowCountInfo">
                     <p>จำนวนรวมผู้กู้เทอมล่าสุด</p>
-                    <h2>132</h2>
+                    <h2><?=$query_term["จำนวนรวมผู้กู้เทอมล่าสุด"]?></h2>
                 </div>
+                <?php
+                    $query3 = $pdo->prepare("SELECT COUNT(Reservation.Duration_id) AS 'จำนวนผู้กู้รายใหม่' FROM Reservation INNER JOIN Post_Duration ON Reservation.duration_id=Post_Duration.Duration_id WHERE Post_Duration.Reservation = 1 AND Post_Duration.Event_status = 1 AND Reservation.duration_id LIKE '%NEW%' ORDER BY Post_Duration.Start_date DESC;");
+                    $query3->execute();
+                    $query_term_new = $query3->fetch();
+                ?>
                 <div class="boxShowCountInfo">
                     <p>จำนวนผู้กู้รายใหม่</p>
                     <p>(เทอมล่าสุด)</p>
-                    <h2>132</h2>
+                    <h2><?=$query_term_new["จำนวนผู้กู้รายใหม่"]?></h2>
                 </div>
+                <?php
+                    $query4 = $pdo->prepare("SELECT COUNT(Reservation.Duration_id) AS 'จำนวนผู้กู้รายเก่า' FROM Reservation INNER JOIN Post_Duration ON Reservation.duration_id=Post_Duration.Duration_id WHERE Post_Duration.Reservation = 1 AND Post_Duration.Event_status = 1 AND Reservation.duration_id LIKE '%OLD%' ORDER BY Post_Duration.Start_date DESC;");
+                    $query4->execute();
+                    $query_term_old = $query4->fetch();
+                ?>
                 <div class="boxShowCountInfo">
                     <p>จำนวนผู้กู้รายเก่า</p>
                     <p>(เทอมล่าสุด)</p>
-                    <h2>132</h2>
+                    <h2><?=$query_term_old["จำนวนผู้กู้รายเก่า"]?></h2>
                 </div>
             </div>
     
@@ -250,6 +113,16 @@
                 
                 <form class="user-management" id="user-management_id">
                     <h3>User Management</h3>
+                    <select name="user_cate_selected" id="user_cate_id">
+                    <option value="">--กรุณาเลือกประเภทผู้กู้--</option>
+                <?php
+                    $stmtU = $pdo->prepare("SELECT * FROM User_category");
+                    $stmtU->execute();
+                    while($row=$stmtU->fetch()){
+                        echo "<option value='".$row["user_cate_id"]."'>". $row["category_desc"] ."</option>";
+                    }
+                ?>
+                    </select>
                     <input type="text" name="keyword" />
                     <input type="submit" value="ค้นหา" />
                     <br>
