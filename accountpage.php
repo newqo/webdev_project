@@ -20,70 +20,73 @@
     <title>ข้อมูลส่วนตัวนักศึกษา</title>
   </head>
 
-  <body>
-    <header>
-      <nav>
-        <div class="menu-bar">
-          <div class="logo-menu">
-            <a href="homepage.php"
-              ><img src="imgs/logo kmutnb final.png" alt="Logo" width="64px"
-            /></a>
-          </div>
-          <span class="menu-toggle" onclick="openNav()">&#9776;</span>
-          <!-- mobile -->
-          <div id="sidebar-mobile" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-              >&times;</a
-            >
-            <a href="#">หน้าหลัก</a>
-            <div class="drop-mobile">
-              <a onmouseover="myFunctionMobile()">บริการ</a>
-              <ul class="drop-content-mobile" id="myDropdown-menu-mobile">
-                <li><a href="#">ผู้กู้รายใหม่</a></li>
-                <li><a href="#">ผู้กู้รายเก่า</a></li>
-              </ul>
+  <body onload="showContent('student')">
+  <header>
+        <nav>
+          <div class="menu-bar">
+            <div class="logo-menu">
+              <a href="homepage.php"
+                ><img src="imgs/logo-kmutnb.png" alt="Logo" width="100px"
+              /></a>
             </div>
-
-            <a href="#">ติดต่อเรา</a>
-            <div class="section-title-menu-mobile">หมวดหมู่</div>
-              <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
-              <a href="#" id="education" onclick="showContent(id)">ข้อมูลการศึกษา</a>
-              <a href="#" id="parents" onclick="showContent(id)">ข้อมูลของครอบครัว</a>
-              <a href="#" id="history" onclick="showContent(id)">ประวัติการจอง</a>
-              <a href="#" id="changepassword" onclick="showContent(id)">เปลี่ยนแปลงรหัสผ่าน</a>
-            <br/>
-            <a href="#">ออกจากระบบ</a>
-          </div>
-
-          <!-- desktop -->
-          <div class="menu-text-bar">
-            <a href="#">หน้าหลัก</a>
-            <div class="dropdown-menu">
-              <button class="drop-menu-btn" onmouseover="myFunction()">
-                บริการ
-              </button>
-            </div>
-            <div class="dropdown-content" id="myDropdown-menu">
-              <a href="#">ผู้กู้รายใหม่</a>
-              <a href="#">ผู้กู้รายเก่า</a>
-            </div>
-            <a href="#">ติดต่อเรา</a>
-          </div>
-          <div class="dropdown-menu-user">
-            <a onmouseover="myFunctionUser()">เข้าสู่ระบบ</a>
-            <div class="dropdown-content-user" id="myDropdown-menu-user">
-              <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
-              <a href="#" id="education" onclick="showContent(id)">ข้อมูลการศึกษา</a>
-              <a href="#" id="parents" onclick="showContent(id)">ข้อมูลของครอบครัว</a>
-              <a href="#" id="history" onclick="showContent(id)">ประวัติการจอง</a>
-              <a href="#" id="changepassword" onclick="showContent(id)">เปลี่ยนแปลงรหัสผ่าน</a>
-              <a href="#">Dashboard</a>
+            <span class="menu-toggle" onclick="openNav()">&#9776;</span>
+            <!-- mobile -->
+            <div id="sidebar-mobile" class="sidenav">
+              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+                >&times;</a
+              >
+              <a href="homepage.php">หน้าหลัก</a>
+              <div class="drop-mobile">
+                <a onclick="myFunctionMobile()">บริการ</a>
+                <ul class="drop-content-mobile" id="myDropdown-menu-mobile">
+                  <li><a href="#checklist_announcement">ลงทะเบียน</a></li>
+                  <li><a href="#reservation_announcement_old_user">ผู้กู้รายเก่า</a></li>
+                  <li><a href="#reservation_announcement_new_user">ผู้กู้รายใหม่</a></li>
+                </ul>
+              </div>
+  
+              <a href="homepage.php#contect">ติดต่อเรา</a>
+              <div class="section-title-menu-mobile">หมวดหมู่</div>
+                <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
+                <a href="#" id="education" onclick="showContent(id)">ข้อมูลการศึกษา</a>
+                <a href="#" id="parents" onclick="showContent(id)">ข้อมูลของครอบครัว</a>
+                <a href="#" id="history" onclick="showContent(id)">ประวัติการจอง</a>
+                <a href="#" id="changepassword" onclick="showContent(id)">เปลี่ยนแปลงรหัสผ่าน</a>
+                <a href="#">Dashboard</a>
+              <br/>
               <a href="#">ออกจากระบบ</a>
             </div>
+  
+            <!-- desktop -->
+            <div class="menu-text-bar">
+              <a href="homepage.php">หน้าหลัก</a>
+              <div class="dropdown-menu">
+                <button class="drop-menu-btn" onclick="myFunction()">
+                  บริการ
+                </button>
+              </div>
+              <div class="dropdown-content" id="myDropdown-menu">
+                <a href="homepage.php#checklist_announcement">ลงทะเบียน</a>
+                <a href="homepage.php#reservation_announcement_old_user">ผู้กู้รายเก่า</a>
+                <a href="homepage.php#reservation_announcement_new_user">ผู้กู้รายใหม่</a>
+              </div>
+              <a href="homepage.php#contect">ติดต่อเรา</a>
+            </div>
+            <div class="dropdown-menu-user">
+              <a onclick="myFunctionUser()">เข้าสู่ระบบ</a>
+              <div class="dropdown-content-user" id="myDropdown-menu-user">
+                <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
+                <a href="#" id="education" onclick="showContent(id)">ข้อมูลการศึกษา</a>
+                <a href="#" id="parents" onclick="showContent(id)">ข้อมูลของครอบครัว</a>
+                <a href="#" id="history" onclick="showContent(id)">ประวัติการจอง</a>
+                <a href="#" id="changepassword" onclick="showContent(id)">เปลี่ยนแปลงรหัสผ่าน</a>
+                <a href="#">Dashboard</a>
+                <a href="#">ออกจากระบบ</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </nav>
-    </header>
+        </nav>
+      </header>
 
     <main>
       <div class="content-container">

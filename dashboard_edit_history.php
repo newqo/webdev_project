@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Reservation</title>
+    <title>Edit Reservation History</title>
 </head>
 <body>
     <?php ?>

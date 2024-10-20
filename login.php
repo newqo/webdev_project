@@ -21,6 +21,9 @@
     <div class="logo">
         <img src="imgs/logo kmutnb final.png">
         <h1>เข้าสู่ระบบ</h1>
+        <div class="login-warning">
+            <div id="result"></div>
+        </div>
         <div id="result"></div>
         <form action="login_validation.php" method="post">
             <input type="text" class="input-login-user" id="user_national_id" name="user_national_id" placeholder="เลขบัตรประชาชน" pattern="[0-9]{13}" required><br>

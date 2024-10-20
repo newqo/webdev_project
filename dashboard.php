@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link href=""
+    <link href="css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
-        <nav  >
+        <nav>
             <div>
                 <a href="#showCountInfo_id" >Dashboard</a>
                 <a href="#user-management_id" >User Management</a>
@@ -24,23 +24,43 @@
         
         <section>
             <div class="showCountInfo" id="showCountInfo_id">
+                <?php
+                    $query1 = $pdo->prepare("SELECT COUNT(Reservation.reservation_id) AS 'จำนวนรวมผู้กู้ทั้งหมด' FROM Reservation;");
+                    $query1->execute();
+                    $query_total=$query1->fetch();
+                ?>
                 <div class="boxShowCountInfo">
                     <p>จำนวนรวมผู้กู้ทั้งหมด</p>
-                    <h2>132</h2>
+                    <h2><?=$query_total["จำนวนรวมผู้กู้ทั้งหมด"]?></h2>
                 </div>
+                <?php
+                    $query2 = $pdo->prepare("SELECT COUNT(Reservation.Duration_id) AS 'จำนวนรวมผู้กู้เทอมล่าสุด' FROM Reservation INNER JOIN Post_Duration ON Reservation.duration_id=Post_Duration.Duration_id WHERE Post_Duration.Reservation = 1 AND Post_Duration.Event_status = 1 ORDER BY Post_Duration.Start_date DESC;");
+                    $query2->execute();
+                    $query_term = $query2->fetch();
+                ?>                
                 <div class="boxShowCountInfo">
                     <p>จำนวนรวมผู้กู้เทอมล่าสุด</p>
-                    <h2>132</h2>
+                    <h2><?=$query_term["จำนวนรวมผู้กู้เทอมล่าสุด"]?></h2>
                 </div>
+                <?php
+                    $query3 = $pdo->prepare("SELECT COUNT(Reservation.Duration_id) AS 'จำนวนผู้กู้รายใหม่' FROM Reservation INNER JOIN Post_Duration ON Reservation.duration_id=Post_Duration.Duration_id WHERE Post_Duration.Reservation = 1 AND Post_Duration.Event_status = 1 AND Reservation.duration_id LIKE 'R_NEW%' ORDER BY Post_Duration.Start_date DESC;");
+                    $query3->execute();
+                    $query_term_new = $query3->fetch();
+                ?>
                 <div class="boxShowCountInfo">
                     <p>จำนวนผู้กู้รายใหม่</p>
                     <p>(เทอมล่าสุด)</p>
-                    <h2>132</h2>
+                    <h2><?=$query_term_new["จำนวนผู้กู้รายใหม่"]?></h2>
                 </div>
+                <?php
+                    $query4 = $pdo->prepare("SELECT COUNT(Reservation.Duration_id) AS 'จำนวนผู้กู้รายเก่า' FROM Reservation INNER JOIN Post_Duration ON Reservation.duration_id=Post_Duration.Duration_id WHERE Post_Duration.Reservation = 1 AND Post_Duration.Event_status = 1 AND Reservation.duration_id LIKE 'R_OLD%' ORDER BY Post_Duration.Start_date DESC;");
+                    $query4->execute();
+                    $query_term_old = $query4->fetch();
+                ?>
                 <div class="boxShowCountInfo">
                     <p>จำนวนผู้กู้รายเก่า</p>
                     <p>(เทอมล่าสุด)</p>
-                    <h2>132</h2>
+                    <h2><?=$query_term_old["จำนวนผู้กู้รายเก่า"]?></h2>
                 </div>
             </div>
     
@@ -79,8 +99,8 @@
                   <td>" .$row["วัน"] ."</td>
                   <td>" .$row["เวลา"] ."</td>
                   <td>" .$row["คิวที่"] ."</td>
-                  <td><a class='editt btn' href='checklist.php'>แก้ไข</a></td>
-                  <td><a class='del btn' href='checklist.php'>ลบ</a></td>
+                  <td><a class='editt btn' href='reservation.php'>แก้ไข</a></td>
+                  <td><a class='del btn' href='#'>ลบ</a></td>
                   </tr>";
                 }
                 
@@ -93,6 +113,16 @@
                 
                 <form class="user-management" id="user-management_id">
                     <h3>User Management</h3>
+                    <select name="user_cate_selected" id="user_cate_id">
+                    <option value="">--กรุณาเลือกประเภทผู้กู้--</option>
+                <?php
+                    $stmtU = $pdo->prepare("SELECT * FROM User_category");
+                    $stmtU->execute();
+                    while($row=$stmtU->fetch()){
+                        echo "<option value='".$row["user_cate_id"]."'>". $row["category_desc"] ."</option>";
+                    }
+                ?>
+                    </select>
                     <input type="text" name="keyword" />
                     <input type="submit" value="ค้นหา" />
                     <br>
@@ -148,13 +178,12 @@
                 
                 <form class="information-management" id="information-management_id">
                     <h3>Information Management</h3>
-                    <br>
-                    <p>Checklist</p>
+                    <div class="add_btn_div"><p>Checklist</p><a class='add_btn' href='dashboard_add_checklist.php?Duration=".$row["ID"]."'>เพิ่ม</a></div>
                     <?php
                   $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'C%';");
                   $stmt3->execute();
                   
-                  echo "<br>
+                  echo "
                   <table border='1'>
                   <tr>
                     <th>ID</th>
@@ -170,8 +199,8 @@
                       <td>" .$row["วันเวลาเริ่มต้น"] ."</td>
                       <td>" .$row["วันเวลาสิ้นสุด"] ."</td>
                       <td>" .$row["Status"] ."</td>
-                      <td><a class='editt btn' href='checklist.php'>แก้ไข</a></td>
-                      <td><a class='del btn' href='checklist.php'>ลบ</a></td>
+                      <td><a class='editt btn' href='dashboard_edit_checklist.php?Duration_id=".$row["ID"]."'>แก้ไข</a></td>
+                      <td><a class='del btn' href='dashboard_add_checklist.php?Duration=".$row["ID"]."'>ลบ</a></td>
                       </tr>";
                     }
                     
@@ -179,13 +208,12 @@
                     
                     ?>
 
-                    <br>
-                    <p>Reservation</p>
+                    <div class="add_btn_div"><p>Reservation</p><a class='add_btn' href='checklist.php'>เพิ่ม</a></div>
                     <?php
                   $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'R%';");
                   $stmt3->execute();
                   
-                  echo "<br>
+                  echo "
                   <table border='1'>
                   <tr>
                     <th>ID</th>

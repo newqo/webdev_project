@@ -140,7 +140,7 @@
                 <div class="section-title">สถานภาพครอบครัว</div>
                 <div class="form-row">
                     <div class="form-group">
-                        <select name="pattern_status_name" id="pattern_status" onchange="showSection(this.value)">
+                        <select name="pattern_status_name" id="pattern_status" onchange="showSection(this.value)" required>
 
                             <option value="">เลือกสถานภาพครอบครัว</option>
                             <!-- <option value="father">อาศัยอยู่กับบิดา</option>
@@ -222,7 +222,7 @@
                     </div>
                     <div class="form-group">
                         <label>รายได้ของบิดา (ต่อปี)*</label>
-                        <input type="text" id="annual_income_father" name="father_annual_income" pattern="[0-9]{1,}">
+                        <input type="number" id="annual_income_father" name="father_annual_income" min="0" max="9999999999">
                     </div>
                 </div>
             </div>
@@ -293,7 +293,7 @@
                     </div>
                     <div class="form-group">
                         <label>รายได้ของมารดา (ต่อปี)*</label>
-                        <input type="text" id="annual_income_mother" name="mother_annual_income" pattern="[0-9]{1,}">
+                        <input type="number" id="annual_income_mother" name="mother_annual_income" min="0" max="9999999999">
                     </div>
                 </div>
             </div>
@@ -365,7 +365,7 @@
                     </div>
                     <div class="form-group">
                         <label>รายได้ของผู้ปกครอง (ต่อปี)*</label>
-                        <input type="text" id="annual_income_guardian" name="guardian_annual_income" pattern="[0-9]{1,}" >
+                        <input type="number" id="annual_income_guardian" name="guardian_annual_income" min="0" max="9999999999">
                     </div>
                 </div>
             </div>      

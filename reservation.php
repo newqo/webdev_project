@@ -1,4 +1,18 @@
-<?php include "connect.php" 
+<?php 
+    include "connect.php";
+
+    session_start();
+
+    if (empty($_SESSION["national_id"]) ) { 
+        header("location: login.php");
+    }else{
+        $term = $pdo->prepare("SELECT Duration_id FROM `Post_Duration` WHERE Reservation = 1 AND Event_status = 1 AND Duration_id LIKE '%OLD%' ORDER BY Start_date DESC");
+        $term->execute();
+        $this_term = $term->fetch();
+        $this_term_id = $this_term["Duration_id"];
+        
+    }
+    
     // if ($stmt->execute()) {
     //     echo '<script>alert("เรียบร้อย");</script>';
     // } else {

@@ -43,6 +43,7 @@ function Major_query(){
 function setRequiredAttributes(role) {
     const fields = {
         father: [
+            "father_pre_name",
             "father_fst_name",
             "father_lst_name",
             "father_phone_num",
@@ -51,6 +52,7 @@ function setRequiredAttributes(role) {
             "father_income_type"
         ],
         mother: [
+            "mother_pre_name",
             "mother_fst_name",
             "mother_lst_name",
             "mother_phone_num",
@@ -59,6 +61,7 @@ function setRequiredAttributes(role) {
             "mother_income_type"
         ],
         guardian: [
+            "guardian_pre_name",
             "guardian_fst_name",
             "guardian_lst_name",
             "guardian_phone_num",
@@ -78,18 +81,21 @@ function setRequiredAttributes(role) {
 
 function removeRequiredAttributes() {
     const allFields = [
+        "father_pre_name",
         "father_fst_name",
         "father_lst_name",
         "father_phone_num",
         "father_career",
         "father_annual_income",
         "father_income_type",
+        "mother_pre_name",
         "mother_fst_name",
         "mother_lst_name",
         "mother_phone_num",
         "mother_career",
         "mother_annual_income",
         "mother_income_type",
+        "guardian_pre_name",
         "guardian_fst_name",
         "guardian_lst_name",
         "guardian_phone_num",

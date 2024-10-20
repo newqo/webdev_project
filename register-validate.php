@@ -13,8 +13,8 @@ try {
     $pdo->beginTransaction();
 
     // Insert Users
-    $stmt = $pdo->prepare("INSERT INTO Users (national_id, pre_name_id, firstname, lastname, Email, phone_num, birthdate, user_role, user_cate_id, passwd)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0, ?)");
+    $stmt = $pdo->prepare("INSERT INTO Users (national_id, pre_name_id, firstname, lastname, Email, phone_num, birthdate, Address, user_role, user_cate_id, passwd)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?,0, 0, ?)");
     $nid = $_POST["user_id"];
     $stmt->bindParam(1, $nid); // nid
     $stmt->bindParam(2, $_POST["user_nametitle"]); // pre name_id
@@ -23,7 +23,8 @@ try {
     $stmt->bindParam(5, $_POST["email"]); // Email
     $stmt->bindParam(6, $_POST["phone_number"]); // phone_num
     $stmt->bindParam(7, $_POST["birthdate"]); // birthdate
-    $stmt->bindParam(8, $_POST["password"]); // password
+    $stmt->bindParam(8, $_POST["user_address"]); // address
+    $stmt->bindParam(9, $_POST["password"]); // password
     $stmt->execute();
 
     // Insert Education
@@ -110,7 +111,8 @@ try {
 
     // Commit transaction
     $pdo->commit();
-    print_r($_POST);
+    // print_r($_POST);
+    header("Location: login.php");
 } catch (PDOException $e) {
     // Rollback transaction on error
     $pdo->rollBack();

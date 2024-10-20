@@ -40,12 +40,12 @@ nav {
   overflow: hidden;
 }
 
-.menu-text-bar{
+.menu-text-bar {
   display: flex;
   flex-direction: row;
 }
 
-.menu-text-bar a{
+.menu-text-bar a {
   position: relative;
   text-decoration: none;
   color: white;
@@ -59,64 +59,64 @@ nav {
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-  .dropdown-menu {
-    float: left;
-    overflow: hidden;
-  }
+.dropdown-menu {
+  float: left;
+  overflow: hidden;
+}
 
-  .dropdown-menu .drop-menu-btn {
-    cursor: pointer;
-    font-size: 14px; /* ให้ขนาด font เท่ากับในลิงก์ */
-    border: none;
-    outline: none;
-    color: white;
-    padding: 5px 15px; /* ปรับ padding ให้เท่ากันกับลิงก์ */
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
-    position: relative;
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
+.dropdown-menu .drop-menu-btn {
+  cursor: pointer;
+  font-size: 14px; /* ให้ขนาด font เท่ากับในลิงก์ */
+  border: none;
+  outline: none;
+  color: white;
+  padding: 5px 15px; /* ปรับ padding ให้เท่ากันกับลิงก์ */
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
 
-  .dropdown-menu .drop-menu-btn:hover {
-    transform: scale(1.1);
-    color: white;
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
+.dropdown-menu .drop-menu-btn:hover {
+  transform: scale(1.1);
+  color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
 
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #329d9c;
-    min-width: 160px;
-    z-index: 1;
-    top: 100%;
-    margin-left:90px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #329d9c;
+  min-width: 160px;
+  z-index: 1;
+  top: 100%;
+  margin-left: 90px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
 
-  .dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    color: white;
-    transform: none;
-    border-bottom: 1px solid rgba(221, 221, 221, 0.5);
-  }
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  color: white;
+  transform: none;
+  border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+}
 
-  .dropdown-content a:hover {
-    background-color: #575757;
-    color: white;
-    transform: none;
-    transition: color 0.5s ease;
-  }
+.dropdown-content a:hover {
+  background-color: #575757;
+  color: white;
+  transform: none;
+  transition: color 0.5s ease;
+}
 
-  .dropdown-content a::after {
-    content: none;
-  }
+.dropdown-content a::after {
+  content: none;
+}
 
 .show {
   display: block;
@@ -126,7 +126,7 @@ nav {
 .dropdown-menu-user {
   background-color: transparent;
   margin-left: auto;
-  border: 3px solid #CFF4D2;
+  border: 3px solid #cff4d2;
   border-radius: 25px;
   padding: 5px 15px;
   cursor: pointer;
@@ -139,7 +139,7 @@ nav {
 }
 
 .dropdown-menu-user:hover {
-  background-color:#5db5b4;
+  background-color: #5db5b4;
   transition: background-color 0.3s ease;
 }
 
@@ -149,8 +149,8 @@ nav {
   background-color: #329d9c;
   min-width: 200px;
   z-index: 1;
-  top: 155%;
-  right:0;
+  top: 140%;
+  right: 0;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -184,8 +184,8 @@ nav {
 }
 .menu-toggle {
   display: none;
-  font-size:20px;
-  cursor:pointer;
+  font-size: 20px;
+  cursor: pointer;
   font-weight: bold;
   color: white;
 }
@@ -223,7 +223,7 @@ nav {
   right: 10px;
   font-size: 50px;
 }
-.section-title-menu-mobile{
+.section-title-menu-mobile {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
@@ -267,6 +267,7 @@ nav {
 .logo-menu.active {
   display: none;
 }
+
 
 /* main */
 
@@ -339,6 +340,11 @@ aside {
   padding-left: 10px;
   color: #56c596;
 }
+.section-title-parents {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 25px 0px 10px;
+}
 .section-title-menu-bar {
   font-size: 18px;
   font-weight: bold;
@@ -373,6 +379,7 @@ label {
   font-size: 14px;
 }
 input[type="text"],
+input[type="number"],
 input[type="email"],
 input[type="password"],
 input[type="date"],
@@ -387,6 +394,7 @@ select {
 }
 
 input[type="text"]:focus,
+input[type="number"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="date"]:focus,
@@ -571,6 +579,7 @@ footer {
 
   input[type="text"],
   input[type="email"],
+  input[type="number"],
   input[type="password"],
   input[type="date"],
   select {
@@ -628,6 +637,7 @@ footer {
 
   input[type="text"],
   input[type="email"],
+  input[type="number"],
   input[type="password"],
   input[type="date"],
   select {
