@@ -1,0 +1,191 @@
+*{
+    
+    font-family: 'Kanit', sans-serif;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    /* font-size: 18px; */
+  }
+  
+  body{
+    background-image: linear-gradient(to top right, #329D9c, #cff4d2, #ffffff);
+    /* display: flex; */
+    justify-content: center;
+    /* align-items: center; */
+    min-height: 100vh; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    /* align-content: center; */
+  }
+  
+  .container{ 
+    margin: 10px 100px;
+    padding: 12px 25px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  select{
+    width: 70%;
+    margin-left: 3%;
+    padding-left: 1%;
+    border: 1px solid;
+    border-radius: 10px;
+  }
+  
+  input{
+    width: 80px;
+    margin-left: 50px;
+    border: 1px solid;
+    border-radius: 25px;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+  
+  .form-container+div+label{
+    display: inline-block;
+  }
+  
+  div.setcenter {
+    margin-top: 2%;
+  }
+  
+  .setcenter{
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .addInformation{
+    background-color: #329D9c;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+  
+  table,th,td{
+    border: 1px solid black;
+    width: 100%;
+  }
+  
+  table tr .sun ,.mon ,.tue ,.wed ,.thu ,.fri ,.sat{
+    width: 14%;
+    text-align: center;
+  }
+  
+  th{
+    background-color: #80d2d1;
+  }
+  
+  td {
+    width: 50px;
+    text-align: center;
+  }
+  
+  table{
+    border-collapse: separate;
+    overflow: hidden;
+    border-spacing: 0;
+  }
+  
+  .doc-column{
+    width: 60%;
+    padding-left: 1%;
+  }
+  
+  .amount-column{
+    width: 10%;
+    text-align: center;
+  }
+  
+  .condition-column{
+    width: 30%;
+    padding-left: 1%;
+  }
+  
+  table#calendar td{
+    padding-bottom: 8%;
+  }
+  
+  .document-mobile{
+    display: none;
+  }
+  
+  .bt-previous-next{
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between; /* Distribute space between buttons */
+    width: 100%; 
+  }
+  
+  .bt-previous{
+    
+  }
+  
+  .bt-next{
+  
+  }
+  
+  #selected{
+    background-color: #329D9c;
+    color: white;
+  }
+  
+  @media only screen and (max-width: 1024px){
+    *{
+        font-size: 16px;
+    }
+    .container{
+        margin: auto;
+        padding: 5%;
+    }
+    th,td{
+        font-size: 16px;
+    }
+    td{
+        padding-bottom: 5%;
+    }
+    
+  }
+  
+  @media only screen and (max-width: 430px){
+    *{
+        font-size: 14px;
+    }
+    .container{
+        margin: auto;
+        padding: 5%;
+    }
+    th,td{
+        font-size: 14px;
+    }
+    td{
+        padding-bottom: 10%;
+    }
+    div #complete_reservation{
+        flex-direction: column;
+    }
+    .reserve_time_select{
+        margin: auto;
+        display: inline-block; 
+        /* margin-left: 0; */
+    }
+    table {
+        display: none;
+    }
+    .document-mobile{
+        display: initial;
+        .b-doc-mobile{
+            /* border-left: 4px solid #56C596; */
+            /* padding-left: 10px; */
+            color: #56C596;
+        }
+    }
+  }

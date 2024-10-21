@@ -18,6 +18,9 @@
     // } else {
     //     echo '<script>alert("ไม่สำเร็จ");</script>';
     // }
+
+    $start = "2024-10-17"; // assume it query from database
+    $end = "2024-12-21";
 ?>
 
 <!DOCTYPE html>
@@ -29,21 +32,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-    <link href="css/checklist_reservation.css" rel="stylesheet">
-    <script>
-        function func_confirm_reserve(date){
-            let ans = confirm("คุณต้องการยืนยันการจองในวัน "+date+"เวลา"+time+"หรือไม่");
-            //วัน +date+"เวลา"+time+ คิวเต็มแล้วค่ะ
-            //ขณะนี้ยังไม่เปิดให้จองค่ะ
-        }
-    </script>
+    <link rel="stylesheet" href="css/reservation.css">
+    <script src="javascript/reservation.js"></script>
 </head>
-<body> 
+<body onload="generate_calendar('<?= $start ?>')">
     <section class="container">
         <article>
-            <label style="font-size: 20px; display: flex; justify-content: center;">วันที่จอง</label>
+            <h1 id="calendar-title"></h1>
             <table id="calendar">
-                <tr style="color: black;">
+                <thead style="color: black;">
                     <th class="sun">SUN</th>
                     <th class="mon">MON</th>
                     <th class="tue">TUE</th>
@@ -51,118 +48,23 @@
                     <th class="thu">THU</th>
                     <th class="fri">FRI</th>
                     <th class="sat">SAT</th>
-                </tr>
-                <tr style="color: #329D9c;">
-                    <td class="sun"></td>
-                    <td class="mon"></td>
-                    <td class="tue">01</td>
-                    <td class="wed">01</td>
-                    <td class="thu">01</td>
-                    <td class="fri">01</td>
-                    <td class="sat">01</td>
-                </tr>
-                <tr style="color: #329D9c;">
-                    <td class="sun">01</td>
-                    <td class="mon">01</td>
-                    <td class="tue">01</td>
-                    <td class="wed">01</td>
-                    <td class="thu">01</td>
-                    <td class="fri">01</td>
-                    <td class="sat">01</td>
-                </tr>
-                <tr style="color: #329D9c;">
-                    <td class="sun">01</td>
-                    <td class="mon">01</td>
-                    <td class="tue">01</td>
-                    <td class="wed">01</td>
-                    <td class="thu">01</td>
-                    <td class="fri">01</td>
-                    <td class="sat">01</td>
-                </tr>
-                <tr style="color: #329D9c;">
-                    <td class="sun">01</td>
-                    <td class="mon">01</td>
-                    <td class="tue">01</td>
-                    <td class="wed">01</td>
-                    <td class="thu">01</td>
-                    <td class="fri">01</td>
-                    <td class="sat">01</td>
-                </tr>
-                <tr style="color: #329D9c;">
-                    <td class="sun">01</td>
-                    <td class="mon">01</td>
-                    <td class="tue">01</td>
-                    <td class="wed">01</td>
-                    <td class="thu">01</td>
-                    <td class="fri"></td>
-                    <td class="sat"></td>
-                </tr>
+                </thead>
+                <tbody id="calendar-body">
+
+                </tbody>
             </table>
-            
             <br>
+            <div>
+                <button>09:00</button>
+                <button>13:00</button>
+            </div>
+            <div class="bt-previous-next">
+                <button type="button" class="bt-previous" id="previous" value="previous" onclick="ScrollMonth(id)">Previous</button>
+                <button type="button" class="bt-next" id="next" value="next" onclick="ScrollMonth(id)">Next</button>
+            </div>
 
+            <button type="button" onclick="Submit()">Confirm</button>
         </article>
-
-        <article>
-            <label>เวลา</label>
-
-            <form class="form-container" action="" method>
-
-                <div class="reserve_time_select">
-                    <input type="radio" id="time_9" name="reserve_time" value="09:00:00"><label for="time_9" class="radio-label">รอบเช้า 9:00 น.</label>
-                    
-                    <input type="radio" id="time_13" name="reserve_time" value="13:00:00"><label for="time_13" class="radio-label">รอบบ่าย 13:00 น.</label>
-                    
-                </div>
-                <div class="setcenter"> 
-                    <button type="button" id="addInformation" class="addInformation" onclick="func_confirm_reserve()">ยืนยัน</button>
-                </div>
-            </form>
-            </article>
-            <article>
-                <?php
-                    $stmt = $pdo->prepare("SELECT 
-    CONCAT(
-        DATE_FORMAT(NOW(), '%e'), ' ',
-        CASE MONTH(NOW())
-            WHEN 1 THEN 'มกราคม'
-            WHEN 2 THEN 'กุมภาพันธ์'
-            WHEN 3 THEN 'มีนาคม'
-            WHEN 4 THEN 'เมษายน'
-            WHEN 5 THEN 'พฤษภาคม'
-            WHEN 6 THEN 'มิถุนายน'
-            WHEN 7 THEN 'กรกฎาคม'
-            WHEN 8 THEN 'สิงหาคม'
-            WHEN 9 THEN 'กันยายน'
-            WHEN 10 THEN 'ตุลาคม'
-            WHEN 11 THEN 'พฤศจิกายน'
-            WHEN 12 THEN 'ธันวาคม'
-        END, ' ',
-        DATE_FORMAT(NOW(), '%Y')+543
-    ) AS 'วัน',
-    DATE_FORMAT(reserve_time, '%H:%i') AS 'เวลา' ,queue_no AS 'คิว'
-FROM `Reservation`
-ORDER BY reserve_date ASC;"); //WHERE national_id=?
-                    $stmt->execute();
-                    $row = $stmt->fetch();
-                ?>
-                <div id="complete_reservation" style="font-size: 20px; display:flex; justify-content:center; ">
-                    <p>จองวัน <?=$row["วัน"]?></p> 
-                    <p>เวลา <?=$row["เวลา"]?></p> 
-                    <p>คิวที่ <?=$row["คิว"]?></p>
-                
-                </div>
-                <p>หมายเหตุ: หากนักศึกษาไม่อยู่รับบริการในช่วงเรียกคิว ทางกยศ.ขอสงวนสิทธิ์ในการข้ามคิว</p>
-
-                <div class="setcenter">
-                    <a href="homepage.php">กลับหน้าหลัก</a>
-                </div>
-            </article>
-
-
     </section>
-
-        
-    
 </body>
 </html>
