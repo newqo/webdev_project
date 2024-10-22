@@ -121,6 +121,9 @@ button:hover {
 .notify-show{
     display: flex;
     color: red;
+    font-size:12px;
+    justify-content: flex-end;
+    margin-top:5px;
 }
 
 .disabled{

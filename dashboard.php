@@ -17,7 +17,7 @@
                 <a href="#information-management_id" >Information Management</a>
             </div>
             <div>
-                <a href="#" >Log out</a>
+                <a href="#" >Add admin</a>
             </div>
 
         </nav>
@@ -99,7 +99,7 @@
                   <td>" .$row["วัน"] ."</td>
                   <td>" .$row["เวลา"] ."</td>
                   <td>" .$row["คิวที่"] ."</td>
-                  <td><a class='editt btn' href='reservation.php'>แก้ไข</a></td>
+                  <td><a class='editt btn' href='dashboard_edit_history.php?national_id='" .$row["ID"]. "'>แก้ไข</a></td>
                   <td><a class='del btn' href='#'>ลบ</a></td>
                   </tr>";
                 }
@@ -200,7 +200,7 @@
                       <td>" .$row["วันเวลาสิ้นสุด"] ."</td>
                       <td>" .$row["Status"] ."</td>
                       <td><a class='editt btn' href='dashboard_edit_checklist.php?Duration_id=".$row["ID"]."'>แก้ไข</a></td>
-                      <td><a class='del btn' href='dashboard_add_checklist.php?Duration=".$row["ID"]."'>ลบ</a></td>
+                      <td><a class='del btn' href='delete_checklist.php?Duration=".$row["ID"]."'>ลบ</a></td>
                       </tr>";
                     }
                     

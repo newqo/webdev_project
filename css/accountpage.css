@@ -373,7 +373,6 @@ label {
 
 .form-group input,
 .form-group select {
-  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
