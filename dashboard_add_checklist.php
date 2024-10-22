@@ -10,6 +10,10 @@
     <div class="title">เพิ่ม Checklist</div>
     <form action="add_checklist_procedure.php" method="post">
         <div class="form-group">
+            <label>ID</label>
+            <input type="text" name="Duration_id">
+        </div>
+        <div class="form-group">
             <label>วันเวลาเริ่มต้น</label>
             <input type="datetime-local" name="Start_date">
         </div>
