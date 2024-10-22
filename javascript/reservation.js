@@ -16,11 +16,15 @@ const months = [
 var current_month;
 var current_year;
 
-var open = "2024-10-01";
-var close = "2024-12-05";
+var open_date;
+var close_date;
 
-var open_date = new Date(open);
-var close_date = new Date(close);
+function GetDuration(start,end){
+    open_date = new Date(start);
+    close_date = new Date(end);
+
+    generate_calendar(open_date);
+}
 
 function initialCalendar(startDate){
 
@@ -58,16 +62,22 @@ function generate_calendar(start){
 
                 td.dataset.value = n_date;
                 
-                d = new Date(current_year,current_month,n_date)
-                if(d.getDay() == 0 || d.getDay() == 6){
+                d = new Date(current_year,current_month,n_date);
+                // console.log("------------checking-------------");
+                // console.log("d : " + d);
+                // console.log("open : " + open_date);
+                // console.log("close : " + close_date);
+                // console.log("-------------------------");
+
+                if(d.getDay() == 0 || d.getDay() == 6 || SetDateFormat(d) < SetDateFormat(open_date) || SetDateFormat(d) > SetDateFormat(close_date)){
                     td.style.opacity = "0.5";
                 }
-                else{
+                else {
                     td.onclick = function() {
-                        printID(this);
+                        Check_Reservation_Round(this);
+                        resetSelection();
                     }
                 }
-
 
                 n_date++;
             }
@@ -80,26 +90,83 @@ function generate_calendar(start){
     }
 }
 
+function SetDateFormat(date){
+    return new Date(date.getFullYear(),date.getMonth(),date.getDate());
+}
+
 function GetTotalDateinMonth(year,month){
     return new Date(year,month+1,0).getDate();
 }
 
+
 var lastSelectedID = null;
-
-function printID(Td_Selected){
-    var value = Td_Selected.dataset.value;
-    console.log(value);
-    var date_num = parseInt(value);
-    var month_num = parseInt(current_month) + 1;
-    console.log("this value is " + current_year + "-" 
-        + (month_num < 10 ? '0' + month_num : month_num) + "-" 
-        + (date_num < 10 ? '0' + date_num : date_num));
-
+var round_morning_xmlhttp;
+var round_noon_xmlhttp;
+function Check_Reservation_Round(Td_Selected){
     if(lastSelectedID) {
         lastSelectedID.id = "";
     }
     Td_Selected.id = "selected";
     lastSelectedID = Td_Selected;
+
+    var value = Td_Selected.dataset.value;
+    // console.log(value);
+    var date_num = parseInt(value);
+    var month_num = parseInt(current_month) + 1;
+    var this_date = current_year + "-" + (month_num < 10 ? '0' + month_num : month_num) + "-" + (date_num < 10 ? '0' + date_num : date_num);
+
+    console.log("this value is " + this_date);
+
+    var reservation_date = document.getElementById("reservation_date_id");
+    reservation_date.value = this_date;
+
+    round_morning_xmlhttp = new XMLHttpRequest();
+    round_noon_xmlhttp = new XMLHttpRequest();
+
+    round_morning_xmlhttp.onreadystatechange = checking_morning_round;
+    round_noon_xmlhttp.onreadystatechange = checking_noon_round;
+
+    var morning = document.getElementById("round-morning").value;
+    var noon = document.getElementById("round-noon").value;
+
+    var morning_url = "checking_reservation_round.php?round=" + morning + "&reservation_date=" + this_date;
+    var noon_url = "checking_reservation_round.php?round=" + noon + "&reservation_date=" + this_date;
+
+    round_morning_xmlhttp.open("GET",morning_url);
+    round_morning_xmlhttp.send();
+
+    round_noon_xmlhttp.open("GET",noon_url);
+    round_noon_xmlhttp.send();
+}
+
+function checking_morning_round(){
+    if (round_morning_xmlhttp.readyState == 4 && round_morning_xmlhttp.status == 200){
+        var morning_response = round_morning_xmlhttp.responseText;
+        var bt_morning = document.getElementById("round-morning");
+        console.log("morning :" + morning_response);
+        if(morning_response == "full"){
+            bt_morning.disabled = true;
+            bt_morning.style.opacity = "0.5";
+        }else{
+            bt_morning.disabled = false;
+            bt_morning.style.opacity = "1";
+        }
+    }
+}
+
+function checking_noon_round(){
+    if (round_noon_xmlhttp.readyState == 4 && round_noon_xmlhttp.status == 200){
+        var noon_response = round_noon_xmlhttp.responseText;
+        var bt_noon = document.getElementById("round-noon");
+        console.log("noon :" +noon_response);
+        if(noon_response == "full"){
+            bt_noon.disabled = true;
+            bt_noon.style.opacity = "0.5";
+        }else{
+            bt_noon.disabled = false;
+            bt_noon.style.opacity = "1";
+        }
+    }
 }
 
 function Check_OutOfDate(){
@@ -160,12 +227,29 @@ function ScrollMonth(id){
     generate_calendar(new Date(current_year, current_month, 1));
 }
 
-function Submit(){
-    selected = document.getElementById("selected");
-    if(selected != null){
-        console.log(selected.dataset.value);
+function selected_round(id){
+    const button = document.getElementsByClassName("reservation_round_bt");
+
+    for (let i of button){
+        i.classList.remove("round-selected");
     }
-    else{
-        console.log("You didn't select date of reservation")
+
+    const select_bt = document.getElementById(id);
+    select_bt.classList.add("round-selected");
+
+    var selected_round = document.getElementById("select_round_id");
+    selected_round.value = select_bt.value;
+    console.log(selected_round.value);
+}
+
+function resetSelection() {
+    var selected_round = document.getElementById("select_round_id");
+    selected_round.value = "";
+
+    const buttons = document.getElementsByClassName("reservation_round_bt");
+    for (let button of buttons) {
+        button.classList.remove("round-selected");
     }
+
+    console.log("Selection has been reset.");
 }

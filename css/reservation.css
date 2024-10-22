@@ -120,6 +120,7 @@
   
   .bt-previous-next{
     margin-top: 3%;
+    margin-bottom: 3%;
     display: flex;
     justify-content: space-between; /* Distribute space between buttons */
     width: 100%; 
@@ -132,60 +133,65 @@
   .bt-next{
   
   }
-  
-  #selected{
-    background-color: #329D9c;
-    color: white;
+
+.round-selected{
+  background-color: #329D9c;
+  color: white;
+}
+
+#selected{
+  background-color: #329D9c;
+  color: white;
+}
+
+@media only screen and (max-width: 1024px){
+  *{
+      font-size: 16px;
+  }
+  .container{
+      margin: auto;
+      padding: 5%;
+  }
+  th,td{
+      font-size: 16px;
+  }
+  td{
+      padding-bottom: 5%;
   }
   
-  @media only screen and (max-width: 1024px){
-    *{
-        font-size: 16px;
-    }
-    .container{
-        margin: auto;
-        padding: 5%;
-    }
-    th,td{
-        font-size: 16px;
-    }
-    td{
-        padding-bottom: 5%;
-    }
-    
+}
+
+@media only screen and (max-width: 430px){
+  *{
+      font-size: 14px;
   }
-  
-  @media only screen and (max-width: 430px){
-    *{
-        font-size: 14px;
-    }
-    .container{
-        margin: auto;
-        padding: 5%;
-    }
-    th,td{
-        font-size: 14px;
-    }
-    td{
-        padding-bottom: 10%;
-    }
-    div #complete_reservation{
-        flex-direction: column;
-    }
-    .reserve_time_select{
-        margin: auto;
-        display: inline-block; 
-        /* margin-left: 0; */
-    }
-    table {
-        display: none;
-    }
-    .document-mobile{
-        display: initial;
-        .b-doc-mobile{
-            /* border-left: 4px solid #56C596; */
-            /* padding-left: 10px; */
-            color: #56C596;
-        }
-    }
+  .container{
+      margin: auto;
+      padding: 5%;
   }
+  th,td{
+      font-size: 14px;
+  }
+  td{
+      padding-bottom: 10%;
+  }
+  div #complete_reservation{
+      flex-direction: column;
+  }
+  .reserve_time_select{
+      margin: auto;
+      display: inline-block; 
+      /* margin-left: 0; */
+  }
+  table {
+      display: none;
+  }
+  .document-mobile{
+      display: initial;
+      .b-doc-mobile{
+          /* border-left: 4px solid #56C596; */
+          /* padding-left: 10px; */
+          color: #56C596;
+      }
+  }
+}
