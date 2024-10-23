@@ -1,3 +1,12 @@
+<?php
+  include "connect.php";
+
+  session_start();
+
+  if (empty($_SESSION["national_id"]) ) { 
+    header("location: login.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
