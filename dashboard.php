@@ -17,7 +17,7 @@
                 <a href="#information-management_id" >Information Management</a>
             </div>
             <div>
-                <a href="#" >Add admin</a>
+                <a href="dashboard_add_admin.php" >Add admin</a>
             </div>
 
         </nav>
@@ -91,7 +91,7 @@
               ";
               while ($row = $stmt->fetch()) {
                   echo "
-                  <tr onclick='window.location.href=\"checklist.php\"'>
+                  <tr onclick='window.location.href=\"dashboard_edit_history.php?national_id=".$row["ID"]."\"'>
                   <td>" .$row["ID"] ."</td>
                   <td>" .$row["คำนำหน้า"] ."</td>
                   <td>" .$row["ชื่อ"] ."</td>
@@ -99,7 +99,7 @@
                   <td>" .$row["วัน"] ."</td>
                   <td>" .$row["เวลา"] ."</td>
                   <td>" .$row["คิวที่"] ."</td>
-                  <td><a class='editt btn' href='dashboard_edit_history.php?national_id='" .$row["ID"]. "'>แก้ไข</a></td>
+                  <td><a class='editt btn' href='dashboard_edit_history.php?national_id=" .$row["ID"]. "'>แก้ไข</a></td>
                   <td><a class='del btn' href='#'>ลบ</a></td>
                   </tr>";
                 }
@@ -150,7 +150,7 @@
                   ";
                   while ($row = $stmt2->fetch()) {
                       echo "
-                      <tr onclick='window.location.href=\"checklist.php\"'>
+                      <tr onclick='window.location.href=\"dashboard_edit_user.php?national_id=".$row["ID"]."\"'>
                       <td>" .$row["ประเภทผู้กู้"] ."</td>
                       <td>" .$row["ID"] ."</td>
                       <td>" .$row["คำนำหน้า"] ."</td>
@@ -163,7 +163,7 @@
                       <td>" .$row["เบอร์โทรศัพท์"] ."</td>
                       <td>" .$row["วันเดือนปีเกิด"] ."</td>
                       <td>" .$row["ที่อยู่"] ."</td>
-                      <td><a class='editt btn' href='checklist.php'>แก้ไข</a></td>
+                      <td><a class='editt btn' href='dashboard_edit_user.php?national_id=" .$row["ID"] . "'>แก้ไข</a></td>
                       <td><a class='del btn' href='checklist.php'>ลบ</a></td>
                       </tr>";
                     }
@@ -178,7 +178,7 @@
                 
                 <form class="information-management" id="information-management_id">
                     <h3>Information Management</h3>
-                    <div class="add_btn_div"><p>Checklist</p><a class='add_btn' href='dashboard_add_checklist.php?Duration=".$row["ID"]."'>เพิ่ม</a></div>
+                    <div class="add_btn_div"><p>Checklist</p><a class='add_btn' href='dashboard_add_checklist.php'>เพิ่ม</a></div>
                     <?php
                   $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'C%';");
                   $stmt3->execute();
@@ -194,7 +194,7 @@
                   ";
                   while ($row = $stmt3->fetch()) {
                       echo "
-                      <tr onclick='window.location.href=\"checklist.php\"'>
+                      <tr onclick='window.location.href=\"dashboard_edit_checklist.php?Duration_id=".$row["ID"]."\"'>
                       <td>" .$row["ID"] ."</td>
                       <td>" .$row["วันเวลาเริ่มต้น"] ."</td>
                       <td>" .$row["วันเวลาสิ้นสุด"] ."</td>
@@ -208,7 +208,7 @@
                     
                     ?>
 
-                    <div class="add_btn_div"><p>Reservation</p><a class='add_btn' href='checklist.php'>เพิ่ม</a></div>
+                    <div class="add_btn_div"><p>Reservation</p><a class='add_btn' href='dashboard_add_reservation.php'>เพิ่ม</a></div>
                     <?php
                   $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'R%';");
                   $stmt3->execute();
@@ -224,12 +224,12 @@
                   ";
                   while ($row = $stmt3->fetch()) {
                       echo "
-                      <tr onclick='window.location.href=\"checklist.php\"'>
+                      <tr onclick='window.location.href=\"dashboard_edit_reservation.php?Duration_id=".$row["ID"]."\"'>
                       <td>" .$row["ID"] ."</td>
                       <td>" .$row["วันเวลาเริ่มต้น"] ."</td>
                       <td>" .$row["วันเวลาสิ้นสุด"] ."</td>
                       <td>" .$row["Status"] ."</td>
-                      <td><a class='editt btn' href='checklist.php'>แก้ไข</a></td>
+                      <td><a class='editt btn' href='dashboard_edit_reservation.php?Duration_id=".$row["ID"]."'>แก้ไข</a></td>
                       <td><a class='del btn' href='checklist.php'>ลบ</a></td>
                       </tr>";
                     }

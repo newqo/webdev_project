@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <label>คำนำหน้า</label>
-            <select id="Pre_name_selected" name="Pre_name_id">
+            <select id="Pre_name_selected" name="Pre_name_id" required>
                 <option value="">เลือกคำนำหน้า</option>
                 <?php 
                     $user_pre_name = $row["คำนำหน้า"];
