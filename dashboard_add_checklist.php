@@ -11,15 +11,15 @@
     <form action="add_checklist_procedure.php" method="post">
         <div class="form-group">
             <label>ID</label>
-            <input type="text" name="Duration_id">
+            <input type="text" name="Duration_id" placeholder="C1" pattern="^C\d{1,}" required>
         </div>
         <div class="form-group">
             <label>วันเวลาเริ่มต้น</label>
-            <input type="datetime-local" name="Start_date">
+            <input type="datetime-local" name="Start_date" required>
         </div>
         <div class="form-group">
             <label>วันเวลาสิ้นสุด</label>
-            <input type="datetime-local" name="End_date">
+            <input type="datetime-local" name="End_date" required>
         </div>
         <div class="form-group">
             <label>Status</label>

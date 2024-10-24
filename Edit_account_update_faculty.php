@@ -10,6 +10,7 @@
     $user_data = $user->fetch();
 
     $faculty_selected = $user_data['Faculty_id'];
+    echo $faculty_selected;
     
 
     if ($ed_level == 1){ // ปวช

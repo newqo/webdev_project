@@ -90,6 +90,7 @@
                 </div>
                 <input type="hidden" name="selected_reservation_round" id="select_round_id" value="" required>
                 <button type="submit">Confirm</button>
+                <p>หมายเหตุ: หากนักศึกษาไม่อยู่รับบริการในช่วงเรียกคิว ทางกยศ.ขอสงวนสิทธิ์ในการข้ามคิว</p>
             </form>
 
         </article>
