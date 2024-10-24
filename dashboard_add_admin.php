@@ -38,7 +38,7 @@
             <label>รหัสผ่าน</label>
             <input type="password" name="passwd" maxlength="100" pattern="[A-Za-z0-9_]{8,100}" placeholder="กรอกอย่างน้อย 8 ตัว" required>
         </div>
-        <button id="submit_btn" type="submit" >เสร็จสิ้น</button>
+        <div class="submit-btn"><input type="submit" value="เพิ่ม"></div>
     </form>
 </body>
 </html>
