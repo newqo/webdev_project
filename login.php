@@ -19,14 +19,14 @@
 </head>
 <body>
     <div class="logo">
-        <img src="imgs/logo kmutnb final.png">
+        <img src="imgs/logo_kmutnb_final.png">
         <h1>เข้าสู่ระบบ</h1>
         <div class="login-warning">
             <div id="result"></div>
         </div>
         <div id="result"></div>
         <form action="login_validation.php" method="post">
-            <input type="text" class="input-login-user" id="user_national_id" name="user_national_id" placeholder="เลขบัตรประชาชน" pattern="[0-9]{13}" maxlength="13" required><br>
+            <input type="text" class="input-login-user" id="user_national_id" name="user_national_id" placeholder="เลขบัตรประชาชน" pattern="[A-Za-z0-9]{1,13}" maxlength="13" required><br>
             <input type="password" class="input-login-password" id="user_password" name="user_password" placeholder="รหัสผ่าน" pattern="\w{8,}" required><br>
             <button type="submit" class="login-btn" onclick="login_validation()">เข้าสู่ระบบ</button><br>
         </form>

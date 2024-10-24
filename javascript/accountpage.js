@@ -97,3 +97,71 @@ function Query_Content(){
     articleContent.innerHTML = article.responseText;
   }
 }
+
+var pswd;
+function changepassword(){
+  pswd = new XMLHttpRequest();
+  pswd.onreadystatechange = changing_password;
+
+  current_pswd = document.getElementById('password_id').value;
+  new_pswd = document.getElementById('new_password_id').value;
+  re_new_pswd = document.getElementById('re_new_password_id').value;
+
+  var url = "checking_password.php?current=" + current_pswd + "&new=" + new_pswd + "&renew=" + re_new_pswd;
+  console.log(url);
+  pswd.open("GET",url);
+  pswd.send();
+}
+
+function changing_password(){
+  if (pswd.readyState == 4 && pswd.status == 200){
+    console.log("changing_password()");
+    console.log(pswd.responseText);
+    var span = document.getElementById('result');
+    span.innerHTML = pswd.responseText;
+  } 
+}
+
+var faculty;
+function updateFaculty(nid){
+    faculty = new XMLHttpRequest();
+    faculty.onreadystatechange = function(){
+      Faculty_query(nid);
+    }
+
+    var ed_level = document.getElementById("user_year").value;
+    // console.log(ed_level)
+    var url = "Edit_account_update_faculty.php?ed_level=" + ed_level + "&nid=" + nid;
+    faculty.open("GET",url,true);
+    faculty.send()
+}
+
+function Faculty_query(nid){
+    if (faculty.readyState == 4 && faculty.status == 200){
+        var faculty_select = document.getElementById("faculty");
+        // console.log(faculty.responseText);
+        faculty_select.innerHTML = faculty.responseText;
+        updateMajor(nid);
+    }
+}
+
+var major;
+function updateMajor(nid){
+    major = new XMLHttpRequest();
+    major.onreadystatechange = Major_query;
+
+    var faculty_select = document.getElementById("faculty").value;
+    var ed_level = document.getElementById("user_year").value;
+    var url = "Edit_account_update_major.php?ed_level="+ ed_level + "&Faculty=" + faculty_select + "&nid=" + nid;
+
+    major.open("GET",url,true);
+    major.send();
+}
+
+function Major_query(){
+    if (major.readyState == 4 && major.status == 200){
+        var major_select = document.getElementById("major");
+        // console.log(major.responseText);
+        major_select.innerHTML = major.responseText;
+    }
+}

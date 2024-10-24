@@ -29,7 +29,7 @@
     <title>ข้อมูลส่วนตัวนักศึกษา</title>
   </head>
 
-  <body onload="showContent('<?php echo isset($_GET['content']) ? $_GET['content'] : 'student'; ?>')">
+  <body>
   <header>
         <nav>
           <div class="menu-bar">
@@ -129,7 +129,66 @@
         </aside>
 
         <article id="article-content">
-      
+        <?php
+            $stmt = $pdo->prepare("SELECT Users.Pre_name_id AS 'pre_name_id' , Pre_name.Pre_name_desc AS 'คำนำหน้า',firstname,lastname ,Users.national_id AS 'national_id', birthdate,Email , phone_num,Address 
+            FROM Users
+            JOIN Pre_name ON Users.Pre_name_id = Pre_name.Pre_name_id 
+            WHERE Users.national_id = ?");
+            $stmt->bindParam(1,$_SESSION['national_id']);
+            $stmt->execute();
+            $row = $stmt->fetch();
+        ?>
+        <div class= 'section-title'>ข้อมูลส่วนตัวนักศึกษา</div>
+        <form action='#' method='post'>
+          <div class='form-group'>
+            <label>คำนำหน้า</label>
+            <select name='user_nametitle' id='user_nametitle'>
+              <?php 
+                    $user_pre_name = $row["pre_name_id"];
+
+                    $query_prename = $pdo->prepare("SELECT * FROM Pre_name");
+                    $query_prename->execute();
+
+                    while($option = $query_prename->fetch()){
+                        $IsSelected_prename = ($user_pre_name == $option["Pre_name_id"]) ? 'selected' : '';
+                        echo "<option value='". $option["Pre_name_id"] ."'". $IsSelected_prename .">". $option["Pre_name_desc"] ."</option>";
+                    }
+                ?>
+            </select>
+          </div>
+          <div class='form-group'>
+            <label>ชื่อจริง</label>
+            <input type='text' id='user_firstname' name='user_firstname' pattern='[A-Za-zก-๗]{2,}' value='<?=$row['firstname']?>'/>
+          </div>
+          <div class='form-group'>
+            <label>นามสกุล</label>
+            <input type='text' id='user_lastname' name='user_lastname' pattern='[A-Za-zก-๗]{2,}' value='<?=$row['lastname']?>'/>
+          </div>
+          <div class='form-group'>
+            <label>เลขบัตรประชาชน*</label>
+            <input type='text' id='user_id' name='user_id' pattern='[0-9]{13}' maxlength='13' onkeyup='check_national_id()' disabled='disabled' value='<?=$row['national_id']?>'>
+          </div>
+          <div class='form-group'>
+            <label>วัน/เดือน/ปีเกิด</label>
+            <input type='date' id='birthdate' name='birthdate' value='<?=$row['birthdate']?>'/>
+          </div>
+          <div class='form-group'>
+            <label>E-mail</label>
+            <input type='email' id='email' name='email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$'  value='<?=$row['Email']?>'/>
+          </div>
+          <div class='form-group'>
+            <label>เบอร์โทร</label>
+            <input type='text' id='phone_number' name='phone_number' pattern='[0-9]{10}'  value='<?=$row['phone_num']?>'/>
+          </div>
+          <div class='form-group' style='flex: 2;'>
+            <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)*</label>
+            <input type='text' id='user_address' name='user_address' pattern='[A-Za-z0-9\s,.]{2,200}' maxlength='200' value='<?=$row['Address']?>'/>
+          </div>
+          <div class="form-button">
+            <button type="submit" class="confirm-bt">ยืนยัน</button>
+            <a href="accountpage.php?content=student" class='cancel_button' id='edit_user_info'>ยกเลิก</a>
+          <div>
+        </form>
         </article>
       </div>
     </main>
@@ -161,6 +220,5 @@
         &copy; 2024 All Rights Reserved
       </div>
     </footer>
-    
   </body>
 </html>

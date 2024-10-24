@@ -29,7 +29,7 @@
     <title>ข้อมูลส่วนตัวนักศึกษา</title>
   </head>
 
-  <body onload="showContent('<?php echo isset($_GET['content']) ? $_GET['content'] : 'student'; ?>')">
+  <body onload="updateFaculty(<?=$_SESSION['national_id']?>)">
   <header>
         <nav>
           <div class="menu-bar">
@@ -129,7 +129,54 @@
         </aside>
 
         <article id="article-content">
-      
+        <?php
+            $stmt = $pdo->prepare("SELECT Education_Level_Category.ed_category_id AS 'ed_cate_id', Education_Level_Category.ed_desc AS 'ed_cate_desc', Faculty.Faculty_id AS 'fac_id', Faculty.Faculty_name AS 'fac_name', Department.Department_id AS 'dep_id', Department.Department_name AS 'dep_name', Education.std_ID AS 'std_id' 
+            FROM Education JOIN Education_Level_Category ON Education.Education_Level = Education_Level_Category.ed_category_id 
+            JOIN Faculty ON Education.Faculty_id = Faculty.Faculty_id 
+            JOIN Department ON Education.Department_id = Department.Department_id
+            WHERE Education.national_id = ?");
+            $stmt->bindParam(1,$_SESSION['national_id']);
+            $stmt->execute();
+            $row = $stmt->fetch();
+        ?>
+        <div class='section-title'>ข้อมูลการศึกษา</div>
+        <div class='form-group'>
+          <form action='#' method='post'>
+            <div class='form-group'>
+              <label>รหัสนักศึกษา*</label>
+              <input type='text' id='user_stdID' name='user_stdID' pattern='[0-9]{13}' maxlength='13' onkeyup='check_std_id()' disabled='disabled' value='<?=$row['std_id']?>'>
+            </div>
+            <div class='form-group'>
+              <label>ระดับชั้น</label>
+              <select name='user_year' id='user_year' onchange='updateFaculty(<?=$_SESSION["national_id"]?>)' >
+                    <?php
+                        $user_ed_cate_id = $row['ed_cate_id'];
+
+                        $stmt = $pdo->prepare("SELECT * FROM Education_Level_Category");
+                        $stmt->execute();
+                        while($row = $stmt->fetch()){
+                            $IsSelected_ed_cate_id = ($user_ed_cate_id == $row['ed_category_id']) ? 'selected' : '';
+                            echo "<option value='". $row["ed_category_id"] ."' ".$IsSelected_ed_cate_id.">". $row["ed_desc"] ."</option>";
+                        }
+                    ?>
+              </select>
+            </div>
+            <div class='form-group'>
+                <label>คณะ</label>
+                <select name='faculty' id='faculty' onchange='updateMajor(<?=$_SESSION["national_id"]?>)' >
+                </select>
+            </div>
+            <div class='form-group'>
+                <label>สาขา</label>
+                <select name='major' id='major'>
+                </select>
+            </div>
+            <div class="form-button">
+                <button type="submit" class="confirm-bt">ยืนยัน</button>
+                <a href='accountpage.php?content=education' class='cancel_button' id='edit_user_info'>ยกเลิก</a>
+            <div>
+          </form>
+        </div>
         </article>
       </div>
     </main>
@@ -161,6 +208,5 @@
         &copy; 2024 All Rights Reserved
       </div>
     </footer>
-    
   </body>
 </html>
