@@ -20,7 +20,7 @@
     $status = $row['status'];
 
     if($status == 0 || $status == 2){ // father
-        $ft_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' 
+        $ft_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' , Parent.income_cate_id AS 'income_type'
                                         FROM Parent 
                                         JOIN User_Relationship ON Parent.parent_id = User_Relationship.parent_id 
                                         JOIN Users ON Users.national_id = User_Relationship.national_id 
@@ -45,6 +45,7 @@
         $father .="</select>
                      </div>
                     <div class='form-group'>
+                        <input type='hidden' name='father_parent_id' value='".$ft_data['parent_id']."'>
                         <label>ชื่อจริง</label>
                         <input type='text' id='firstname_father' name='father_fst_name' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $ft_data['firstname'] ."'>
                     </div>
@@ -57,6 +58,20 @@
                         <input type='text' id='phone_number_father' name='father_phone_num' maxlength='10' pattern='[0-9]{10}'  value='". $ft_data['phone_num'] ."'>
                     </div>
                         <div class='form-group'>
+                            <label>ประเภทของรายได้</label>
+                            <select id='father_income_type_id' name='father_income_type'>
+                              ";
+                              $stmt = $pdo->prepare("SELECT * FROM Income_Category;");
+                              $stmt->execute();
+                              while($row = $stmt->fetch()){
+                                $IsSelected_ft_income_type = ($ft_data['income_type'] == $row['income_cate_id']) ? 'selected' : '';
+                                $father .= "<option value='". $row["income_cate_id"] ."' ".$IsSelected_ft_income_type.">". $row["income_cate_desc"] . "</option>"; 
+                              }
+
+                        $father .="
+                            </select>
+                        </div>
+                        <div class='form-group'>
                             <label>อาชีพ</label>
                             <input type='text' id='job_detail_father' name='father_career' pattern='[A-Za-zก-ฮ-๗]{2,50}'  value='". $ft_data['career'] ."'>
                         </div>
@@ -68,7 +83,7 @@
         ";
     }
     if ($status == 1 || $status == 2){ // mother
-        $mt_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' 
+        $mt_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' , Parent.income_cate_id AS 'income_type'
                                         FROM Parent 
                                         JOIN User_Relationship ON Parent.parent_id = User_Relationship.parent_id 
                                         JOIN Users ON Users.national_id = User_Relationship.national_id 
@@ -94,6 +109,7 @@
         </select>
                 </div>
                 <div class='form-group'>
+                    <input type='hidden' name='mother_parent_id' value='".$mt_data['parent_id']."'>
                     <label>ชื่อจริง</label>
                     <input type='text' id='firstname_mother' name='mother_fst_name' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $mt_data['firstname'] ."'>
                 </div>
@@ -106,6 +122,19 @@
                     <input type='text' id='phone_number_mother' name='mother_phone_num' maxlength='10' pattern='[0-9]{10}'  value='". $mt_data['phone_num'] ."'>
                 </div>
                 <div class='form-group'>
+                            <label>ประเภทของรายได้</label>
+                            <select id='mother_income_type_id' name='mother_income_type'>
+                              ";
+                              $stmt = $pdo->prepare("SELECT * FROM Income_Category;");
+                              $stmt->execute();
+                              while($row = $stmt->fetch()){
+                                $IsSelected_mt_income_type = ($mt_data['income_type'] == $row['income_cate_id']) ? 'selected' : '';
+                                $mother .= "<option value='". $row["income_cate_id"] ."' ".$IsSelected_mt_income_type.">". $row["income_cate_desc"] . "</option>"; 
+                              }
+                        $mother .="
+                            </select>
+                        </div>
+                <div class='form-group'>
                         <label>อาชีพ</label>
                         <input type='text' id='job_detail_mother' name='mother_career' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $mt_data['career'] ."'>
                     </div>
@@ -117,7 +146,7 @@
     ";
     }
     if($status == 3){ // guardian
-        $gd_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' 
+        $gd_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' , Parent.income_cate_id AS 'income_type'
                                         FROM Parent 
                                         JOIN User_Relationship ON Parent.parent_id = User_Relationship.parent_id 
                                         JOIN Users ON Users.national_id = User_Relationship.national_id 
@@ -143,6 +172,7 @@
         $guardian .="</select>
                 </div>
                 <div class='form-group'>
+                    <input type='hidden' name='guardian_parent_id' value='".$gd_data['parent_id']."'>
                     <label>ชื่อจริง</label>
                     <input type='text' id='firstname_guardian' name='guardian_fst_name' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $gd_data['firstname'] ."'>
                 </div>
@@ -154,6 +184,20 @@
                     <label>เบอร์โทร</label>
                     <input type='text' id='phone_number_guardian' name='guardian_phone_num' maxlength='10' pattern='[0-9]{10}' value='". $gd_data['phone_num'] ."'>
                 </div>
+                <div class='form-group'>
+                            <label>ประเภทของรายได้</label>
+                            <select id='guardian_income_type_id' name='guardian_income_type'>
+                              ";
+                              $stmt = $pdo->prepare("SELECT * FROM Income_Category;");
+                              $stmt->execute();
+                              while($row = $stmt->fetch()){
+                                $IsSelected_gd_income_type = ($gd_data['income_type'] == $row['income_cate_id']) ? 'selected' : '';
+                                $guardian .= "<option value='". $row["income_cate_id"] ."' ".$IsSelected_gd_income_type.">". $row["income_cate_desc"] . "</option>"; 
+                              }
+
+                        $guardian .="
+                            </select>
+                        </div>
                 <div class='form-group'>
                         <label>อาชีพ</label>
                         <input type='text' id='job_detail_guardian' name='guardian_career' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $gd_data['career'] ."'>
@@ -225,7 +269,7 @@
                       ";
                     }
                 ?>
-                <a href='' id='changepassword' onclick='showContent(id)'>เปลี่ยนแปลงรหัสผ่าน</a>
+                <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
                 <a href="#">Dashboard</a>
               <br/>
               <a href="#">ออกจากระบบ</a>
@@ -259,7 +303,7 @@
                       ";
                     }
                 ?>
-                <a href='#' id='changepassword' onclick='showContent(id)'>เปลี่ยนแปลงรหัสผ่าน</a>
+                <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
                 <a href="#">Dashboard</a>
                 <a href="#">ออกจากระบบ</a>
               </div>
@@ -283,14 +327,16 @@
                     ";
                   }
                   ?>
-              <a href='#' id='changepassword' onclick='showContent(id)'>เปลี่ยนแปลงรหัสผ่าน</a>
+              <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
           </div>
         </aside>
 
         <article id="article-content">
         <div class='section-title'>ข้อมูลของครอบครัว</div>
-        <form action='#' method='post'>
+        <form action='update_user_parents.php' method='post'>
             <?php
+                echo "<input type='hidden' id='national_id' name='nid' value='". $_SESSION['national_id'] ."'>";
+                echo "<input type='hidden' id='parent_status_id' name='parent_status_name' value='". $status ."'>";
                 if($status == 0){ // father
                 echo $father;
                 }else if($status == 1){ // mother

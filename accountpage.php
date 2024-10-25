@@ -29,7 +29,7 @@
     <title>ข้อมูลส่วนตัวนักศึกษา</title>
   </head>
 
-  <body onload="showContent('<?php echo isset($_GET['content']) ? $_GET['content'] : 'student'; ?>')">
+<body onload="showContent('<?php echo isset($_GET['content']) ? $_GET['content'] : 'student'; ?>')">
   <header>
         <nav>
           <div class="menu-bar">
@@ -66,7 +66,7 @@
                       ";
                     }
                 ?>
-                <a href='' id='changepassword' onclick='showContent(id)'>เปลี่ยนแปลงรหัสผ่าน</a>
+                <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
                 <a href="#">Dashboard</a>
               <br/>
               <a href="#">ออกจากระบบ</a>
@@ -100,7 +100,7 @@
                       ";
                     }
                 ?>
-                <a href='#' id='changepassword' onclick='showContent(id)'>เปลี่ยนแปลงรหัสผ่าน</a>
+                <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
                 <a href="#">Dashboard</a>
                 <a href="#">ออกจากระบบ</a>
               </div>
@@ -124,7 +124,7 @@
                     ";
                   }
                   ?>
-              <a href='#' id='changepassword' onclick='showContent(id)'>เปลี่ยนแปลงรหัสผ่าน</a>
+              <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
           </div>
         </aside>
 

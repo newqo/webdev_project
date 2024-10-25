@@ -98,30 +98,6 @@ function Query_Content(){
   }
 }
 
-var pswd;
-function changepassword(){
-  pswd = new XMLHttpRequest();
-  pswd.onreadystatechange = changing_password;
-
-  current_pswd = document.getElementById('password_id').value;
-  new_pswd = document.getElementById('new_password_id').value;
-  re_new_pswd = document.getElementById('re_new_password_id').value;
-
-  var url = "checking_password.php?current=" + current_pswd + "&new=" + new_pswd + "&renew=" + re_new_pswd;
-  console.log(url);
-  pswd.open("GET",url);
-  pswd.send();
-}
-
-function changing_password(){
-  if (pswd.readyState == 4 && pswd.status == 200){
-    console.log("changing_password()");
-    console.log(pswd.responseText);
-    var span = document.getElementById('result');
-    span.innerHTML = pswd.responseText;
-  } 
-}
-
 var faculty;
 function updateFaculty(nid){
     faculty = new XMLHttpRequest();

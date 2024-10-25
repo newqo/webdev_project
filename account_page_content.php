@@ -111,7 +111,7 @@
         $status = $row['status'];
   
         if($status == 0 || $status == 2){ // father
-          $ft_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' 
+          $ft_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income'  , Parent.income_cate_id AS 'income_type'
                                             FROM Parent 
                                             JOIN User_Relationship ON Parent.parent_id = User_Relationship.parent_id 
                                             JOIN Users ON Users.national_id = User_Relationship.national_id 
@@ -142,6 +142,19 @@
                       <label>เบอร์โทร</label>
                       <input type='text' id='phone_number_father' name='father_phone_num' maxlength='10' pattern='[0-9]{10}' disabled='disabled' value='". $ft_data['phone_num'] ."'>
                   </div>
+                  <div class='form-group'>
+                            <label>ประเภทของรายได้</label>
+                            <select id='father_income_type_id' name='father_income_type' disabled='disabled'>
+                              ";
+                              $stmt = $pdo->prepare("SELECT Income_Category.income_cate_desc AS 'income_desc' FROM Income_Category WHERE Income_Category.income_cate_id = ?");
+                              $stmt->bindParam(1,$ft_data['income_type']);
+                              $stmt->execute();
+                              $row = $stmt->fetch();
+                              $father .= "<option value='". $ft_data["income_type"] ."'>". $row["income_desc"] . "</option>"; 
+
+                        $father .="
+                            </select>
+                        </div>
                       <div class='form-group'>
                           <label>อาชีพ</label>
                           <input type='text' id='job_detail_father' name='father_career' pattern='[A-Za-zก-ฮ-๗]{2,50}' disabled='disabled' value='". $ft_data['career'] ."'>
@@ -155,7 +168,7 @@
         ";
         }
         if ($status == 1 || $status == 2){ // mother
-          $mt_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' 
+          $mt_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' , Parent.income_cate_id AS 'income_type'
                                             FROM Parent 
                                             JOIN User_Relationship ON Parent.parent_id = User_Relationship.parent_id 
                                             JOIN Users ON Users.national_id = User_Relationship.national_id 
@@ -187,6 +200,19 @@
                       <input type='text' id='phone_number_mother' name='mother_phone_num' maxlength='10' pattern='[0-9]{10}' disabled='disabled' value='". $mt_data['phone_num'] ."'>
                   </div>
                   <div class='form-group'>
+                            <label>ประเภทของรายได้</label>
+                            <select id='father_income_type_id' name='father_income_type' disabled='disabled'>
+                              ";
+                              $stmt = $pdo->prepare("SELECT Income_Category.income_cate_desc AS 'income_desc' FROM Income_Category WHERE Income_Category.income_cate_id = ?");
+                              $stmt->bindParam(1,$mt_data['income_type']);
+                              $stmt->execute();
+                              $row = $stmt->fetch();
+                              $mother .= "<option value='". $mt_data["income_type"] ."'>". $row["income_desc"] . "</option>"; 
+
+                        $mother .="
+                            </select>
+                        </div>
+                  <div class='form-group'>
                           <label>อาชีพ</label>
                           <input type='text' id='job_detail_mother' name='mother_career' pattern='[A-Za-zก-ฮ-๗]{2,50}' disabled='disabled' value='". $mt_data['career'] ."'>
                       </div>
@@ -198,7 +224,7 @@
         ";
         }
         if($status == 3){ // guardian
-          $gd_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' 
+          $gd_query = $pdo->prepare("SELECT Parent.parent_id AS 'parent_id' , Parent.Pre_name_id AS 'parent_pre_name_id', Pre_name.Pre_name_desc AS 'parent_pre_name_desc', Parent.firstname AS 'firstname', Parent.lastname AS 'lastname', Parent.phone_num AS 'phone_num', Parent.career AS 'career', Parent.income AS 'income' , Parent.income_cate_id AS 'income_type'
                                             FROM Parent 
                                             JOIN User_Relationship ON Parent.parent_id = User_Relationship.parent_id 
                                             JOIN Users ON Users.national_id = User_Relationship.national_id 
@@ -229,6 +255,19 @@
                       <label>เบอร์โทร</label>
                       <input type='text' id='phone_number_guardian' name='guardian_phone_num' maxlength='10' pattern='[0-9]{10}' disabled='disabled' value='". $gd_data['phone_num'] ."'>
                   </div>
+                  <div class='form-group'>
+                            <label>ประเภทของรายได้</label>
+                            <select id='father_income_type_id' name='father_income_type' disabled='disabled'>
+                              ";
+                              $stmt = $pdo->prepare("SELECT Income_Category.income_cate_desc AS 'income_desc' FROM Income_Category WHERE Income_Category.income_cate_id = ?");
+                              $stmt->bindParam(1,$gd_data['income_type']);
+                              $stmt->execute();
+                              $row = $stmt->fetch();
+                              $guardian .= "<option value='". $gd_data["income_type"] ."'>". $row["income_desc"] . "</option>"; 
+
+                        $guardian .="
+                            </select>
+                        </div>
                   <div class='form-group'>
                           <label>อาชีพ</label>
                           <input type='text' id='job_detail_guardian' name='guardian_career' pattern='[A-Za-zก-ฮ-๗]{2,50}' disabled='disabled' value='". $gd_data['career'] ."'>
@@ -294,28 +333,5 @@
         </form>
         ";
       }
-    }
-    if($content == 'changepassword'){
-      echo "
-        <div class='section-title'>เปลี่ยนแปลงรหัสผ่าน</div>
-        <span id='result'>
-        <form action='#' method='get' onsubmit='changepassword()'>
-            <div class='form-group'>
-              <label>รหัสผ่านปัจจุบัน</label>
-              <input type='password' id='password_id' name='password' pattern='\w{8,20}' required>
-          </div>
-            <div class='form-group'>
-                <label>รหัสผ่านใหม่</label>
-                <input type='password' id='new_password_id' name='new_password' pattern='\w{8,20}' required>
-            </div>
-            <div class='form-group'>
-                <label>ยืนยันรหัสผ่านใหม่อีกครั้ง</label>
-                <input type='password' id='re_new_password_id' name='re_new_password' pattern='\w{8,20}' required>
-            </div>
-        <div class='form-group'>
-          <a href='Edit_student_info.php' class='edit_button' id='edit_user_info'>แก้ไข</a>
-        <div>
-        </form>
-      ";
     }
 ?>

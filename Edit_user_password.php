@@ -29,7 +29,7 @@
     <title>ข้อมูลส่วนตัวนักศึกษา</title>
   </head>
 
-  <body onload="updateFaculty(<?=$_SESSION['national_id']?>)">
+  <body>
   <header>
         <nav>
           <div class="menu-bar">
@@ -115,68 +115,40 @@
           <div class="section-title-menu-bar">หมวดหมู่</div>
           <div class="menu">
               <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
-              <?php
-                if($_SESSION["role"] == 0){
-                  echo "
-                    <a href='#' id='education' onclick='showContent(id)'>ข้อมูลการศึกษา</a>
-                    <a href='#' id='parents' onclick='showContent(id)'>ข้อมูลของครอบครัว</a>
-                    <a href='#' id='history' onclick='showContent(id)'>ประวัติการจอง</a>
-                    ";
-                  }
-                  ?>
+                <?php
+                    if($_SESSION["role"] == 0){
+                    echo "
+                        <a href='#' id='education' onclick='showContent(id)'>ข้อมูลการศึกษา</a>
+                        <a href='#' id='parents' onclick='showContent(id)'>ข้อมูลของครอบครัว</a>
+                        <a href='#' id='history' onclick='showContent(id)'>ประวัติการจอง</a>
+                        ";
+                    }
+                ?>
               <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
           </div>
         </aside>
 
         <article id="article-content">
-        <?php
-            $stmt = $pdo->prepare("SELECT Education_Level_Category.ed_category_id AS 'ed_cate_id', Education_Level_Category.ed_desc AS 'ed_cate_desc', Faculty.Faculty_id AS 'fac_id', Faculty.Faculty_name AS 'fac_name', Department.Department_id AS 'dep_id', Department.Department_name AS 'dep_name', Education.std_ID AS 'std_id' 
-            FROM Education JOIN Education_Level_Category ON Education.Education_Level = Education_Level_Category.ed_category_id 
-            JOIN Faculty ON Education.Faculty_id = Faculty.Faculty_id 
-            JOIN Department ON Education.Department_id = Department.Department_id
-            WHERE Education.national_id = ?");
-            $stmt->bindParam(1,$_SESSION['national_id']);
-            $stmt->execute();
-            $row = $stmt->fetch();
-        ?>
-        <div class='section-title'>ข้อมูลการศึกษา</div>
-        <div class='form-group'>
-          <form action='update_user_education.php' method='post'>
-            <div class='form-group'>
-              <!-- <label>รหัสนักศึกษา*</label> -->
-              <input type='hidden' id='user_stdID' name='user_stdID' pattern='[0-9]{13}' maxlength='13' value='<?=$row['std_id']?>'>
-            </div>
-            <div class='form-group'>
-              <label>ระดับชั้น</label>
-              <select name='user_year' id='user_year' onchange='updateFaculty(<?=$_SESSION["national_id"]?>)' >
-                    <?php
-                        $user_ed_cate_id = $row['ed_cate_id'];
-
-                        $stmt = $pdo->prepare("SELECT * FROM Education_Level_Category");
-                        $stmt->execute();
-                        while($row = $stmt->fetch()){
-                            $IsSelected_ed_cate_id = ($user_ed_cate_id == $row['ed_category_id']) ? 'selected' : '';
-                            echo "<option value='". $row["ed_category_id"] ."' ".$IsSelected_ed_cate_id.">". $row["ed_desc"] ."</option>";
-                        }
-                    ?>
-              </select>
-            </div>
-            <div class='form-group'>
-                <label>คณะ</label>
-                <select name='faculty' id='faculty' onchange='updateMajor(<?=$_SESSION["national_id"]?>)' >
-                </select>
-            </div>
-            <div class='form-group'>
-                <label>สาขา</label>
-                <select name='major' id='major'>
-                </select>
-            </div>
-            <div class="form-button">
-                <button type="submit" class="confirm-bt">ยืนยัน</button>
-                <a href='accountpage.php?content=education' class='cancel_button' id='edit_user_info'>ยกเลิก</a>
-            <div>
-          </form>
-        </div>
+        <div class='section-title'>เปลี่ยนแปลงรหัสผ่าน</div>
+            <span id='result'>
+            <form action='update_user_password.php' method='post'>
+                <div class='form-group'>
+                    <label>รหัสผ่านปัจจุบัน</label>
+                    <input type="hidden" name="nid" value="<?=$_SESSION['national_id']?>">
+                    <input type='password' id='password_id' name='password' pattern='\w{8,20}' required>
+                </div>
+                <div class='form-group'>
+                    <label>รหัสผ่านใหม่</label>
+                    <input type='password' id='new_password_id' name='new_password' pattern='\w{8,20}' required>
+                </div>
+                <div class='form-group'>
+                    <label>ยืนยันรหัสผ่านใหม่อีกครั้ง</label>
+                    <input type='password' id='re_new_password_id' name='re_new_password' pattern='\w{8,20}' required>
+                </div>
+                <div class='form-group'>
+                    <button type='submit' class='edit_button' id='edit_user_info'>แก้ไข</button>
+                </div>
+            </form>
         </article>
       </div>
     </main>

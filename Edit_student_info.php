@@ -66,7 +66,7 @@
                       ";
                     }
                 ?>
-                <a href='' id='changepassword' onclick='showContent(id)'>เปลี่ยนแปลงรหัสผ่าน</a>
+                <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
                 <a href="#">Dashboard</a>
               <br/>
               <a href="#">ออกจากระบบ</a>
@@ -100,7 +100,7 @@
                       ";
                     }
                 ?>
-                <a href='#' id='changepassword' onclick='showContent(id)'>เปลี่ยนแปลงรหัสผ่าน</a>
+                <a href='Edit_user_password.php' id='changepassword' >เปลี่ยนแปลงรหัสผ่าน</a>
                 <a href="#">Dashboard</a>
                 <a href="#">ออกจากระบบ</a>
               </div>
@@ -124,7 +124,7 @@
                     ";
                   }
                   ?>
-              <a href='#' id='changepassword' onclick='showContent(id)'>เปลี่ยนแปลงรหัสผ่าน</a>
+              <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
           </div>
         </aside>
 
@@ -139,7 +139,7 @@
             $row = $stmt->fetch();
         ?>
         <div class= 'section-title'>ข้อมูลส่วนตัวนักศึกษา</div>
-        <form action='#' method='post'>
+        <form action='update_student_info.php' method='post'>
           <div class='form-group'>
             <label>คำนำหน้า</label>
             <select name='user_nametitle' id='user_nametitle'>
@@ -165,8 +165,8 @@
             <input type='text' id='user_lastname' name='user_lastname' pattern='[A-Za-zก-๗]{2,}' value='<?=$row['lastname']?>'/>
           </div>
           <div class='form-group'>
-            <label>เลขบัตรประชาชน*</label>
-            <input type='text' id='user_id' name='user_id' pattern='[0-9]{13}' maxlength='13' onkeyup='check_national_id()' disabled='disabled' value='<?=$row['national_id']?>'>
+            <!-- <label>เลขบัตรประชาชน*</label> -->
+            <input type='hidden' id='user_id' name='user_id' pattern='[0-9]{13}' maxlength='13' value='<?=$row['national_id']?>'>
           </div>
           <div class='form-group'>
             <label>วัน/เดือน/ปีเกิด</label>
@@ -174,7 +174,7 @@
           </div>
           <div class='form-group'>
             <label>E-mail</label>
-            <input type='email' id='email' name='email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$'  value='<?=$row['Email']?>'/>
+            <input type='email' id='email' name='email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'  value='<?=$row['Email']?>'/>
           </div>
           <div class='form-group'>
             <label>เบอร์โทร</label>
