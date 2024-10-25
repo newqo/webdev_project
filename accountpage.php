@@ -29,7 +29,7 @@
     <title>ข้อมูลส่วนตัวนักศึกษา</title>
   </head>
 
-<body onload="showContent('<?php echo isset($_GET['content']) ? $_GET['content'] : 'student'; ?>')">
+  <body onload="showContent('<?php echo isset($_GET['content']) ? $_GET['content'] : 'student'; ?>')">
   <header>
         <nav>
           <div class="menu-bar">

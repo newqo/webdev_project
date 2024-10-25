@@ -89,7 +89,9 @@
                     <button type="button" class="reservation_round_bt" id="round-noon" value="13:00:00" onclick="selected_round(id)">13:00</button>
                 </div>
                 <input type="hidden" name="selected_reservation_round" id="select_round_id" value="" required>
-                <button type="submit">Confirm</button>
+                <div class="submit-btn">
+                    <input type="submit" value="Confirm">
+                </div>
                 <p>หมายเหตุ: หากนักศึกษาไม่อยู่รับบริการในช่วงเรียกคิว ทางกยศ.ขอสงวนสิทธิ์ในการข้ามคิว</p>
             </form>
 

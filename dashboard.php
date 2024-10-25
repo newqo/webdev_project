@@ -184,7 +184,7 @@ function linkClick(element) {
                 
                 <form class="information-management" id="information-management_id">
                     <h3>Information Management</h3>
-                    <div class="add_btn_div"><p>Checklist</p><a class='add_btn' href='dashboard_add_checklist.php'>เพิ่ม</a></div>
+                    <div class="add_btn_div"><p>Checklist</p><a class='add_btn' href='dashboard_add_checklist.php' disabled>เพิ่ม</a></div>
                     <?php
                   $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'C%';");
                   $stmt3->execute();
