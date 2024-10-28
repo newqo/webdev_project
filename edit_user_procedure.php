@@ -17,10 +17,10 @@
         $stmt->bindParam(9, $_POST["national_id"]);
         $stmt->execute();
 
-        $stmt2 = $pdo->prepare("UPDATE Education SET Faculty_id=?, Department_id=?, Education_level=? WHERE national_id=?");
+        $stmt2 = $pdo->prepare("UPDATE Education SET Faculty_id=?, Department_id=?, Education_Level=? WHERE national_id=?");
         $stmt2->bindParam(1, $_POST["Faculty_id"]);
         $stmt2->bindParam(2, $_POST["Department_id"]);
-        $stmt2->bindParam(3, $_POST["Education_level"]);
+        $stmt2->bindParam(3, $_POST["Education_Level"]);
         $stmt2->bindParam(4, $_POST["national_id"]);
         $stmt2->execute();
         

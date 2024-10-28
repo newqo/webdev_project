@@ -16,15 +16,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kanit&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet"/>
 
-    <script
-      src="https://kit.fontawesome.com/9703a87d5d.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/9703a87d5d.js" crossorigin="anonymous"></script>
     <script src="javascript/accountpage.js"></script>
     <title>ข้อมูลส่วนตัวนักศึกษา</title>
   </head>
@@ -184,11 +178,40 @@
             <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)*</label>
             <input type='text' id='user_address' name='user_address' pattern='[A-Za-z0-9\s,.]{2,200}' maxlength='200' value='<?=$row['Address']?>'/>
           </div>
-          <div class="form-button">
-            <button type="submit" class="confirm-bt">ยืนยัน</button>
-            <a href="accountpage.php?content=student" class='cancel_button' id='edit_user_info'>ยกเลิก</a>
-          <div>
+
+          <!-- super button T^T -->
+          <div class="submit-btn">
+            <button type="button" class="sub-btn" onclick="openPopup()">ยืนยัน</button>
+            <a href="accountpage.php?content=student" class='cancel-btn' id='edit_user_info'>ยกเลิก</a>
+          </div>
+          <div id="overlay" class="overlay"></div>
+          <div class="popup" id="popup">
+                <img src="imgs/checked.png">
+                <h2>แก้ไขข้อมูลเสร็จสิ้น !</h2>
+                <div class="choice-btn">
+                  <a href="homepage.php">
+                  <button type="button" onclick="closePopup()" class="home-btn">กลับสู่หน้าหลัก</button>
+                  </a>
+                  <a href="accountpage.php">
+                  <button type="button" onclick="closePopup()" class="info-btn">ไปที่ข้อมูลส่วนตัว</button>
+                  </a>
+                </div>
+          </div>
         </form>
+        <script>
+            let popup = document.getElementById("popup");
+            let overlay = document.getElementById("overlay");
+
+            function openPopup() {
+              popup.classList.add("open-popup");
+              overlay.style.display = "block";
+            }
+
+            function closePopup() {
+              popup.classList.remove("open-popup");
+              overlay.style.display = "none";
+            }
+        </script>
         </article>
       </div>
     </main>

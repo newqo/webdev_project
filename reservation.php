@@ -84,13 +84,13 @@
                 <input type="hidden" name="checklist_id" value="<?=$User_checklist_id?>">
                 <input type="hidden" name="national_id" value="<?=$_SESSION["national_id"]?>">
                 <input type="hidden" name="reservation_date" id="reservation_date_id" value="" required>
-                <div>
+                <div class="bt-reservation_round_bt">
                     <button type="button" class="reservation_round_bt" id="round-morning" value="09:00:00" onclick="selected_round(id)">09:00</button>
                     <button type="button" class="reservation_round_bt" id="round-noon" value="13:00:00" onclick="selected_round(id)">13:00</button>
                 </div>
                 <input type="hidden" name="selected_reservation_round" id="select_round_id" value="" required>
-                <div class="submit-btn">
-                    <input type="submit" value="Confirm">
+                <div class="div-submit-btn">
+                    <input type="submit" value="Confirm" class="submit-btn">
                 </div>
                 <p>หมายเหตุ: หากนักศึกษาไม่อยู่รับบริการในช่วงเรียกคิว ทางกยศ.ขอสงวนสิทธิ์ในการข้ามคิว</p>
             </form>

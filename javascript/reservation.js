@@ -71,7 +71,8 @@ function generate_calendar(start){
 
                 if(d.getDay() == 0 || d.getDay() == 6 || SetDateFormat(d) < SetDateFormat(open_date) || SetDateFormat(d) > SetDateFormat(close_date)){
                     td.style.opacity = "0.5";
-                    td.style.backgroundColor = "grey";
+                    td.style.backgroundColor = "#f2f2f2";
+                    td.style.color = "#b0b0b0";
                 }
                 else {
                     td.onclick = function() {

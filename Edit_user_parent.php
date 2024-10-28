@@ -348,11 +348,38 @@
                 echo $guardian;
                 }
             ?>
-            <div class="form-button">
-                <button type="submit" class="confirm-bt">ยืนยัน</button>
-                <a href='accountpage.php?content=parents' class='cancel_button' id='edit_user_info'>ยกเลิก</a>
-            <div>
+            <div class="submit-btn">
+            <button type="button" class="sub-btn" onclick="openPopup()">ยืนยัน</button>
+            <a href="accountpage.php?content=student" class='cancel-btn' id='edit_user_info'>ยกเลิก</a>
+          </div>
+          <div id="overlay" class="overlay"></div>
+          <div class="popup" id="popup">
+                <img src="imgs/checked.png">
+                <h2>แก้ไขข้อมูลเสร็จสิ้น !</h2>
+                <div class="choice-btn">
+                  <a href="homepage.php">
+                  <button type="button" onclick="closePopup()" class="home-btn">กลับสู่หน้าหลัก</button>
+                  </a>
+                  <a href="accountpage.php">
+                  <button type="button" onclick="closePopup()" class="info-btn">ไปที่ข้อมูลส่วนตัว</button>
+                  </a>
+                </div>
+          </div>
         </form>
+        <script>
+            let popup = document.getElementById("popup");
+            let overlay = document.getElementById("overlay");
+
+            function openPopup() {
+              popup.classList.add("open-popup");
+              overlay.style.display = "block";
+            }
+
+            function closePopup() {
+              popup.classList.remove("open-popup");
+              overlay.style.display = "none";
+            }
+        </script>
         </article>
       </div>
     </main>

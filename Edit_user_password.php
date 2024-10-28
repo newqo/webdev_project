@@ -145,7 +145,7 @@
                     <label>ยืนยันรหัสผ่านใหม่อีกครั้ง</label>
                     <input type='password' id='re_new_password_id' name='re_new_password' pattern='\w{8,20}' required>
                 </div>
-                <div class='form-group'>
+                <div class='submit-btn'>
                     <button type='submit' class='edit_button' id='edit_user_info'>แก้ไข</button>
                 </div>
             </form>

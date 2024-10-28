@@ -15,6 +15,6 @@
     $stmt->bindParam(4,$stdID);
 
     if($stmt->execute()){
-        header("location: successful.php");
+        echo "<script>openPopup();</script>";
     }
 ?>

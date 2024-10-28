@@ -13,16 +13,16 @@
   <body>
     <main>
       <div class="nt-reservation">
-        <div class="nt-re-title">รหัสผ่านของคุณแก้ไขเรียบร้อยแล้ว!</div>
-          <img src="imgs/checked.png" style="width: 200px;">
+        <div class="nt-re-title">รหัสผ่านปัจจุบันของคุณไม่ถูกต้อง!</div>
+          <img src="imgs/cross.png" style="width: 200px;">
         </div>
       </div>
       <div class="choice-btn">
         <a href="homepage.php">
         <button type="button" class="home-btn">กลับสู่หน้าหลัก</button>
         </a>
-        <a href="accountpage.php">
-        <button type="button" class="info-btn">ไปที่ข้อมูลส่วนตัว</button>
+        <a href="Edit_user_password.php">
+        <button type="button" class="info-btn">แก้ไขรหัสผ่านอีกครั้ง</button>
         </a>
       </div>
     </main>

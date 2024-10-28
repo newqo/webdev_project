@@ -5,8 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User information</title>
+
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/9703a87d5d.js" crossorigin="anonymous"></script>
+
+    <script>
+        function rmBG() {
+            var links = document.querySelectorAll('aside a');
+            links.forEach(link => {
+            link.classList.remove('active');
+            });
+        }
+
+        function linkClick(element) {
+            rmBG();
+            element.classList.add('active');
+        }
+        function selectStatus(statusId) {
+            document.getElementById(statusId).checked = true;
+        }
+    </script>
 </head>
 <body>
+        <aside> 
+            <a href="dashboard.php#showCountInfo_id" name="dashboard" onclick="linkClick(this)"><i class="fa-solid fa-gauge-simple"></i>  Dashboard</a>
+            <a href="dashboard.php#user-management_id" name="user" onclick="linkClick(this)"><i class="fa-solid fa-user"></i>  User Management</a>
+            <a href="dashboard.php#information-management_id" name="info" onclick="linkClick(this)"><i class="fa-solid fa-bullhorn"></i>  Information Management</a><br>
+            <a href="dashboard_add_admin.php" name="admin" onclick="linkClick(this)"><i class="fa-solid fa-user-plus"></i>  Add admin</a>
+        </aside>
+    <div class="container">
     <?php 
         $query_user = $pdo->prepare("SELECT User_category.user_cate_id AS 'ประเภทผู้กู้',User_category.category_desc,Users.national_id AS 'ID' , Pre_name.Pre_name_id AS 'คำนำหน้า' ,Pre_name.Pre_name_desc,Users.firstname AS 'ชื่อ',Users.lastname AS 'นามสกุล',Education_Level_Category.ed_category_id AS 'ชั้นปี',Education_Level_Category.ed_desc,Faculty.Faculty_id AS 'คณะ',Faculty.Faculty_name,Department.Department_id AS 'สาขา',Department.Department_name,Users.Email AS 'อีเมลล์',Users.phone_num AS 'เบอร์โทรศัพท์',Users.birthdate AS 'วันเดือนปีเกิด',Users.Address AS 'ที่อยู่' FROM Users INNER JOIN Pre_name ON Users.Pre_name_id=Pre_name.Pre_name_id INNER JOIN User_category ON Users.user_cate_id=User_category.user_cate_id INNER JOIN Education ON Users.national_id=Education.national_id INNER JOIN Education_Level_Category ON Education.Education_Level=Education_Level_Category.ed_category_id INNER JOIN Faculty ON Education.Faculty_id=Faculty.Faculty_id INNER JOIN Department ON Department.Department_id=Education.Department_id WHERE Users.national_id = ? ;");
         $query_user->bindParam(1,$_GET["national_id"]);
@@ -120,7 +150,32 @@
             <label>ที่อยู่</label>
             <textarea name="Address" rows="4" cols="50" pattern="[A-Za-z0-9ก-๙\s,.]{2,200}" maxlength="200" required><?=$row["ที่อยู่"]?></textarea>
         </div>
-        <div class="submit-btn"><input type="submit" value="แก้ไข"></div>
+        <div class="submit-btn">
+            <button type="button" class="btn" onclick="openPopup()">แก้ไข</button>
+        </div>
+        <div id="overlay" class="overlay"></div>
+        <div class="popup" id="popup">
+                <img src="imgs/checked.png">
+                <h2>แก้ไขเสร็จสิ้น !</h2>
+                <p>การเปลี่ยนแปลงได้ถูกบันทึกเรียบร้อยแล้ว</p>
+                <a href="dashboard.php">
+                <button type="button" onclick="closePopup()">ตกลง</button>
+                </a>
+        </div>
     </form>
+    <script>
+        let popup = document.getElementById("popup");
+        let overlay = document.getElementById("overlay");
+
+        function openPopup() {
+            popup.classList.add("open-popup");
+            overlay.style.display = "block";
+        }
+
+        function closePopup() {
+            popup.classList.remove("open-popup");
+            overlay.style.display = "none";
+        }
+    </script>
 </body>
 </html>

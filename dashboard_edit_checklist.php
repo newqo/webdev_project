@@ -12,7 +12,6 @@
       href="https://fonts.googleapis.com/css2?family=Kanit&display=swap"
       rel="stylesheet"
     />
-
     <script
       src="https://kit.fontawesome.com/9703a87d5d.js"
       crossorigin="anonymous"
@@ -29,14 +28,17 @@
             rmBG();
             element.classList.add('active');
         }
+        function selectStatus(statusId) {
+            document.getElementById(statusId).checked = true;
+        }
     </script>
     <link href="css/dashboard.css" rel="stylesheet">
 </head>
 <body>
         <aside>
-            <a href="#showCountInfo_id" name="dashboard" onclick="linkClick(this)"><i class="fa-solid fa-gauge-simple"></i>  Dashboard</a>
-            <a href="#user-management_id" name="user" onclick="linkClick(this)"><i class="fa-solid fa-user"></i>  User Management</a>
-            <a href="#information-management_id" name="info" onclick="linkClick(this)"><i class="fa-solid fa-bullhorn"></i>  Information Management</a><br>
+            <a href="dashboard.php#showCountInfo_id" name="dashboard" onclick="linkClick(this)"><i class="fa-solid fa-gauge-simple"></i>  Dashboard</a>
+            <a href="dashboard.php#user-management_id" name="user" onclick="linkClick(this)"><i class="fa-solid fa-user"></i>  User Management</a>
+            <a href="dashboard.php#information-management_id" name="info" onclick="linkClick(this)"><i class="fa-solid fa-bullhorn"></i>  Information Management</a><br>
             <a href="dashboard_add_admin.php" name="admin" onclick="linkClick(this)"><i class="fa-solid fa-user-plus"></i>  Add admin</a>
         </aside>
     <div class="container">
@@ -64,21 +66,47 @@
         <?php 
             $status_selected = $row["Status"];
         ?>
-        <div class="form-group">
+        <div class="form-group-status">
             <label>Status</label>
             <div class="radio-container">
                 <input type="radio" name="Event_status" id="status_close"value="0"
-                <?php echo ($status_selected == 0) ? 'checked' : '' ?> required/>
-                <label for="status_close">ปิด</label>
-            </div>
-            <div class="radio-container">
+                <?php echo ($status_selected == 0) ? 'checked' : '' ?> required />
+                <label for="status_close" onclick="selectStatus('status_close')">ปิด</label>
                 <input type="radio" name="Event_status" id="status_open"value="1"
-                <?php echo ($status_selected == 1) ? 'checked' : '' ?> required/>
-                <label for="status_open">เปิด</label>
+                <?php echo ($status_selected == 1) ? 'checked' : '' ?> required />
+                <label for="status_open"onclick=" selectStatus('status_open')">เปิด</label>
             </div>
         </div>
-        <div class="submit-btn"><input type="submit" value="แก้ไข"></div>
+
+        <div class="submit-btn">
+            <button type="button" class="btn" onclick="openPopup()">แก้ไข</button>
+        </div>
+        <div id="overlay" class="overlay"></div>
+        <div class="popup" id="popup">
+                <img src="imgs/checked.png">
+                <h2>แก้ไขเสร็จสิ้น !</h2>
+                <p>การเปลี่ยนแปลงได้ถูกบันทึกเรียบร้อยแล้ว</p>
+                <a href="dashboard.php">
+                <button type="button" onclick="closePopup()">ตกลง</button>
+                </a>
+            </div>
+    </div>
     </form>
     </div>
+    <script>
+        let popup = document.getElementById("popup");
+        let overlay = document.getElementById("overlay");
+
+        function openPopup() {
+            popup.classList.add("open-popup");
+            overlay.style.display = "block";
+        }
+
+        function closePopup() {
+            popup.classList.remove("open-popup");
+            overlay.style.display = "none";
+        }
+    </script>
+
 </body>
 </html>

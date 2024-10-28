@@ -88,12 +88,13 @@ function linkClick(element) {
             <form>
                 <h3>ประวัติการจอง</h3>
                 <?php
-              $stmt = $pdo->prepare("SELECT Reservation.national_id AS 'ID',Pre_name.Pre_name_desc AS 'คำนำหน้า',Users.firstname AS 'ชื่อ',Users.lastname AS 'นามสกุล', Scholarship.scholarship_name AS 'ทุน', Cost_of_living_status.amount AS 'ค่าครองชีพต่อเดือน',Reservation.reserve_date AS 'วัน',Reservation.reserve_time AS 'เวลา',Reservation.queue_no AS 'คิวที่' FROM Reservation INNER JOIN Users ON Reservation.national_id=Users.national_id INNER JOIN Pre_name ON Pre_name.Pre_name_id=Users.Pre_name_id INNER JOIN Checklist ON Checklist.checklist_id=Reservation.checklist_id INNER JOIN Scholarship ON Scholarship.scholarship_id=Checklist.scholarship_id INNER JOIN Cost_of_living_status ON Cost_of_living_status.cost_of_living_id=Checklist.cost_of_living_id ORDER BY Reservation.reserve_date ASC , Reservation.reserve_time ASC , Reservation.queue_no ASC;");
+              $stmt = $pdo->prepare("SELECT Reservation.reservation_id AS 'ID',Reservation.national_id AS 'std_ID',Pre_name.Pre_name_desc AS 'คำนำหน้า',Users.firstname AS 'ชื่อ',Users.lastname AS 'นามสกุล', Scholarship.scholarship_name AS 'ทุน', Cost_of_living_status.amount AS 'ค่าครองชีพต่อเดือน',Reservation.reserve_date AS 'วัน',Reservation.reserve_time AS 'เวลา',Reservation.queue_no AS 'คิวที่' FROM Reservation INNER JOIN Users ON Reservation.national_id=Users.national_id INNER JOIN Pre_name ON Pre_name.Pre_name_id=Users.Pre_name_id INNER JOIN Checklist ON Checklist.checklist_id=Reservation.checklist_id INNER JOIN Scholarship ON Scholarship.scholarship_id=Checklist.scholarship_id INNER JOIN Cost_of_living_status ON Cost_of_living_status.cost_of_living_id=Checklist.cost_of_living_id ORDER BY Reservation.reserve_date ASC , Reservation.reserve_time ASC , Reservation.queue_no ASC;");
               $stmt->execute();
               
               echo "
               <table border='1'>
               <tr>
+                <th>ID</th>
                 <th>เลขบัตรประชาชน</th>
                 <th>คำนำหน้า</th>
                 <th>ชื่อ</th>
@@ -111,6 +112,7 @@ function linkClick(element) {
                   echo "
                   <tr>
                   <td>" .$row["ID"] ."</td>
+                  <td>" .$row["std_ID"] ."</td>
                   <td>" .$row["คำนำหน้า"] ."</td>
                   <td>" .$row["ชื่อ"] ."</td>
                   <td>" .$row["นามสกุล"] ."</td>
@@ -119,7 +121,7 @@ function linkClick(element) {
                   <td>" .$row["วัน"] ."</td>
                   <td>" .$row["เวลา"] ."</td>
                   <td>" .$row["คิวที่"] ."</td>
-                  <td><a class='del_btn' href='delete_history.php?national_id=".$row["ID"]."'>ลบ</a></td>
+                  <td><a class='del_btn' href='delete_history.php?reservation_id=".$row["ID"]."'>ลบ</a></td>
                   </tr>";
                 }
                 
@@ -184,7 +186,15 @@ function linkClick(element) {
                 
                 <form class="information-management" id="information-management_id">
                     <h3>Information Management</h3>
-                    <div class="add_btn_div"><p>Checklist</p><a class='add_btn' href='dashboard_add_checklist.php' disabled>เพิ่ม</a></div>
+                    <?php
+                    $stmtLast = $pdo->prepare("SELECT Event_status FROM Post_Duration WHERE Duration_id LIKE 'C%' ORDER BY Start_date DESC LIMIT 1;");
+                    $stmtLast->execute();
+
+                    $lastStatus=$stmtLast->fetchColumn();
+
+                    $disablechl = ($lastStatus == 1) ? "onclick='return false;'" : "";
+                    ?>
+                    <div class="add_btn_div" ><p>Checklist</p><a class='add_btn' href='dashboard_add_checklist.php' <?php echo $disablechl ; ?> >เพิ่ม</a></div>
                     <?php
                   $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'C%';");
                   $stmt3->execute();
@@ -214,7 +224,16 @@ function linkClick(element) {
                     
                     ?>
 
-                    <div class="add_btn_div"><p>Reservation</p><a class='add_btn' href='dashboard_add_reservation.php'>เพิ่ม</a></div>
+                <?php
+                    $stmtLast = $pdo->prepare("SELECT Event_status FROM Post_Duration WHERE Duration_id LIKE 'R%' ORDER BY Start_date DESC LIMIT 1;");
+                    $stmtLast->execute();
+
+                    $lastStatus=$stmtLast->fetchColumn();
+
+                    $disableRes = ($lastStatus == 1) ? "onclick='return false;'" : "";
+                ?>
+
+                    <div class="add_btn_div"><p>Reservation</p><a class='add_btn' href='dashboard_add_reservation.php' <?php echo $disableRes ; ?>>เพิ่ม</a></div>
                     <?php
                   $stmt3 = $pdo->prepare("SELECT Post_Duration.Duration_id AS 'ID',Post_Duration.Start_date AS 'วันเวลาเริ่มต้น',Post_Duration.End_date AS 'วันเวลาสิ้นสุด',Post_Duration.Event_status AS 'Status' FROM Post_Duration WHERE Post_Duration.Duration_id LIKE 'R%';");
                   $stmt3->execute();

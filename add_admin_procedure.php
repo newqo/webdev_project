@@ -6,10 +6,10 @@
         // Start a transaction
         $pdo->beginTransaction();
 
-        $stmt = $pdo->prepare("INSERT INTO Users (national_id,pre_name_id,firstname,lastname,Email,phone_num,birthdate,user_role,user_cate_id,passwd) VALUES (?,?,?,?,?,?,?,1,0,?)");
+        $stmt = $pdo->prepare("INSERT INTO Users (national_id,Pre_name_id,firstname,lastname,Email,phone_num,birthdate,user_role,user_cate_id,passwd) VALUES (?,?,?,?,?,?,?,1,0,?)");
 
         $stmt->bindParam(1,$_POST["national_id"]);
-        $stmt->bindParam(2,$_POST["pre_name_id"]);
+        $stmt->bindParam(2,$_POST["Pre_name_id"]);
         $stmt->bindParam(3,$_POST["firstname"]);
         $stmt->bindParam(4,$_POST["lastname"]);
         $stmt->bindParam(5,$_POST["Email"]);

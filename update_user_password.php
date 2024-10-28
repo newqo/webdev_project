@@ -20,9 +20,9 @@
                 header("Location: successful.php?status=success"); // เมื่อรหัสผ่านใหม่ถูกต้อง
             }
         }else{
-            header("Location: successful.php?status=notmatch"); // เมื่อรหัสผ่านใหม่ไม่ตรงกัน
+            header("Location: notmatch.php?status=notmatch"); // เมื่อรหัสผ่านใหม่ไม่ตรงกัน
         }
     }else{
-        header("Location: successful.php?status=incorrect"); // เมื่อรหัสผ่านปัจจุบันไม่ถูกต้อง
+        header("Location: incorrect.php?status=incorrect"); // เมื่อรหัสผ่านปัจจุบันไม่ถูกต้อง
     }
 ?>
