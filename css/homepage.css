@@ -263,6 +263,7 @@ nav {
 .show {
   display: block;
 }
+
 /* --------------------------------------------- */
 
 .logo-menu {
@@ -677,22 +678,6 @@ footer {
   }
   .dropdown-menu-user{
     display:none;
-  }
-  .nt-reservation{
-    padding: 20px;
-  }
-  .nt-re-title{
-    font-size: 28px;
-    font-weight: bold;
-  }
-  .p-nt{
-    font-size: 12px;
-    margin-bottom: 30px;
-  }
-  .home-btn{
-    margin-top: 30px;
-    font-size: 12px;
-    padding: 10px 20px;
   }
 }
 

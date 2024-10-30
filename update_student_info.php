@@ -25,6 +25,6 @@
     $stmt->bindParam(8,$nid);
     
     if($stmt->execute()){
-        echo "<script>openPopup();</script>";
+        header("location: edit_success_account.php");
     }    
 ?>

@@ -122,7 +122,7 @@
         </aside>
     <main>
       <div class="nt-reservation">
-        <div class="nt-re-title">รหัสผ่านของคุณแก้ไขเรียบร้อยแล้ว!</div>
+        <div class="nt-re-title">การแก้ไขเสร็จสิ้นเรียบร้อยแล้ว!</div>
           <img src="imgs/checked.png" style="width: 200px;">
         </div>
       </div>

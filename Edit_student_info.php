@@ -42,28 +42,26 @@
               <div class="drop-mobile">
                 <a onclick="myFunctionMobile()">บริการ</a>
                 <ul class="drop-content-mobile" id="myDropdown-menu-mobile">
-                  <li><a href="#checklist_announcement">ลงทะเบียน</a></li>
-                  <li><a href="#reservation_announcement_old_user">ผู้กู้รายเก่า</a></li>
-                  <li><a href="#reservation_announcement_new_user">ผู้กู้รายใหม่</a></li>
+                  <li><a href="homepage.php#checklist_announcement">ลงทะเบียน</a></li>
+                  <li><a href="homepage.php#reservation_announcement_old_user">ผู้กู้รายเก่า</a></li>
+                  <li><a href="homepage.php#reservation_announcement_new_user">ผู้กู้รายใหม่</a></li>
                 </ul>
               </div>
   
               <a href="homepage.php#contect">ติดต่อเรา</a>
               <div class="section-title-menu-mobile">หมวดหมู่</div>
-                <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
+                <a href="accountpage.php?content=student" id="student">ข้อมูลส่วนตัวนักศึกษา</a>
+                <a href="accountpage.php?content=education" id="education" >ข้อมูลการศึกษา</a>
+                <a href="accountpage.php?content=parents" id="parents" >ข้อมูลของครอบครัว</a>
+                <a href="accountpage.php?content=history" id="history" >ประวัติการจอง</a>
+                <a href="Edit_user_password.php" id="changepassword" >เปลี่ยนแปลงรหัสผ่าน</a>
                 <?php
-                  if($_SESSION["role"] == 0){
-                    echo "
-                      <a href='#' id='education' onclick='showContent(id)'>ข้อมูลการศึกษา</a>
-                      <a href='#' id='parents' onclick='showContent(id)'>ข้อมูลของครอบครัว</a>
-                      <a href='#' id='history' onclick='showContent(id)'>ประวัติการจอง</a>
-                      ";
-                    }
+                  if(isset($_SESSION['role']) && $_SESSION["role"] == 1){
+                    echo "<a href=\"dashboard.php\">Dashboard</a>";
+                  }
                 ?>
-                <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
-                <a href="#">Dashboard</a>
               <br/>
-              <a href="#">ออกจากระบบ</a>
+              <a href="logout.php">ออกจากระบบ</a>
             </div>
   
             <!-- desktop -->
@@ -82,21 +80,30 @@
               <a href="homepage.php#contect">ติดต่อเรา</a>
             </div>
             <div class="dropdown-menu-user">
-              <a onclick="myFunctionUser()">เข้าสู่ระบบ</a>
-              <div class="dropdown-content-user" id="myDropdown-menu-user">
-                <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
+              <div class="drop-menu-user-btn">
+                <button id='user-btn'
                 <?php
-                  if($_SESSION["role"] == 0){
-                    echo "
-                      <a href='#' id='education' onclick='showContent(id)'>ข้อมูลการศึกษา</a>
-                      <a href='#' id='parents' onclick='showContent(id)'>ข้อมูลของครอบครัว</a>
-                      <a href='#' id='history' onclick='showContent(id)'>ประวัติการจอง</a>
-                      ";
-                    }
+                  if(isset($_SESSION['firstname'])){
+                    echo "onclick='myFunctionUser()'>" . $_SESSION['firstname'];
+                  }
+                  else{
+                    echo "onclick=\"window.location.href='login.php'\">เข้าสู่ระบบ";
+                  }
                 ?>
-                <a href='Edit_user_password.php' id='changepassword' >เปลี่ยนแปลงรหัสผ่าน</a>
-                <a href="#">Dashboard</a>
-                <a href="#">ออกจากระบบ</a>
+                </button>
+              </div>
+              <div class="dropdown-content-user" id="myDropdown-menu-user">
+                <a href="accountpage.php?content=student" id="student">ข้อมูลส่วนตัวนักศึกษา</a>
+                <a href="accountpage.php?content=education" id="education" >ข้อมูลการศึกษา</a>
+                <a href="accountpage.php?content=parents" id="parents" >ข้อมูลของครอบครัว</a>
+                <a href="accountpage.php?content=history" id="history" >ประวัติการจอง</a>
+                <a href="Edit_user_password.php" id="changepassword" >เปลี่ยนแปลงรหัสผ่าน</a>
+                <?php
+                  if(isset($_SESSION['role']) && $_SESSION["role"] == 1){
+                    echo "<a href=\"dashboard.php\">Dashboard</a>";
+                  }
+                ?>
+                <a href="logout.php">ออกจากระบบ</a>
               </div>
             </div>
           </div>
@@ -178,40 +185,11 @@
             <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)*</label>
             <input type='text' id='user_address' name='user_address' pattern='[A-Za-z0-9\s,.]{2,200}' maxlength='200' value='<?=$row['Address']?>'/>
           </div>
-
-          <!-- super button T^T -->
           <div class="submit-btn">
-            <button type="button" class="sub-btn" onclick="openPopup()">ยืนยัน</button>
+            <button type="submit" class="sub-btn">ยืนยัน</button>
             <a href="accountpage.php?content=student" class='cancel-btn' id='edit_user_info'>ยกเลิก</a>
-          </div>
-          <div id="overlay" class="overlay"></div>
-          <div class="popup" id="popup">
-                <img src="imgs/checked.png">
-                <h2>แก้ไขข้อมูลเสร็จสิ้น !</h2>
-                <div class="choice-btn">
-                  <a href="homepage.php">
-                  <button type="button" onclick="closePopup()" class="home-btn">กลับสู่หน้าหลัก</button>
-                  </a>
-                  <a href="accountpage.php">
-                  <button type="button" onclick="closePopup()" class="info-btn">ไปที่ข้อมูลส่วนตัว</button>
-                  </a>
-                </div>
-          </div>
+          <div>
         </form>
-        <script>
-            let popup = document.getElementById("popup");
-            let overlay = document.getElementById("overlay");
-
-            function openPopup() {
-              popup.classList.add("open-popup");
-              overlay.style.display = "block";
-            }
-
-            function closePopup() {
-              popup.classList.remove("open-popup");
-              overlay.style.display = "none";
-            }
-        </script>
         </article>
       </div>
     </main>

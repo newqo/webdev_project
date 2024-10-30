@@ -70,5 +70,5 @@
         $stmt->execute();
     }
 
-    header("location: successful.php");
+    header("location: edit_success_account.php");
 ?>

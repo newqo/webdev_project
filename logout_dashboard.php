@@ -1,24 +1,62 @@
 <?php
-  include "connect.php";
-  session_start();
-  
-  $months = array("ม.ค", "ก.พ", "มี.ค", "เม.ย", "พ.ค", "มิ.ย", "ก.ค", "ส.ค", "ก.ย", "ต.ค", "พ.ย", "ธ.ค");
+session_start();
+
+session_destroy(); // ทำลาย session
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>notification</title>
-    <link rel="stylesheet" href="css/homepage.css" />
-    <script src="javascript/homepage.js"></script>
-    <script
-      src="https://kit.fontawesome.com/9703a87d5d.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-  <header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <script src="javascript/dashboard.js"></script>
+    <title>ออกจากระบบสำเร็จ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .message {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .return-link {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .return-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<header>
         <nav>
           <div class="menu-bar">
             <div class="logo-menu">
@@ -42,7 +80,7 @@
                 </ul>
               </div>
   
-              <a href="homepage.php#contect">ติดต่อเรา</a>
+              <a href="#contect">ติดต่อเรา</a>
               <div class="section-title-menu-mobile">หมวดหมู่</div>
                 <a href="accountpage.php?content=student" id="student">ข้อมูลส่วนตัวนักศึกษา</a>
                 <a href="accountpage.php?content=education" id="education" >ข้อมูลการศึกษา</a>
@@ -55,7 +93,7 @@
                   }
                 ?>
               <br/>
-              <a href="logout.php">ออกจากระบบ</a>
+              <a href="#">ออกจากระบบ</a>
             </div>
   
             <!-- desktop -->
@@ -75,7 +113,7 @@
             </div>
             <div class="dropdown-menu-user">
               <div class="drop-menu-user-btn">
-                <button id='user-btn'
+                <button
                 <?php
                   if(isset($_SESSION['firstname'])){
                     echo "onclick='myFunctionUser()'>" . $_SESSION['firstname'];
@@ -84,6 +122,7 @@
                     echo "onclick=\"window.location.href='login.php'\">เข้าสู่ระบบ";
                   }
                 ?>
+            
                 </button>
               </div>
               <div class="dropdown-content-user" id="myDropdown-menu-user">
@@ -97,80 +136,44 @@
                     echo "<a href=\"dashboard.php\">Dashboard</a>";
                   }
                 ?>
-                <a href="logout.php">ออกจากระบบ</a>
+                <a href="logout_dashboard.php">ออกจากระบบ</a>
               </div>
             </div>
           </div>
         </nav>
       </header>
-
-        <aside>
-          <div class="section-title-menu-bar">หมวดหมู่</div>
-          <div class="menu">
-              <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
-              <?php
-                if($_SESSION["role"] == 0){
-                  echo "
-                    <a href='#' id='education' onclick='showContent(id)'>ข้อมูลการศึกษา</a>
-                    <a href='#' id='parents' onclick='showContent(id)'>ข้อมูลของครอบครัว</a>
-                    <a href='#' id='history' onclick='showContent(id)'>ประวัติการจอง</a>
-                    ";
-                  }
-                  ?>
-              <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
-          </div>
-        </aside>
-    <main>
-      <div class="nt-reservation">
-        <div class="nt-re-title">รหัสผ่านของคุณแก้ไขเรียบร้อยแล้ว!</div>
-          <img src="imgs/checked.png" style="width: 200px;">
+    <div class="message">
+        <h1>ออกจากระบบสำเร็จ</h1>
+        <div>
+            <a class="return-link" href="homepage.php">กลับสู่หน้าหลัก</a>
         </div>
-      </div>
-      <div class="choice-btn">
-        <a href="homepage.php">
-        <button type="button" class="home-btn">กลับสู่หน้าหลัก</button>
-        </a>
-        <a href="accountpage.php">
-        <button type="button" class="info-btn">ไปที่ข้อมูลส่วนตัว</button>
-        </a>
-      </div>
-    </main>
-
+    </div>
     <footer>
       <div class="footer-content">
         <div class="footer-section about">
           <h2>เกี่ยวกับเรา</h2>
           <p>
-            เว็บไซต์ของเราให้บริการจองและลงทะเบียนที่เกี่ยวข้องกับการกู้ยืม
-            กยศ.มจพ.
+            เว็บไซต์ของเราให้บริการจองและลงทะเบียนที่เกี่ยวข้องกับการกู้ยืม กยศ.มจพ
           </p>
         </div>
-
+    
         <div class="footer-section contact">
           <h2>ติดต่อเรา</h2>
           <ul>
             <li><i class="fas fa-envelope"></i> Email: info@website.com</li>
-            <li>
-              <i class="fas fa-phone"></i> โทรศัพท์: 02-555-2000 ต่อ 1150, 1161
-            </li>
+            <li><i class="fas fa-phone"></i> โทรศัพท์: 02-555-2000 ต่อ 1150, 1161</li>
           </ul>
         </div>
-
+    
         <div class="footer-section social">
           <h2>ติดตามเรา</h2>
-          <a
-            href="https://www.facebook.com/profile.php?id=100066829755038"
-            target="_blank"
-            ><i class="fab fa-facebook-f"></i> กยศ_kmutnb</a
-          ><br />
-          <a
-            href="https://liff.line.me/1645278921-kWRPP32q/?accountId=sa.kmutnb"
-            target="_blank"
-            ><i class="fab fa-line"></i> กิจการนักศึกษา มจพ.</a
-          >
+          <a href="https://www.facebook.com/profile.php?id=100066829755038"><i class="fab fa-facebook-f"></i> กยศ_kmutnb</a><br>
+          <a href="https://liff.line.me/1645278921-kWRPP32q/?accountId=sa.kmutnb"><i class="fab fa-line"></i> กิจการนักศึกษา มจพ.</a>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2024 All Rights Reserved</div>
+      <div class="footer-bottom">
+        &copy; 2024 All Rights Reserved
+      </div>
     </footer>
-  </body>
+</body>
 </html>

@@ -1,24 +1,70 @@
 <?php
-  include "connect.php";
-  session_start();
-  
-  $months = array("ม.ค", "ก.พ", "มี.ค", "เม.ย", "พ.ค", "มิ.ย", "ก.ค", "ส.ค", "ก.ย", "ต.ค", "พ.ย", "ธ.ค");
+session_start();
+
+session_destroy(); // ทำลาย session
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>notification</title>
-    <link rel="stylesheet" href="css/homepage.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/homepage.css">
     <script src="javascript/homepage.js"></script>
-    <script
-      src="https://kit.fontawesome.com/9703a87d5d.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-  <header>
+    <title>ออกจากระบบสำเร็จ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background-image: linear-gradient(to top right,#329D9c, #cff4d2, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .message {
+            width: 50%;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px 0px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .return-link {
+            padding: 12px 20px;
+            background-color: #5DC0A6; 
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .return-link:hover {
+            background-color: #4DAE8F; /* สีเมื่อชี้เมาส์ */
+        }
+    </style>
+</head>
+<body>
+<header>
         <nav>
           <div class="menu-bar">
             <div class="logo-menu">
@@ -103,74 +149,36 @@
           </div>
         </nav>
       </header>
-
-        <aside>
-          <div class="section-title-menu-bar">หมวดหมู่</div>
-          <div class="menu">
-              <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
-              <?php
-                if($_SESSION["role"] == 0){
-                  echo "
-                    <a href='#' id='education' onclick='showContent(id)'>ข้อมูลการศึกษา</a>
-                    <a href='#' id='parents' onclick='showContent(id)'>ข้อมูลของครอบครัว</a>
-                    <a href='#' id='history' onclick='showContent(id)'>ประวัติการจอง</a>
-                    ";
-                  }
-                  ?>
-              <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
-          </div>
-        </aside>
-    <main>
-      <div class="nt-reservation">
-        <div class="nt-re-title">รหัสผ่านของคุณแก้ไขเรียบร้อยแล้ว!</div>
-          <img src="imgs/checked.png" style="width: 200px;">
-        </div>
-      </div>
-      <div class="choice-btn">
-        <a href="homepage.php">
-        <button type="button" class="home-btn">กลับสู่หน้าหลัก</button>
-        </a>
-        <a href="accountpage.php">
-        <button type="button" class="info-btn">ไปที่ข้อมูลส่วนตัว</button>
-        </a>
-      </div>
-    </main>
-
+    <div class="message">
+        <h1>ออกจากระบบสำเร็จ</h1>
+        <a class="return-link" href="homepage.php">กลับสู่หน้าหลัก</a>
+    </div>
     <footer>
       <div class="footer-content">
         <div class="footer-section about">
           <h2>เกี่ยวกับเรา</h2>
           <p>
-            เว็บไซต์ของเราให้บริการจองและลงทะเบียนที่เกี่ยวข้องกับการกู้ยืม
-            กยศ.มจพ.
+            เว็บไซต์ของเราให้บริการจองและลงทะเบียนที่เกี่ยวข้องกับการกู้ยืม กยศ.มจพ
           </p>
         </div>
-
+    
         <div class="footer-section contact">
           <h2>ติดต่อเรา</h2>
           <ul>
             <li><i class="fas fa-envelope"></i> Email: info@website.com</li>
-            <li>
-              <i class="fas fa-phone"></i> โทรศัพท์: 02-555-2000 ต่อ 1150, 1161
-            </li>
+            <li><i class="fas fa-phone"></i> โทรศัพท์: 02-555-2000 ต่อ 1150, 1161</li>
           </ul>
         </div>
-
+    
         <div class="footer-section social">
           <h2>ติดตามเรา</h2>
-          <a
-            href="https://www.facebook.com/profile.php?id=100066829755038"
-            target="_blank"
-            ><i class="fab fa-facebook-f"></i> กยศ_kmutnb</a
-          ><br />
-          <a
-            href="https://liff.line.me/1645278921-kWRPP32q/?accountId=sa.kmutnb"
-            target="_blank"
-            ><i class="fab fa-line"></i> กิจการนักศึกษา มจพ.</a
-          >
+          <a href="https://www.facebook.com/profile.php?id=100066829755038"><i class="fab fa-facebook-f"></i> กยศ_kmutnb</a><br>
+          <a href="https://liff.line.me/1645278921-kWRPP32q/?accountId=sa.kmutnb"><i class="fab fa-line"></i> กิจการนักศึกษา มจพ.</a>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2024 All Rights Reserved</div>
+      <div class="footer-bottom">
+        &copy; 2024 All Rights Reserved
+      </div>
     </footer>
-  </body>
+</body>
 </html>

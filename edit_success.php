@@ -1,25 +1,22 @@
 <?php
   include "connect.php";
   session_start();
-  
-  $months = array("ม.ค", "ก.พ", "มี.ค", "เม.ย", "พ.ค", "มิ.ย", "ก.ค", "ส.ค", "ก.ย", "ต.ค", "พ.ย", "ธ.ค");
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>notification</title>
-    <link rel="stylesheet" href="css/homepage.css" />
-    <script src="javascript/homepage.js"></script>
-    <script
-      src="https://kit.fontawesome.com/9703a87d5d.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-  <header>
-        <nav>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Success!</title>
+
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/9703a87d5d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav>
           <div class="menu-bar">
             <div class="logo-menu">
               <a href="homepage.php"
@@ -55,7 +52,7 @@
                   }
                 ?>
               <br/>
-              <a href="logout.php">ออกจากระบบ</a>
+              <a href="logout_dashboard.php">ออกจากระบบ</a>
             </div>
   
             <!-- desktop -->
@@ -75,7 +72,7 @@
             </div>
             <div class="dropdown-menu-user">
               <div class="drop-menu-user-btn">
-                <button id='user-btn'
+                <button
                 <?php
                   if(isset($_SESSION['firstname'])){
                     echo "onclick='myFunctionUser()'>" . $_SESSION['firstname'];
@@ -84,6 +81,7 @@
                     echo "onclick=\"window.location.href='login.php'\">เข้าสู่ระบบ";
                   }
                 ?>
+            
                 </button>
               </div>
               <div class="dropdown-content-user" id="myDropdown-menu-user">
@@ -97,80 +95,28 @@
                     echo "<a href=\"dashboard.php\">Dashboard</a>";
                   }
                 ?>
-                <a href="logout.php">ออกจากระบบ</a>
+                <a href="logout_dashboard.php">ออกจากระบบ</a>
               </div>
             </div>
           </div>
         </nav>
       </header>
-
-        <aside>
-          <div class="section-title-menu-bar">หมวดหมู่</div>
-          <div class="menu">
-              <a href="#" id="student" onclick="showContent(id)">ข้อมูลส่วนตัวนักศึกษา</a>
-              <?php
-                if($_SESSION["role"] == 0){
-                  echo "
-                    <a href='#' id='education' onclick='showContent(id)'>ข้อมูลการศึกษา</a>
-                    <a href='#' id='parents' onclick='showContent(id)'>ข้อมูลของครอบครัว</a>
-                    <a href='#' id='history' onclick='showContent(id)'>ประวัติการจอง</a>
-                    ";
-                  }
-                  ?>
-              <a href='Edit_user_password.php' id='changepassword'>เปลี่ยนแปลงรหัสผ่าน</a>
-          </div>
+        <aside> 
+            <a href="dashboard.php#showCountInfo_id" name="dashboard" onclick="linkClick(this)"><i class="fa-solid fa-gauge-simple"></i>  Dashboard</a>
+            <a href="dashboard.php#user-management_id" name="user" onclick="linkClick(this)"><i class="fa-solid fa-user"></i>  User Management</a>
+            <a href="dashboard.php#information-management_id" name="info" onclick="linkClick(this)"><i class="fa-solid fa-bullhorn"></i>  Information Management</a><br>
+            <a href="dashboard_add_admin.php" name="admin" onclick="linkClick(this)"><i class="fa-solid fa-user-plus"></i>  Add admin</a>
         </aside>
-    <main>
-      <div class="nt-reservation">
-        <div class="nt-re-title">รหัสผ่านของคุณแก้ไขเรียบร้อยแล้ว!</div>
-          <img src="imgs/checked.png" style="width: 200px;">
+    <div class="container">
+    <div class="nt-reservation">
+            <div class="nt-re-title">การแก้ไขเสร็จสิ้นเรียบร้อยแล้ว!</div>
+            <img src="imgs/checked.png" style="width: 200px;" alt="Success Icon">
         </div>
-      </div>
-      <div class="choice-btn">
-        <a href="homepage.php">
-        <button type="button" class="home-btn">กลับสู่หน้าหลัก</button>
-        </a>
-        <a href="accountpage.php">
-        <button type="button" class="info-btn">ไปที่ข้อมูลส่วนตัว</button>
-        </a>
-      </div>
-    </main>
-
-    <footer>
-      <div class="footer-content">
-        <div class="footer-section about">
-          <h2>เกี่ยวกับเรา</h2>
-          <p>
-            เว็บไซต์ของเราให้บริการจองและลงทะเบียนที่เกี่ยวข้องกับการกู้ยืม
-            กยศ.มจพ.
-          </p>
+        <div class="choice-btn">
+            <a href="dashboard.php">
+                <button type="button" class="home-btn">กลับสู่แดชบอร์ด</button>
+            </a>
         </div>
-
-        <div class="footer-section contact">
-          <h2>ติดต่อเรา</h2>
-          <ul>
-            <li><i class="fas fa-envelope"></i> Email: info@website.com</li>
-            <li>
-              <i class="fas fa-phone"></i> โทรศัพท์: 02-555-2000 ต่อ 1150, 1161
-            </li>
-          </ul>
-        </div>
-
-        <div class="footer-section social">
-          <h2>ติดตามเรา</h2>
-          <a
-            href="https://www.facebook.com/profile.php?id=100066829755038"
-            target="_blank"
-            ><i class="fab fa-facebook-f"></i> กยศ_kmutnb</a
-          ><br />
-          <a
-            href="https://liff.line.me/1645278921-kWRPP32q/?accountId=sa.kmutnb"
-            target="_blank"
-            ><i class="fab fa-line"></i> กิจการนักศึกษา มจพ.</a
-          >
-        </div>
-      </div>
-      <div class="footer-bottom">&copy; 2024 All Rights Reserved</div>
-    </footer>
-  </body>
+    </div>
+</body>
 </html>

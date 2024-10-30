@@ -16,7 +16,7 @@
         // Commit transaction
         $pdo->commit();
         // print_r($_POST);
-        header("Location: dashboard.php");
+        header("Location: edit_success.php");
     }catch (PDOException $e) {
         // Rollback transaction on error
         $pdo->rollBack();
