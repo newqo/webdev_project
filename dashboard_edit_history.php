@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php 
-        $query_res_his = $pdo->prepare("SELECT Reservation.national_id AS 'ID',Pre_name.Pre_name_desc,Pre_name.Pre_name_id AS 'คำนำหน้า',Users.firstname AS 'ชื่อ',Users.lastname AS 'นามสกุล',Reservation.reserve_date AS 'วัน',Reservation.reserve_time AS 'เวลา',Reservation.queue_no AS 'คิวที่' FROM Reservation INNER JOIN Users ON Reservation.national_id=Users.national_id INNER JOIN Pre_name ON Pre_name.Pre_name_id=Users.Pre_name_id WHERE Reservation.national_id = ? ORDER BY วัน ASC, 'เวลา' ASC , 'คิวที่' ASC;");
+        $query_res_his = $pdo->prepare("SELECT Reservation.national_id AS 'ID',Pre_name.Pre_name_desc,Pre_name.Pre_name_id AS 'คำนำหน้า',Users.firstname AS 'ชื่อ',Users.lastname AS 'นามสกุล',Reservation.reserve_date AS 'วัน',Reservation.reserve_time AS 'เวลา',Reservation.queue_no AS 'คิวที่' FROM Reservation INNER JOIN Users ON Reservation.national_id=Users.national_id INNER JOIN Pre_name ON Pre_name.Pre_name_id=Users.Pre_name_id WHERE Reservation.national_id = ? ORDER BY วัน' ASC, 'เวลา' ASC , 'คิวที่' ASC;");
         $query_res_his->bindParam(1,$_GET["national_id"]);
         $query_res_his->execute();
         $row=$query_res_his->fetch();
