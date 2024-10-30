@@ -307,7 +307,8 @@
       $rs = $pdo->prepare("SELECT Users.national_id, Users.firstname , Users.lastname, Scholarship.scholarship_name AS 'ชื่อทุน', Cost_of_living_status.amount AS 'ค่าครองชีพต่อเดือน',
                           DATE_FORMAT(Reservation.reserve_date, '%d/%m/%Y') AS reserve_date,
                           DATE_FORMAT(Reservation.reserve_time, '%h:%i') AS reserve_time, 
-                          Reservation.queue_no AS 'queue_no'
+                          Reservation.queue_no AS 'queue_no',
+                          Reservation.duration_id AS 'duration_id'
                           FROM Reservation 
                           JOIN Users ON Reservation.national_id = Users.national_id 
                           JOIN Checklist ON Reservation.checklist_id = Checklist.checklist_id 
@@ -328,7 +329,7 @@
             <p name='reserve_date'><b>วันที่จอง</b> ".$row['reserve_date'] ." เวลา ". $row['reserve_time'] ." น.</p>
             <p name='queue_no'><b>ลำดับคิวที่</b> ".$row['queue_no'] ."</p>
             <p name='location'><b>สถานที่</b> ชั้น 4 (ฝั่งสนามบาสเกตบอล) อาคาร 40 ปี มจพ.</p>
-            <button id='success-bt'>พิมพ์</button>
+            <a class='print-bt' href='pdf_reservation.php?nid=".$row['national_id']."&duration_id=".$row['duration_id']."'>พิมพ์</a>
           </div>
         </form>
         ";

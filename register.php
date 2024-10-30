@@ -116,7 +116,7 @@
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)*</label>
-                        <input type="text" id="user_address" name="user_address" pattern="[A-Za-z0-9ก-๙\s,.]{2,200}" maxlength="200" required>
+                        <input type="text" id="user_address" name="user_address" pattern="[A-Za-z0-9ก-๙\s,./]{2,200}" maxlength="200" required>
                     </div>
                 </div>
             </div>   

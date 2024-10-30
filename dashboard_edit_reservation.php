@@ -136,7 +136,7 @@
     <div class="title">แก้ไขการจอง</div>
     <form action="edit_reservation_procedure.php" method="post">
         <div class="form-group">
-            <label>ID</label>
+            <label>ID : <?=$row["ID"]?></label>
             <input type="hidden" name="Duration_id" placeholder="R_NEW1/R_OLD1" value="<?=$row["ID"]?>">
         </div>
         <div class="form-group">

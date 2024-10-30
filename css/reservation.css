@@ -393,7 +393,7 @@ select:focus, input[type="text"]:focus {
 
 .submit-btn {
   font-size: 16px;
-  padding: 12px 40px;
+  padding: 12px;
   border: none;
   border-radius: 8px;
   color: white;
@@ -405,6 +405,7 @@ select:focus, input[type="text"]:focus {
   width: 25%;
   text-align: center;
   margin:10px;
+  justify-content: center;
 }
 
 .submit-btn:hover{
@@ -480,7 +481,7 @@ select:focus, input[type="text"]:focus {
 
 .bt-next {
   padding: 10px 15px;
-  background-color: #4aa08b;
+  background-color: #b37400;
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -623,7 +624,7 @@ footer {
           /* padding-left: 10px; */
           color: #56C596;
       }
-  }
+  }ผ
   .dropdown-menu-user{
     display:none;
   }

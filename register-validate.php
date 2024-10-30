@@ -13,7 +13,7 @@ try {
     $pdo->beginTransaction();
 
     // Insert Users
-    $stmt = $pdo->prepare("INSERT INTO Users (national_id, pre_name_id, firstname, lastname, Email, phone_num, birthdate, Address, user_role, user_cate_id, passwd)
+    $stmt = $pdo->prepare("INSERT INTO Users (national_id, Pre_name_id, firstname, lastname, Email, phone_num, birthdate, Address, user_role, user_cate_id, passwd)
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?,0, 0, ?)");
     $nid = $_POST["user_id"];
     $stmt->bindParam(1, $nid); // nid
@@ -116,5 +116,6 @@ try {
 } catch (PDOException $e) {
     // Rollback transaction on error
     $pdo->rollBack();
+    print_r($_POST);
     echo "Error: " . $e->getMessage();
 }

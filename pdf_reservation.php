@@ -1,8 +1,41 @@
 <?php
 require_once('PDF/tcpdf.php');
 
+include "connect.php";
+
 class PDF extends TCPDF
 {
+    //constructor
+    private $pdo; 
+    public $data;
+
+    public function setPdo($pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
+    public function fetchUserData($nid, $duration_id)
+    {
+        $stmt = $this->pdo->prepare("SELECT Users.national_id AS 'nid', Users.firstname AS 'firstname', Users.lastname AS 'lastname', 
+                                            DATE_FORMAT(Users.birthdate,'%d/%m/%Y') AS 'birthdate', Users.phone_num AS 'phone_num', Users.Email AS 'email', 
+                                            User_category.category_desc AS 'user_category', Education.std_ID AS 'std_id', 
+                                            Education_Level_Category.ed_desc AS 'ed_level' , Faculty.Faculty_name AS 'faculty',
+                                            Scholarship.scholarship_name AS 'scholarship'
+                            FROM Users 
+                            JOIN Education ON Education.national_id = Users.national_id 
+                            JOIN Faculty ON Faculty.Faculty_id = Education.Faculty_id 
+                            JOIN Education_Level_Category ON Education_Level_Category.ed_category_id = Education.Education_Level 
+                            JOIN User_category ON Users.user_cate_id = User_category.user_cate_id 
+                            JOIN Checklist ON Checklist.national_id = Users.national_id 
+                            JOIN Scholarship ON Checklist.scholarship_id = Scholarship.scholarship_id
+                            JOIN Reservation ON Checklist.checklist_id = Reservation.checklist_id
+                            WHERE Users.national_id = ? AND Reservation.duration_id = ?;");
+        $stmt->bindParam(1, $nid);
+        $stmt->bindParam(2, $duration_id);
+        $stmt->execute();
+        $this->data = $stmt->fetch();
+    }
+
     // Header
     public function Header()
     {
@@ -46,27 +79,27 @@ class PDF extends TCPDF
         $this->Header2();
 
         $this->SetFont('FreeSerif', 'B', 12);
-        $this->Cell(0, 8, 'นักศึกษากู้ใหม่/เก่า ', 0, 1,'R');
+        $this->Cell(0, 8, $this->data['user_category'], 0, 1,'R');
 
         // Section 1: General Information
         $this->SetFont('FreeSerif', '', 12);
 
-        $this->Cell(0, 10, 'วัน/เดือน/ปีเกิด: __ (อายุ: __)', 0, 0);
-        $this->Cell(0,10,'เลขบัตรประชาชน',0,1,'R');
+        $this->Cell(0, 10, 'วัน/เดือน/ปีเกิด : ' . $this->data['birthdate'], 0, 0);
+        $this->Cell(0,10,'เลขบัตรประชาชน : ' .$this->data['nid'],0,1,'R');
 
 
-        $this->Cell(70, 7, 'ชื่อ-นามสกุล ', 1, 0);
-        $this->Cell(40,7,'รหัสนักศึกษา ',1,0);
-        $this->Cell(30,7,'ระดับ ',1,0);
-        $this->Cell(50,7,'กลุ่ม ',1,1,'C');
+        $this->Cell(70, 7, 'ชื่อ-นามสกุล : ' . $this->data['firstname'] . " " . $this->data['lastname'], 1, 0);
+        $this->Cell(40,7,'รหัสนักศึกษา : ' . $this->data['nid'],1,0);
+        $this->Cell(30,7,'ระดับ : ' . $this->data['ed_level'],1,0);
+        $this->Cell(50,7,'กลุ่ม ' . $this->data['user_category'],1,1,'C');
         
-        $this->Cell(70,7,'วิทยาเขต',1,0);
-        $this->Cell(70,7,'เบอร์โทร ',1,0);
-        $this->Cell(50,7,'ทุน : ',1,1);
+        $this->Cell(70,7,'วิทยาเขต : กรุงเทพ',1,0);
+        $this->Cell(70,7,'เบอร์โทร : ' . $this->data['phone_num'],1,0);
+        $this->Cell(50,7,'ทุน : ' . $this->data['scholarship'],1,1);
 
-        $this->Cell(70,7,'คณะ',1,0);
-        $this->Cell(70,7,'Email',1,0);
-        $this->Cell(50,7,'ล็อค/ไม่ล็อค',1,1);
+        $this->Cell(70,7,'คณะ'. $this->data['faculty'],1,0);
+        $this->Cell(70,7,'Email : ' . $this->data['email'],1,0);
+        $this->Cell(50,7,'',1,1);
         
         $this->Ln(2);
         
@@ -108,36 +141,42 @@ class PDF extends TCPDF
         $this->Cell(50,7,'วันเวลาที่บันทึกข้อมูล',0,1,'C');
         
 
-$this->SetFont('FreeSerif', 'B', 12);
+        $this->SetFont('FreeSerif', 'B', 12);
 
-$this->Rect(10, 225, 190, 45, 'D'); // (x, y, width, height, style)
+        $this->Rect(10, 225, 190, 45, 'D'); // (x, y, width, height, style)
 
-$this->Ln(5);
-$this->Cell(0, 7, 'สำหรับเจ้าหน้าที่ตรวจเอกสาร', 0, 1, 'C');
-$this->Cell(0, 8, 'ตรวจเอกสารแล้ว', 0, 1);
+        $this->Ln(5);
+        $this->Cell(0, 7, 'สำหรับเจ้าหน้าที่ตรวจเอกสาร', 0, 1, 'C');
+        $this->Cell(0, 8, 'ตรวจเอกสารแล้ว', 0, 1);
 
-$this->SetFont('FreeSerif', '', 11);
-$this->Cell(5, 5, '', 0, 0, 'C');
-$this->Cell(5, 5, '', 1, 0, 'C');
-$this->Cell(30, 8, 'ถูกต้อง/ครบถ้วน', 0, 0);
+        $this->SetFont('FreeSerif', '', 11);
+        $this->Cell(5, 5, '', 0, 0, 'C');
+        $this->Cell(5, 5, '', 1, 0, 'C');
+        $this->Cell(30, 8, 'ถูกต้อง/ครบถ้วน', 0, 0);
 
-$this->Cell(5, 5, '', 1, 0, 'C');
-$this->Cell(0, 8, 'ส่งคืนแล้วให้แก้ไข..................................................................................................................', 0, 1);  //
+        $this->Cell(5, 5, '', 1, 0, 'C');
+        $this->Cell(0, 8, 'ส่งคืนแล้วให้แก้ไข..................................................................................................................', 0, 1);  //
 
 
 
-$this->SetFont('FreeSerif', '', 11);
-$this->MultiCell(0, 10, 
-    "1 ผู้ตรวจ................................. วันที่................................. นัดมายื่นอีกครั้งในวันที่.......................... เวลา.........................
-2 ผู้ตรวจ................................. วันที่................................. นัดมายื่นอีกครั้งในวันที่.......................... เวลา.........................
-3 ผู้ตรวจ................................. วันที่................................. นัดมายื่นอีกครั้งในวันที่.......................... เวลา........................."
-    , 0, 'C', false, 1);
+        $this->SetFont('FreeSerif', '', 11);
+        $this->MultiCell(0, 10, 
+            "1 ผู้ตรวจ................................. วันที่................................. นัดมายื่นอีกครั้งในวันที่.......................... เวลา.........................
+        2 ผู้ตรวจ................................. วันที่................................. นัดมายื่นอีกครั้งในวันที่.......................... เวลา.........................
+        3 ผู้ตรวจ................................. วันที่................................. นัดมายื่นอีกครั้งในวันที่.......................... เวลา........................."
+            , 0, 'C', false, 1);
 
     }
 }
 
+$nid = $_GET['nid'];
+$duration_id = $_GET['duration_id'];
+
 // Create PDF
 $pdf = new PDF();
+$pdf->setPdo($pdo);
+$pdf->fetchUserData($nid, $duration_id);
+
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Your Name');
 $pdf->SetTitle('Check List Kmutnb');
@@ -146,6 +185,7 @@ $pdf->SetKeywords('TCPDF, PDF, form, checklist');
 
 // Set default font
 $pdf->SetFont('FreeSerif', '', 12);
+// $pdf->fetchUserData($nid, $duration_id);
 $pdf->CreateForm();
 $pdf->Output('checklist.pdf', 'I');
 ?>

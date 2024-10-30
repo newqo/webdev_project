@@ -170,12 +170,12 @@
                 <input type="hidden" name="national_id" value="<?=$_SESSION["national_id"]?>">
                 <input type="hidden" name="reservation_date" id="reservation_date_id" value="" required>
                 <div class="bt-reservation_round_bt">
-                    <button type="button" class="reservation_round_bt" id="round-morning" value="09:00:00" onclick="selected_round(id)">09:00</button>
-                    <button type="button" class="reservation_round_bt" id="round-noon" value="13:00:00" onclick="selected_round(id)">13:00</button>
+                    <button type="button" class="reservation_round_bt" id="round-morning" value="09:00:00" onclick="selected_round(id)" disabled>09:00</button>
+                    <button type="button" class="reservation_round_bt" id="round-noon" value="13:00:00" onclick="selected_round(id)" disabled>13:00</button>
                 </div>
                 <input type="hidden" name="selected_reservation_round" id="select_round_id" value="" required>
                 <div class="div-submit-btn">
-                    <input type="submit" value="ยืนยันการจอง" class="submit-btn">
+                    <input type="submit" value="ยืนยันการจอง" class="submit-btn" id="submit_bt_id" disabled>
                 </div>
                 <br>
                 <p style="color: red; font-size: 16px;"><span style="color: red; font-size: 16px; font-weight:bold;">หมายเหตุ : </span> หากนักศึกษาไม่อยู่รับบริการในช่วงเรียกคิว ทางเจ้าหน้าที่.ขอสงวนสิทธิ์ในการข้ามคิว</p>
