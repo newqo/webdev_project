@@ -194,7 +194,7 @@
                     }
                     echo "</p>";
                 ?>
-                <a href="checklist.php">จองคิวนัดส่งเอกสาร</a>
+                <a href="reservation_newuser.php">จองคิวนัดส่งเอกสาร</a>
             </article>
          </section>
 
