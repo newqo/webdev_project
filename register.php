@@ -177,11 +177,11 @@
                     </div>
                     <div class="form-group">
                         <label>ชื่อจริง*</label>
-                        <input type="text" id="firstname_father" name="father_fst_name" pattern="[A-Za-zก-ฮ-๙]{2,50}">
+                        <input type="text" id="firstname_father" name="father_fst_name" pattern="[A-Za-zก-๙]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>นามสกุล*</label>
-                        <input type="text" id="lastname_father" name="father_lst_name" pattern="[A-Za-zก-ฮ-๙]{2,50}">
+                        <input type="text" id="lastname_father" name="father_lst_name" pattern="[A-Za-zก-๙]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>เบอร์โทร*</label>
@@ -218,7 +218,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>ระบุอาชีพ หรือรายละเอียดของงาน*</label>
-                        <input type="text" id="job_detail_father" name="father_career" pattern="[A-Za-zก-ฮ-๙]{2,50}">
+                        <input type="text" id="job_detail_father" name="father_career" pattern="[A-Za-zก-๙]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>รายได้ของบิดา (ต่อปี)*</label>
@@ -248,11 +248,11 @@
                     </div>
                     <div class="form-group">
                         <label>ชื่อจริง*</label>
-                        <input type="text" id="firstname_mother" name="mother_fst_name" pattern="[A-Za-zก-ฮ-๙]{2,50}">
+                        <input type="text" id="firstname_mother" name="mother_fst_name" pattern="[A-Za-zก-๙]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>นามสกุล*</label>
-                        <input type="text" id="lastname_mother" name="mother_lst_name" pattern="[A-Za-zก-ฮ-๙]{2,50}">
+                        <input type="text" id="lastname_mother" name="mother_lst_name" pattern="[A-Za-zก-๙]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>เบอร์โทร*</label>
@@ -289,7 +289,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>ระบุอาชีพ หรือรายละเอียดของงาน*</label>
-                        <input type="text" id="job_detail_mother" name="mother_career" pattern="[A-Za-zก-ฮ-๙]{2,50}">
+                        <input type="text" id="job_detail_mother" name="mother_career" pattern="[A-Za-zก-๙]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>รายได้ของมารดา (ต่อปี)*</label>
@@ -320,11 +320,11 @@
                     </div>
                     <div class="form-group">
                         <label>ชื่อจริง*</label>
-                        <input type="text" id="firstname_guardian" name="guardian_fst_name" pattern="[A-Za-zก-ฮ-๙]{2,50}">
+                        <input type="text" id="firstname_guardian" name="guardian_fst_name" pattern="[A-Za-zก-๙]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>นามสกุล*</label>
-                        <input type="text" id="lastname_guardian" name="guardian_lst_name" pattern="[A-Za-zก-ฮ-๙]{2,50}">
+                        <input type="text" id="lastname_guardian" name="guardian_lst_name" pattern="[A-Za-zก-๙]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>เบอร์โทร*</label>
@@ -361,7 +361,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>ระบุอาชีพ หรือรายละเอียดของงาน*</label>
-                        <input type="text" id="job_detail_guardian" name="guardian_career" pattern="[A-Za-zก-ฮ-๙]{2,50}">
+                        <input type="text" id="job_detail_guardian" name="guardian_career" pattern="[A-Za-zก-๙]{2,50}">
                     </div>
                     <div class="form-group">
                         <label>รายได้ของผู้ปกครอง (ต่อปี)*</label>

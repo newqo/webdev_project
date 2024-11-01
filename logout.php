@@ -19,7 +19,6 @@ session_destroy(); // ทำลาย session
             box-sizing: border-box;
             font-family: 'Kanit', sans-serif;
         }
-
         body {
             background-image: linear-gradient(to top right,#329D9c, #cff4d2, #ffffff);
             display: flex;
@@ -29,15 +28,16 @@ session_destroy(); // ทำลาย session
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
+            flex-direction: column;
         }
 
         .message {
-            width: 50%;
+            width: 30%;
             background-color: white;
             border-radius: 12px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: 10px 0px;
+            margin: auto;
             text-align: center;
         }
 
@@ -61,6 +61,41 @@ session_destroy(); // ทำลาย session
         .return-link:hover {
             background-color: #4DAE8F; /* สีเมื่อชี้เมาส์ */
         }
+
+        @media (min-width: 432px) and (max-width: 1024px) {
+          .message {
+          width: 60%;
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 26px;
+        }
+
+        .return-link {
+         padding: 12px 18px;
+          font-size: 15px;
+        }
+      }
+
+      @media (max-width: 432px) {
+        .message {
+          width: 80%;
+          padding: 15px;
+          margin-top: 150px;
+          margin-bottom: 50px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .return-link {
+          padding: 10px 15px;
+          font-size: 14px;
+      }
+    }
+
     </style>
 </head>
 <body>
@@ -89,19 +124,8 @@ session_destroy(); // ทำลาย session
               </div>
   
               <a href="homepage.php#contect">ติดต่อเรา</a>
-              <div class="section-title-menu-mobile">หมวดหมู่</div>
-                <a href="accountpage.php?content=student" id="student">ข้อมูลส่วนตัวนักศึกษา</a>
-                <a href="accountpage.php?content=education" id="education" >ข้อมูลการศึกษา</a>
-                <a href="accountpage.php?content=parents" id="parents" >ข้อมูลของครอบครัว</a>
-                <a href="accountpage.php?content=history" id="history" >ประวัติการจอง</a>
-                <a href="Edit_user_password.php" id="changepassword" >เปลี่ยนแปลงรหัสผ่าน</a>
-                <?php
-                  if(isset($_SESSION['role']) && $_SESSION["role"] == 1){
-                    echo "<a href=\"dashboard.php\">Dashboard</a>";
-                  }
-                ?>
               <br/>
-              <a href="logout.php">ออกจากระบบ</a>
+              <a href="login.php">เข้าสู่ระบบ</a>
             </div>
   
             <!-- desktop -->
@@ -148,7 +172,7 @@ session_destroy(); // ทำลาย session
             </div>
           </div>
         </nav>
-      </header>
+</header>
     <div class="message">
         <h1>ออกจากระบบสำเร็จ</h1>
         <a class="return-link" href="homepage.php">กลับสู่หน้าหลัก</a>

@@ -53,7 +53,7 @@
                   }
                 ?>
               <br/>
-              <a href="logout_dashboard.php">ออกจากระบบ</a>
+              <a href="logout.php">ออกจากระบบ</a>
             </div>
   
             <!-- desktop -->
@@ -96,7 +96,7 @@
                     echo "<a href=\"dashboard.php\">Dashboard</a>";
                   }
                 ?>
-                <a href="logout_dashboard.php">ออกจากระบบ</a>
+                <a href="logout.php">ออกจากระบบ</a>
               </div>
             </div>
           </div>

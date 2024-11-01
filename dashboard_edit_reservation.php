@@ -58,12 +58,9 @@
                 </ul>
               </div>
   
-              <a href="#contect">ติดต่อเรา</a>
+              <a href="homepage.php#contect">ติดต่อเรา</a>
               <div class="section-title-menu-mobile">หมวดหมู่</div>
                 <a href="accountpage.php?content=student" id="student">ข้อมูลส่วนตัวนักศึกษา</a>
-                <a href="accountpage.php?content=education" id="education" >ข้อมูลการศึกษา</a>
-                <a href="accountpage.php?content=parents" id="parents" >ข้อมูลของครอบครัว</a>
-                <a href="accountpage.php?content=history" id="history" >ประวัติการจอง</a>
                 <a href="Edit_user_password.php" id="changepassword" >เปลี่ยนแปลงรหัสผ่าน</a>
                 <?php
                   if(isset($_SESSION['role']) && $_SESSION["role"] == 1){
@@ -71,7 +68,7 @@
                   }
                 ?>
               <br/>
-              <a href="#">ออกจากระบบ</a>
+              <a href="logout.php">ออกจากระบบ</a>
             </div>
   
             <!-- desktop -->
@@ -105,16 +102,13 @@
               </div>
               <div class="dropdown-content-user" id="myDropdown-menu-user">
                 <a href="accountpage.php?content=student" id="student">ข้อมูลส่วนตัวนักศึกษา</a>
-                <a href="accountpage.php?content=education" id="education" >ข้อมูลการศึกษา</a>
-                <a href="accountpage.php?content=parents" id="parents" >ข้อมูลของครอบครัว</a>
-                <a href="accountpage.php?content=history" id="history" >ประวัติการจอง</a>
                 <a href="Edit_user_password.php" id="changepassword" >เปลี่ยนแปลงรหัสผ่าน</a>
                 <?php
                   if(isset($_SESSION['role']) && $_SESSION["role"] == 1){
                     echo "<a href=\"dashboard.php\">Dashboard</a>";
                   }
                 ?>
-                <a href="logout_dashboard.php">ออกจากระบบ</a>
+                <a href="logout.php">ออกจากระบบ</a>
               </div>
             </div>
           </div>

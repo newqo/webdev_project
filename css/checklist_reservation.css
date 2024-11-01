@@ -1,9 +1,9 @@
 *{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: "Kanit", sans-serif;
   word-wrap: break-word;
+  box-sizing: border-box;
   overflow-wrap: break-word;
 }
 
@@ -485,6 +485,7 @@ footer {
     .menu-toggle {
         display: none;
       }
+    
 }
 
 @media only screen and (max-width: 430px){
@@ -511,6 +512,10 @@ footer {
     }
     table {
         display: none;
+    }
+    select{
+      max-width: 300px;
+      margin-left: 0;
     }
     .document-mobile{
         display: initial;

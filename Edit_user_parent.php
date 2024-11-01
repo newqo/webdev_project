@@ -47,11 +47,11 @@
                     <div class='form-group'>
                         <input type='hidden' name='father_parent_id' value='".$ft_data['parent_id']."'>
                         <label>ชื่อจริง</label>
-                        <input type='text' id='firstname_father' name='father_fst_name' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $ft_data['firstname'] ."'>
+                        <input type='text' id='firstname_father' name='father_fst_name' pattern='[A-Za-zก-๙]{2,50}' value='". $ft_data['firstname'] ."'>
                     </div>
                     <div class='form-group'>
                         <label>นามสกุล</label>
-                        <input type='text' id='lastname_father' name='father_lst_name' pattern='[A-Za-zก-ฮ-๗]{2,50}'  value='". $ft_data['lastname'] ."'>
+                        <input type='text' id='lastname_father' name='father_lst_name' pattern='[A-Za-zก-๙]{2,50}'  value='". $ft_data['lastname'] ."'>
                     </div>
                     <div class='form-group'>
                         <label>เบอร์โทร</label>
@@ -73,7 +73,7 @@
                         </div>
                         <div class='form-group'>
                             <label>อาชีพ</label>
-                            <input type='text' id='job_detail_father' name='father_career' pattern='[A-Za-zก-ฮ-๗]{2,50}'  value='". $ft_data['career'] ."'>
+                            <input type='text' id='job_detail_father' name='father_career' pattern='[A-Za-zก-๙]{2,50}'  value='". $ft_data['career'] ."'>
                         </div>
                         <div class='form-group'>
                             <label>รายได้ของบิดา (ต่อปี)</label>
@@ -111,11 +111,11 @@
                 <div class='form-group'>
                     <input type='hidden' name='mother_parent_id' value='".$mt_data['parent_id']."'>
                     <label>ชื่อจริง</label>
-                    <input type='text' id='firstname_mother' name='mother_fst_name' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $mt_data['firstname'] ."'>
+                    <input type='text' id='firstname_mother' name='mother_fst_name' pattern='[A-Za-zก-๙]{2,50}' value='". $mt_data['firstname'] ."'>
                 </div>
                 <div class='form-group'>
                     <label>นามสกุล</label>
-                    <input type='text' id='lastname_mother' name='mother_lst_name' pattern='[A-Za-zก-ฮ-๗]{2,50}'  value='". $mt_data['lastname'] ."'>
+                    <input type='text' id='lastname_mother' name='mother_lst_name' pattern='[A-Za-zก-๙]{2,50}'  value='". $mt_data['lastname'] ."'>
                 </div>
                 <div class='form-group'>
                     <label>เบอร์โทร</label>
@@ -136,7 +136,7 @@
                         </div>
                 <div class='form-group'>
                         <label>อาชีพ</label>
-                        <input type='text' id='job_detail_mother' name='mother_career' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $mt_data['career'] ."'>
+                        <input type='text' id='job_detail_mother' name='mother_career' pattern='[A-Za-zก-๙]{2,50}' value='". $mt_data['career'] ."'>
                     </div>
                     <div class='form-group'>
                         <label>รายได้ของมารดา (ต่อปี)</label>
@@ -174,11 +174,11 @@
                 <div class='form-group'>
                     <input type='hidden' name='guardian_parent_id' value='".$gd_data['parent_id']."'>
                     <label>ชื่อจริง</label>
-                    <input type='text' id='firstname_guardian' name='guardian_fst_name' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $gd_data['firstname'] ."'>
+                    <input type='text' id='firstname_guardian' name='guardian_fst_name' pattern='[A-Za-zก-๙]{2,50}' value='". $gd_data['firstname'] ."'>
                 </div>
                 <div class='form-group'>
                     <label>นามสกุล</label>
-                    <input type='text' id='lastname_guardian' name='guardian_lst_name' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $gd_data['lastname'] ."'>
+                    <input type='text' id='lastname_guardian' name='guardian_lst_name' pattern='[A-Za-zก-๙]{2,50}' value='". $gd_data['lastname'] ."'>
                 </div>
                 <div class='form-group'>
                     <label>เบอร์โทร</label>
@@ -200,7 +200,7 @@
                         </div>
                 <div class='form-group'>
                         <label>อาชีพ</label>
-                        <input type='text' id='job_detail_guardian' name='guardian_career' pattern='[A-Za-zก-ฮ-๗]{2,50}' value='". $gd_data['career'] ."'>
+                        <input type='text' id='job_detail_guardian' name='guardian_career' pattern='[A-Za-zก-๙]{2,50}' value='". $gd_data['career'] ."'>
                     </div>
                     <div class='form-group'>
                         <label>รายได้ของผู้ปกครอง (ต่อปี)</label>
