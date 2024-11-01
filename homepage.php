@@ -165,7 +165,9 @@
                   }
                   echo "</p>";
                 ?>
-                <a href="reservation.php">จองคิวนัดส่งเอกสาร</a>
+              
+                <a <?php echo isset($_SESSION['user_category']) && $_SESSION['user_category'] == '1' ? 'href="reservation.php"': 'class="disabled-bt"' ?>>จองคิวนัดส่งเอกสาร</a>
+
             </article>
             <article class="reservation" id="reservation_announcement_new_user">
                 <h3>จองคิวนัดส่งเอกสารสำหรับผู้กู้รายใหม่</h3>
@@ -194,7 +196,7 @@
                     }
                     echo "</p>";
                 ?>
-                <a href="reservation_newuser.php">จองคิวนัดส่งเอกสาร</a>
+                <a <?php echo isset($_SESSION['user_category']) && $_SESSION['user_category'] == '0' ? 'href="reservation_newuser.php"': 'class="disabled-bt"' ?>>จองคิวนัดส่งเอกสาร</a>
             </article>
          </section>
 

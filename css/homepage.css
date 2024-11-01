@@ -566,6 +566,14 @@ footer {
   background-color: #e69500;
 }
 
+a.disabled-bt{
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+a.disabled-bt:hover{
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
 /* mobile query for mobile*/
 

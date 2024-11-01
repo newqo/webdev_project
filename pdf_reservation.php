@@ -8,6 +8,42 @@ class PDF extends TCPDF
     //constructor
     private $pdo; 
     public $data;
+    public $months = array(
+        1 => 'มกราคม',  
+        2 => 'กุมภาพันธ์', 
+        3 => 'มีนาคม',   
+        4 => 'เมษายน',     
+        5 => 'พฤษภาคม',  
+        6 => 'มิถุนายน',   
+        7 => 'กรกฎาคม',   
+        8 => 'สิงหาคม',   
+        9 => 'กันยายน',   
+        10 => 'ตุลาคม',
+        11 => 'พฤศจิกายน',
+        12 => 'ธันวาคม'
+    );
+
+    public $label_document = array(
+        1 => 'แบบยืนยันการเบิกเงินกู้ยืม จากระบบ DSL',
+        2 => 'สัญญากู้ยืมเงินกองทุน กยศ. จากระบบ DSL',
+        3 => 'สำเนาบัตรประชาชนผู้กู้ยืม',
+        4 => 'เอกสารแสดงผลการลงทะเบียน 1/2567',
+        5 => 'เอกสารแสดงค่าใช้จ่าย/ทุน 1/2567',
+        6 => 'สำเนาใบเสร็จรับเงินค่าเทอม 1/2567',
+        7 => 'บันทึกกิจกรรมจิตอาสาไม่น้อยกว่า 36 ชั่วโมง',
+        8 => 'หนังสือยินยอมเปิดเผยข้อมูล'
+    );
+
+    public $amount_document = array(
+        1 => '2 แผ่น',
+        2 => '2 ชุด',
+        3 => '2 แผ่น',
+        4 => '1 ชุด',
+        5 => '1 แผ่น',
+        6 => '1 แผ่น',
+        7 => '1 แผ่น',
+        8 => '1 ชุด'
+    );
 
     public function setPdo($pdo)
     {
@@ -20,7 +56,12 @@ class PDF extends TCPDF
                                             DATE_FORMAT(Users.birthdate,'%d/%m/%Y') AS 'birthdate', Users.phone_num AS 'phone_num', Users.Email AS 'email', 
                                             User_category.category_desc AS 'user_category', Education.std_ID AS 'std_id', 
                                             Education_Level_Category.ed_desc AS 'ed_level' , Faculty.Faculty_name AS 'faculty',
-                                            Scholarship.scholarship_name AS 'scholarship'
+                                            Scholarship.scholarship_name AS 'scholarship',
+                                            DATE_FORMAT(Reservation.reserve_date,'%e') AS 'Reserv_date' ,
+                                            MONTH(Reservation.reserve_date) AS 'Reserv_month' ,
+                                            YEAR(Reservation.reserve_date) AS 'Reserv_year',
+                                            TIME_FORMAT(Reservation.reserve_time,'%H:%s') AS 'Reserv_time' ,
+                                            Reservation.queue_no AS 'queue_no'
                             FROM Users 
                             JOIN Education ON Education.national_id = Users.national_id 
                             JOIN Faculty ON Faculty.Faculty_id = Education.Faculty_id 
@@ -64,7 +105,7 @@ class PDF extends TCPDF
 
         $this->SetFont('FreeSerif', 'B', 10);
         $this->SetTextColor(255, 0, 0);
-        $this->Cell(0, 5, 'วันที่...เดือน.....ปี..... เวลา ......น. ลำดับที่ ....', 0, 1, 'C');
+        $this->Cell(0, 5, 'วันที่ ' .$this->data['Reserv_date'] . " " . $this->months[$this->data['Reserv_month']] . " พ.ศ. " . ($this->data['Reserv_year'] + 543) . " เวลา " . $this->data['Reserv_time'] . " น. ลำดับที่ " . $this->data['queue_no'] , 0, 1, 'C');
 
         $this->SetFont('FreeSerif', '', 10);
         $this->SetTextColor(0, 0, 0);
@@ -89,13 +130,14 @@ class PDF extends TCPDF
 
 
         $this->Cell(70, 7, 'ชื่อ-นามสกุล : ' . $this->data['firstname'] . " " . $this->data['lastname'], 1, 0);
-        $this->Cell(45,7,'รหัสนักศึกษา : ' . $this->data['nid'],1,0);
-        $this->Cell(25,7,'ระดับ : ' . $this->data['ed_level'],1,0);
+        $this->Cell(50,7,'รหัสนักศึกษา : ' . $this->data['nid'],1,0);
+        $this->Cell(20,7,'ระดับ : ' . $this->data['ed_level'],1,0);
         $this->Cell(50,7,'กลุ่ม ' . $this->data['user_category'],1,1,'C');
         
         $this->Cell(70,7,'วิทยาเขต : กรุงเทพ',1,0);
         $this->Cell(70,7,'เบอร์โทร : ' . $this->data['phone_num'],1,0);
-        $this->Cell(50,14,'ทุน : ' . $this->data['scholarship'],1,1,'C');
+        $this->setFillColor(255,255,255);
+        $this->MultiCell(50,14,'ทุน : ' . $this->data['scholarship'],1,1,'C',1);
 
         $this->SetXY(10, 63);
         $this->Cell(70,7,$this->data['faculty'],1,0);
@@ -115,13 +157,23 @@ class PDF extends TCPDF
 
         // Table content
         $this->SetFont('FreeSerif', '', 10);
-        for ($i = 1; $i <= 14; $i++) {
-            $this->Cell(10, 7, $i, 1, 0, 'C'); // Row number
-            $this->Cell(130, 7, '__', 1, 0); // Document placeholder
-            $this->Cell(15,7,'',1,0,'C');
-            $this->Cell(35,7,'',1,1);
+        for ($i = 1; $i <= 8; $i++) {
+            $this->Cell(10, 10, $i, 1, 0, 'C'); // Row number
+            $this->Cell(130, 10, $this->label_document[$i], 1, 0); // Document placeholder
+            $this->Cell(15,10,$this->amount_document[$i],1,0,'C');
+            $this->Cell(35,10,'',1,1);
         }
+        $this->Cell(10,10,'',1,0);
+        $this->Cell(130,10,'',1,0);
+        $this->Cell(15,10,'',1,0);
+        $this->Cell(35,10,'',1,1);
 
+        $this->Cell(10,10,'',1,0);
+        $this->Cell(130,10,'',1,0);
+        $this->Cell(15,10,'',1,0);
+        $this->Cell(35,10,'',1,1);
+
+        
         $this->Ln(5);
 
         $this->SetFont('FreeSerif', '', 10);

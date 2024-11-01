@@ -20,5 +20,8 @@ function validation(){
         if (xmlhttp.responseText == "เลขบัตรประชาชนหรือรหัสผ่านไม่ถูกต้อง"){
             document.getElementById("result").innerHTML = xmlhttp.responseText;
         }
+        else{
+            window.location.href = "homepage.php";
+        }
     }
 }

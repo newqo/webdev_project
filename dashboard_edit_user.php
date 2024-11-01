@@ -35,7 +35,7 @@
         
     </script>
 </head>
-<body onload="updateFaculty(<?=$row['ID']?>)">
+<body onload="updateFaculty(<?=$_GET['national_id']?>)">
 <header>
         <nav>
           <div class="menu-bar">
