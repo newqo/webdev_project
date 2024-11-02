@@ -39,9 +39,9 @@ try {
 
     // // Insert parent
     if($_POST["pattern_status_name"] != 2){
+        $stmt = $pdo->prepare("INSERT INTO Parent (Pre_name_id, firstname, lastname, phone_num, career, income, income_cate_id, parent_status_id)
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         if($_POST["pattern_status_name"] == 0){ //father
-            $stmt = $pdo->prepare("INSERT INTO Parent (Pre_name_id, firstname, lastname, phone_num, career, income, income_cate_id, parent_status_id)
-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bindParam(1,$_POST["father_pre_name"]); // pre name
             $stmt->bindParam(2,$_POST["father_fst_name"]); // first name
             $stmt->bindParam(3,$_POST["father_lst_name"]); // last name
