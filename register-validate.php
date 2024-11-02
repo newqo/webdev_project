@@ -47,7 +47,8 @@ try {
             $stmt->bindParam(3,$_POST["father_lst_name"]); // last name
             $stmt->bindParam(4,$_POST["father_phone_num"]); // phone num
             $stmt->bindParam(5,$_POST["father_career"]); // career
-            $stmt->bindParam(6,$_POST["father_annual_income"]); // income
+            $father_income = (int)$_POST["father_annual_income"];
+            $stmt->bindParam(6,$father_income); // income
             $stmt->bindParam(7,$_POST["father_income_type"]); // income category
             $stmt->bindParam(8,$_POST["pattern_status_name"]); // parent status
         }
@@ -57,7 +58,8 @@ try {
             $stmt->bindParam(3,$_POST["mother_lst_name"]); // last name
             $stmt->bindParam(4,$_POST["mother_phone_num"]); // phone num
             $stmt->bindParam(5,$_POST["mother_career"]); // career
-            $stmt->bindParam(6,$_POST["mother_annual_income"]); // income
+            $mother_income = (int)$_POST["mother_annual_income"];
+            $stmt->bindParam(6,$mother_income); // income
             $stmt->bindParam(7,$_POST["mother_income_type"]); // income category
             $stmt->bindParam(8,$_POST["pattern_status_name"]); // parent status
         }
@@ -67,7 +69,8 @@ try {
             $stmt->bindParam(3,$_POST["guardian_lst_name"]); // last name
             $stmt->bindParam(4,$_POST["guardian_phone_num"]); // phone num
             $stmt->bindParam(5,$_POST["guardian_career"]); // career
-            $stmt->bindParam(6,$_POST["guardian_annual_income"]); // income
+            $guardian_income = (int)$_POST["guardian_annual_income"];
+            $stmt->bindParam(6,$guardian_income); // income
             $stmt->bindParam(7,$_POST["guardian_income_type"]); // income category
             $stmt->bindParam(8,$_POST["pattern_status_name"]); // parent status
         }
@@ -88,7 +91,8 @@ try {
         $stmt->bindParam(3,$_POST["father_lst_name"]); // last name
         $stmt->bindParam(4,$_POST["father_phone_num"]); // phone num
         $stmt->bindParam(5,$_POST["father_career"]); // career
-        $stmt->bindParam(6,$_POST["father_annual_income"]); // income
+        $father_income = (int)$_POST["father_annual_income"];
+        $stmt->bindParam(6,$father_income); // income
         $stmt->bindParam(7,$_POST["father_income_type"]); // income category
         $stmt->bindParam(8,$_POST["pattern_status_name"]); // parent status
 
@@ -98,7 +102,8 @@ try {
         $stmt->bindParam(11,$_POST["mother_lst_name"]); // last name
         $stmt->bindParam(12,$_POST["mother_phone_num"]); // phone num
         $stmt->bindParam(13,$_POST["mother_career"]); // career
-        $stmt->bindParam(14,$_POST["mother_annual_income"]); // income
+        $mother_income = (int)$_POST["mother_annual_income"];
+        $stmt->bindParam(14,$mother_income); // income
         $stmt->bindParam(15,$_POST["mother_income_type"]); // income category
         $stmt->bindParam(16,$_POST["pattern_status_name"]); // parent status
         
@@ -116,6 +121,6 @@ try {
 } catch (PDOException $e) {
     // Rollback transaction on error
     $pdo->rollBack();
-    print_r($_POST);
+    // print_r($_POST);
     echo "Error: " . $e->getMessage();
 }

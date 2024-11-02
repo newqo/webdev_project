@@ -306,7 +306,7 @@
     if($content == 'history'){
       $rs = $pdo->prepare("SELECT Users.national_id, Users.firstname , Users.lastname, Scholarship.scholarship_name AS 'ชื่อทุน', Cost_of_living_status.amount AS 'ค่าครองชีพต่อเดือน',
                           DATE_FORMAT(Reservation.reserve_date, '%d/%m/%Y') AS reserve_date,
-                          DATE_FORMAT(Reservation.reserve_time, '%h:%i') AS reserve_time, 
+                          DATE_FORMAT(Reservation.reserve_time, '%H:%i') AS reserve_time, 
                           Reservation.queue_no AS 'queue_no',
                           Reservation.duration_id AS 'duration_id'
                           FROM Reservation 

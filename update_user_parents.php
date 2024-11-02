@@ -14,7 +14,8 @@
             $stmt->bindParam(3,$_POST["father_lst_name"]); // last name
             $stmt->bindParam(4,$_POST["father_phone_num"]); // phone num
             $stmt->bindParam(5,$_POST["father_career"]); // career
-            $stmt->bindParam(6,$_POST["father_annual_income"]); // income
+            $father_income = (int)$_POST["father_annual_income"];
+            $stmt->bindParam(6,$father_income); // income
             $stmt->bindParam(7,$_POST["father_income_type"]); // income category
             $stmt->bindParam(8,$_POST["father_parent_id"]); // parent_id
 
@@ -25,7 +26,8 @@
             $stmt->bindParam(3,$_POST["mother_lst_name"]); // last name
             $stmt->bindParam(4,$_POST["mother_phone_num"]); // phone num
             $stmt->bindParam(5,$_POST["mother_career"]); // career
-            $stmt->bindParam(6,$_POST["mother_annual_income"]); // income
+            $mother_income = (int)$_POST["mother_annual_income"];
+            $stmt->bindParam(6,$mother_income); // income
             $stmt->bindParam(7,$_POST["mother_income_type"]); // income category
             $stmt->bindParam(8,$_POST["mother_parent_id"]); // parent_id
         }
@@ -35,7 +37,8 @@
             $stmt->bindParam(3,$_POST["guardian_lst_name"]); // last name
             $stmt->bindParam(4,$_POST["guardian_phone_num"]); // phone num
             $stmt->bindParam(5,$_POST["guardian_career"]); // career
-            $stmt->bindParam(6,$_POST["guardian_annual_income"]); // income
+            $guardian_income = (int)$_POST["guardian_annual_income"];
+            $stmt->bindParam(6,$guardian_income); // income
             $stmt->bindParam(7,$_POST["guardian_income_type"]); // income category
             $stmt->bindParam(8,$_POST["guardian_parent_id"]); // parent_id
         }
@@ -51,7 +54,8 @@
         $stmt->bindParam(3,$_POST["father_lst_name"]); // last name
         $stmt->bindParam(4,$_POST["father_phone_num"]); // phone num
         $stmt->bindParam(5,$_POST["father_career"]); // career
-        $stmt->bindParam(6,$_POST["father_annual_income"]); // income
+        $father_income = (int)$_POST["father_annual_income"];
+        $stmt->bindParam(6,$father_income); // income
         $stmt->bindParam(7,$_POST["father_income_type"]); // income category
         $stmt->bindParam(8,$_POST["father_parent_id"]); // parent_id
         $stmt->execute();
@@ -64,7 +68,8 @@
         $stmt->bindParam(3,$_POST["mother_lst_name"]); // last name
         $stmt->bindParam(4,$_POST["mother_phone_num"]); // phone num
         $stmt->bindParam(5,$_POST["mother_career"]); // career
-        $stmt->bindParam(6,$_POST["mother_annual_income"]); // income
+        $mother_income = (int)$_POST["mother_annual_income"];
+        $stmt->bindParam(6,$mother_income); // income
         $stmt->bindParam(7,$_POST["mother_income_type"]); // income category
         $stmt->bindParam(8,$_POST["mother_parent_id"]); // parent_id
         $stmt->execute();
