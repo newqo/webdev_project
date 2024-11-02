@@ -112,6 +112,18 @@ function Check_Reservation_Round(Td_Selected){
     lastSelectedID = Td_Selected;
 
     var value = Td_Selected.dataset.value;
+
+    var morning_bt = document.getElementById("round-morning");
+    var noon_bt = document.getElementById("round-noon");
+    if(value != null){
+        morning_bt.removeAttribute("disabled");
+        noon_bt.removeAttribute("disabled");
+    }
+    else{
+        morning_bt.setAttribute("disabled","true");
+        noon_bt.setAttribute("disabled","true");
+    }
+
     // console.log(value);
     var date_num = parseInt(value);
     var month_num = parseInt(current_month) + 1;
@@ -139,6 +151,8 @@ function Check_Reservation_Round(Td_Selected){
 
     round_noon_xmlhttp.open("GET",noon_url);
     round_noon_xmlhttp.send();
+
+    resetSelection();
 }
 
 function checking_morning_round(){
@@ -242,6 +256,21 @@ function selected_round(id){
     var selected_round = document.getElementById("select_round_id");
     selected_round.value = select_bt.value;
     console.log(selected_round.value);
+
+    Check_confirm_bt();
+}
+
+function Check_confirm_bt(){
+    var reserv_date = lastSelectedID.dataset.value;
+    var reserv_round = document.getElementById("select_round_id").value;
+
+    var confirm_bt = document.getElementById("submit_bt_id");
+    console.log(reserv_date + " , " + reserv_round);
+    if(reserv_date != null && reserv_round != null){
+        confirm_bt.removeAttribute("disabled");
+    }else{
+        confirm_bt.setAttribute("disabled" , "true");
+    }
 }
 
 function resetSelection() {
@@ -252,6 +281,8 @@ function resetSelection() {
     for (let button of buttons) {
         button.classList.remove("round-selected");
     }
+    var confirm_bt = document.getElementById("submit_bt_id");
+    confirm_bt.setAttribute("disabled","true");
 
     console.log("Selection has been reset.");
 }

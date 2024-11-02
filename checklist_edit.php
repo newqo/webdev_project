@@ -166,6 +166,7 @@
                 <option value="5">ทุนอุดมศึกษาเพื่อการพัฒนาจังหวัดชายแดนภาคใต้</option>
                 <option value="6">ทุนอุดหนุนการศึกษาประเภทขาดแคลนแก่นักศึกษาโครงการสมทบพิเศษ (เฉพาะคณะวิทยาศาสตร์ประยุกต์)</option> -->
             </select>
+            <div style="margin-top: 3%;"><label style="color:red;">*นักศึกษาได้ลงทะเบียน Checklist ในเทอมนี้เรียบร้อยแล้ว สามารถเปลี่ยนแปลงได้จนกว่าจะหมดเขตการลงทะเบียน</label></div>
             </div>
             <div class="setcenter">
                 <button type="submit" id="addInformation" class="addInformation">ลงทะเบียน</button>

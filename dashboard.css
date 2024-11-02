@@ -234,9 +234,9 @@ nav {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
-    border-left: 4px solid #56c596;
+    border-left: 4px solid #007BFF;
     padding-left: 10px;
-    color: #56c596;
+    color: #007BFF;
     margin: 10px 0px 10px 30px;
   }
   
@@ -704,7 +704,7 @@ h3 {
 }
 
 /* mobile */
-@media (max-width: 431px) {
+@media (max-width: 432px) {
     aside {
         width: 100%;
         height: auto;
@@ -724,13 +724,14 @@ h3 {
     }
 
     .showCountInfo {
-        flex-direction: column;
+        margin-top: 70px;
+        display: flex;
+        flex-wrap: wrap;
         gap: 10px;
     }
 
     .boxShowCountInfo {
-        flex: 1 1 100%;
-        margin-bottom: 10px;
+        flex: 1 1 calc(50% - 10px);
         padding: 15px;
         text-align: center;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -750,6 +751,23 @@ h3 {
     }
     .submit-btn input[type="submit"]{
         font-size:14px;
+    }
+    .menu-text-bar,
+    .menu-user-bar,
+    .dropdown-menu-user
+    {
+    display: none;
+    }
+    .menu-toggle {
+    display: block;
+    }
+    
+    .menu-bar {
+    justify-content: space-between;
+    }
+    .menu {
+    flex-direction: column;
+    font-size: 14px;
     }
 }
 
@@ -778,6 +796,7 @@ h3 {
     .showCountInfo {
         flex-direction: row;
         gap: 15px;
+        margin-top: 50px;
     }
 
     .boxShowCountInfo {

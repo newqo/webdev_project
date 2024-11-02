@@ -393,7 +393,7 @@ select:focus, input[type="text"]:focus {
 
 .submit-btn {
   font-size: 16px;
-  padding: 12px 40px;
+  padding: 12px;
   border: none;
   border-radius: 8px;
   color: white;
@@ -402,9 +402,9 @@ select:focus, input[type="text"]:focus {
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   height: 48px;
-  width: 25%;
   text-align: center;
   margin:10px;
+  justify-content: center;
 }
 
 .submit-btn:hover{
@@ -414,6 +414,11 @@ select:focus, input[type="text"]:focus {
 
 .submit-btn:active {
   transform: scale(0.95);
+}
+
+.submit-btn:disabled{
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .div-submit-btn{
@@ -452,6 +457,10 @@ select:focus, input[type="text"]:focus {
 
 }
 
+.reservation_round_bt:disabled{
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
 
 .round-selected{
@@ -469,7 +478,7 @@ select:focus, input[type="text"]:focus {
 
 .bt-previous {
   padding: 10px 15px;
-  background-color: #b37400;
+  background-color: #e69500;
   border: none;
   border-radius: 5px;
   color: #fff;

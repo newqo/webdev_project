@@ -1,6 +1,10 @@
 <?php
   include "connect.php";
   session_start();
+  if (empty($_SESSION["national_id"]) || $_SESSION['role'] == 0 ) { 
+    header("location: login.php");
+    exit();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet"/>
+    <script src="javascript/accountpage.js"></script>
     <script src="https://kit.fontawesome.com/9703a87d5d.js" crossorigin="anonymous"></script>
 
     <script>
@@ -31,9 +36,10 @@
         function selectStatus(statusId) {
             document.getElementById(statusId).checked = true;
         }
+        
     </script>
 </head>
-<body>
+<body onload="updateFaculty(<?=$_GET['national_id']?>)">
 <header>
         <nav>
           <div class="menu-bar">
@@ -61,9 +67,6 @@
               <a href="homepage.php#contect">ติดต่อเรา</a>
               <div class="section-title-menu-mobile">หมวดหมู่</div>
                 <a href="accountpage.php?content=student" id="student">ข้อมูลส่วนตัวนักศึกษา</a>
-                <a href="accountpage.php?content=education" id="education" >ข้อมูลการศึกษา</a>
-                <a href="accountpage.php?content=parents" id="parents" >ข้อมูลของครอบครัว</a>
-                <a href="accountpage.php?content=history" id="history" >ประวัติการจอง</a>
                 <a href="Edit_user_password.php" id="changepassword" >เปลี่ยนแปลงรหัสผ่าน</a>
                 <?php
                   if(isset($_SESSION['role']) && $_SESSION["role"] == 1){
@@ -71,7 +74,7 @@
                   }
                 ?>
               <br/>
-              <a href="#">ออกจากระบบ</a>
+              <a href="logout.php">ออกจากระบบ</a>
             </div>
   
             <!-- desktop -->
@@ -87,7 +90,7 @@
                 <a href="homepage.php#reservation_announcement_old_user">ผู้กู้รายเก่า</a>
                 <a href="homepage.php#reservation_announcement_new_user">ผู้กู้รายใหม่</a>
               </div>
-              <a href="#contect">ติดต่อเรา</a>
+              <a href="homepage.php#contect">ติดต่อเรา</a>
             </div>
             <div class="dropdown-menu-user">
               <div class="drop-menu-user-btn">
@@ -105,16 +108,13 @@
               </div>
               <div class="dropdown-content-user" id="myDropdown-menu-user">
                 <a href="accountpage.php?content=student" id="student">ข้อมูลส่วนตัวนักศึกษา</a>
-                <a href="accountpage.php?content=education" id="education" >ข้อมูลการศึกษา</a>
-                <a href="accountpage.php?content=parents" id="parents" >ข้อมูลของครอบครัว</a>
-                <a href="accountpage.php?content=history" id="history" >ประวัติการจอง</a>
                 <a href="Edit_user_password.php" id="changepassword" >เปลี่ยนแปลงรหัสผ่าน</a>
                 <?php
                   if(isset($_SESSION['role']) && $_SESSION["role"] == 1){
                     echo "<a href=\"dashboard.php\">Dashboard</a>";
                   }
                 ?>
-                <a href="logout_dashboard.php">ออกจากระบบ</a>
+                <a href="logout.php">ออกจากระบบ</a>
               </div>
             </div>
           </div>
@@ -170,7 +170,7 @@
         </div>
         <div class="form-group">
             <label>ชื่อ</label>
-            <input type="text" name="firstname" pattern="[A-Za-zก-ฮ-๙]{2,50}" value="<?=$row["ชื่อ"]?>" required>
+            <input type="text" name="firstname" pattern="[A-Za-zก-๙]{2,50}" value="<?=$row["ชื่อ"]?>" required>
         </div>
         <div class="form-group">
             <label>นามสกุล</label>
@@ -178,7 +178,7 @@
         </div>
         <div class="form-group">
             <label>ชั้นปี</label>
-            <select name="Education_Level" required>
+            <select name="Education_Level" id="user_year" onchange="updateFaculty(<?=$row['ID']?>)">
                 <?php 
                     $user_ed_level = $row["ชั้นปี"];
 
@@ -194,34 +194,14 @@
         </div>
         <div class="form-group">
             <label>คณะ</label>
-            <select name="Faculty_id" required>
-                <?php 
-                    $user_faculty = $row["คณะ"];
-
-                    $query_faculty = $pdo->prepare("SELECT * FROM Faculty");
-                    $query_faculty->execute();
-
-                    while($option = $query_faculty->fetch()){
-                        $IsSelected_faculty = ($user_faculty == $option["Faculty_id"]) ? 'selected' : '';
-                        echo "<option value='". $option["Faculty_id"] ."'". $IsSelected_faculty .">". $option["Faculty_name"] ."</option>";
-                    }
-                ?>
+            <select name="Faculty_id" id="faculty" onchange="updateMajor(<?=$row['ID']?>)">
+          
             </select>
         </div>
         <div class="form-group">
             <label>สาขา</label>
-            <select name="Department_id" required>
-                <?php 
-                    $user_department = $row["สาขา"];
-
-                    $query_department = $pdo->prepare("SELECT * FROM Department");
-                    $query_department->execute();
-
-                    while($option = $query_department->fetch()){
-                        $IsSelected_department = ($user_department == $option["Department_id"]) ? 'selected' : '';
-                        echo "<option value='". $option["Department_id"] ."'". $IsSelected_department .">". $option["Department_name"] ."</option>";
-                    }
-                ?>
+            <select name="Department_id" id="major" >
+                
             </select>
         </div>
         <div class="form-group">
@@ -238,7 +218,7 @@
         </div>
         <div class="form-group">
             <label>ที่อยู่</label>
-            <textarea name="Address" rows="4" cols="50" pattern="[A-Za-z0-9ก-๙\s,.]{2,200}" maxlength="200" required><?=$row["ที่อยู่"]?></textarea>
+            <textarea name="Address" rows="4" cols="50" pattern="[A-Za-z0-9ก-๙\s,./]{2,200}" maxlength="200" required><?=$row["ที่อยู่"]?></textarea>
         </div>
         <div class="submit-btn">
             <button type="submit" class="btn">แก้ไข</button>
