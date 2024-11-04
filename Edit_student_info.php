@@ -159,11 +159,11 @@
           </div>
           <div class='form-group'>
             <label>ชื่อจริง</label>
-            <input type='text' id='user_firstname' name='user_firstname' pattern='[A-Za-zก-๗]{2,}' value='<?=$row['firstname']?>'/>
+            <input type='text' id='user_firstname' name='user_firstname' pattern='[A-Za-zก-๙\s]{1,50}' value='<?=$row['firstname']?>'/>
           </div>
           <div class='form-group'>
             <label>นามสกุล</label>
-            <input type='text' id='user_lastname' name='user_lastname' pattern='[A-Za-zก-๗]{2,}' value='<?=$row['lastname']?>'/>
+            <input type='text' id='user_lastname' name='user_lastname' pattern='[A-Za-zก-๙\s]{1,50}' value='<?=$row['lastname']?>'/>
           </div>
           <div class='form-group'>
             <!-- <label>เลขบัตรประชาชน*</label> -->
@@ -175,15 +175,15 @@
           </div>
           <div class='form-group'>
             <label>E-mail</label>
-            <input type='email' id='email' name='email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'  value='<?=$row['Email']?>'/>
+            <input type='email' id='email' name='email' maxlength='50' value='<?=$row['Email']?>'/>
           </div>
           <div class='form-group'>
             <label>เบอร์โทร</label>
-            <input type='text' id='phone_number' name='phone_number' pattern='[0-9]{10}'  value='<?=$row['phone_num']?>'/>
+            <input type='text' id='phone_number' name='phone_number' pattern='[0-9]{10}'  value='<?=$row['phone_num']?>' maxlength="10"/>
           </div>
           <div class='form-group' style='flex: 2;'>
             <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)*</label>
-            <input type='text' id='user_address' name='user_address' pattern='[A-Za-z0-9\s,.]{2,200}' maxlength='200' value='<?=$row['Address']?>'/>
+            <input type='text' id='user_address' name='user_address' pattern='[A-Za-z0-9ก-๙\s,./]{1,200}' maxlength='200' value='<?=$row['Address']?>'/>
           </div>
           <div class="submit-btn">
             <button type="submit" class="sub-btn">ยืนยัน</button>

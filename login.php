@@ -26,7 +26,7 @@
         </div>
         <form action="login_validation.php" method="post">
             <input type="text" class="input-login-user" id="user_national_id" name="user_national_id" placeholder="เลขบัตรประชาชน" pattern="([A-Za-z0-9]{1,13}|Admin-[A-Za-z0-9]{1,})" maxlength="13" required><br>
-            <input type="password" class="input-login-password" id="user_password" name="user_password" placeholder="รหัสผ่าน" pattern="\w{8,}" required><br>
+            <input type="password" class="input-login-password" id="user_password" name="user_password" placeholder="รหัสผ่าน" pattern=".{8,100}" required><br>
             <button type="button" class="login-btn" onclick="login_validation()">เข้าสู่ระบบ</button><br>
         </form>
         <div class="register">

@@ -252,7 +252,7 @@ function Checking_span(){
         bt_submit.className = bt_response;
 
         if(bt_response == "disabled"){
-            bt_submit.diabled = true;
+            bt_submit.disabled = true;
         }else{
             bt_submit.disabled = false;
         }

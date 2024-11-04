@@ -142,15 +142,15 @@
                 <div class='form-group'>
                     <label>รหัสผ่านปัจจุบัน</label>
                     <input type="hidden" name="nid" value="<?=$_SESSION['national_id']?>">
-                    <input type='password' id='password_id' name='password' pattern='\w{8,20}' required>
+                    <input type='password' id='password_id' name='password' pattern='.{8,100}' required>
                 </div>
                 <div class='form-group'>
                     <label>รหัสผ่านใหม่</label>
-                    <input type='password' id='new_password_id' name='new_password' pattern='\w{8,20}' required>
+                    <input type='password' id='new_password_id' name='new_password' pattern='.{8,100}' required>
                 </div>
                 <div class='form-group'>
                     <label>ยืนยันรหัสผ่านใหม่อีกครั้ง</label>
-                    <input type='password' id='re_new_password_id' name='re_new_password' pattern='\w{8,20}' required>
+                    <input type='password' id='re_new_password_id' name='re_new_password' pattern='.{8,100}' required>
                 </div>
                 <div class='submit-btn'>
                     <button type='submit' class='edit_button' id='edit_user_info'>แก้ไข</button>

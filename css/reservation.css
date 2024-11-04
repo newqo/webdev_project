@@ -312,10 +312,6 @@ select:focus, input[type="text"]:focus {
     align-items: flex-start; 
 }
   
-  .form-container+div+label{
-    display: inline-block;
-  }
-  
   div.setcenter {
     margin-top: 2%;
   }

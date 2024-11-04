@@ -1,6 +1,10 @@
 <?php
   include "connect.php";
   session_start();
+  if (empty($_SESSION["national_id"]) || $_SESSION['role'] == 0 ) { 
+    header("location: login.php");
+    exit();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

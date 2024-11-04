@@ -24,11 +24,11 @@
           </div>
           <div class='form-group'>
             <label>ชื่อจริง</label>
-            <input type='text' id='user_firstname' name='user_firstname' pattern='[A-Za-zก-๗]{2,}' disabled='disabled' value='". $row['firstname'] ."'/>
+            <input type='text' id='user_firstname' name='user_firstname' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $row['firstname'] ."'/>
           </div>
           <div class='form-group'>
             <label>นามสกุล</label>
-            <input type='text' id='user_lastname' name='user_lastname' pattern='[A-Za-zก-๗]{2,}' disabled='disabled' value='". $row['lastname'] ."'/>
+            <input type='text' id='user_lastname' name='user_lastname' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $row['lastname'] ."'/>
           </div>
           <div class='form-group'>
             <label>เลขบัตรประชาชน*</label>
@@ -40,7 +40,7 @@
           </div>
           <div class='form-group'>
             <label>E-mail</label>
-            <input type='email' id='email' name='email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$' disabled='disabled' value='". $row['Email'] ."'/>
+            <input type='email' id='email' name='email' disabled='disabled' value='". $row['Email'] ."'  maxlength='50'/>
           </div>
           <div class='form-group'>
             <label>เบอร์โทร</label>
@@ -48,7 +48,7 @@
           </div>
           <div class='form-group' style='flex: 2;'>
             <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)*</label>
-            <input type='text' id='user_address' name='user_address' pattern='[A-Za-z0-9\s,./]{2,200}' maxlength='200' disabled='disabled' value='". $row['Address'] ."'/>
+            <input type='text' id='user_address' name='user_address' pattern='[A-Za-z0-9ก-๙\s,./]{1,200}' maxlength='200' disabled='disabled' value='". $row['Address'] ."'/>
           </div>
           <div class='form-group'>
             <a href='Edit_student_info.php' class='edit_button' id='edit_user_info'>แก้ไข</a>
@@ -132,11 +132,11 @@
                   </div>
                   <div class='form-group'>
                       <label>ชื่อจริง</label>
-                      <input type='text' id='firstname_father' name='father_fst_name' pattern='[A-Za-zก-๙]{2,50}' disabled='disabled' value='". $ft_data['firstname'] ."'>
+                      <input type='text' id='firstname_father' name='father_fst_name' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $ft_data['firstname'] ."'>
                   </div>
                   <div class='form-group'>
                       <label>นามสกุล</label>
-                      <input type='text' id='lastname_father' name='father_lst_name' pattern='[A-Za-zก-๙]{2,50}' disabled='disabled' value='". $ft_data['lastname'] ."'>
+                      <input type='text' id='lastname_father' name='father_lst_name' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $ft_data['lastname'] ."'>
                   </div>
                   <div class='form-group'>
                       <label>เบอร์โทร</label>
@@ -157,7 +157,7 @@
                         </div>
                       <div class='form-group'>
                           <label>อาชีพ</label>
-                          <input type='text' id='job_detail_father' name='father_career' pattern='[A-Za-zก-๙]{2,50}' disabled='disabled' value='". $ft_data['career'] ."'>
+                          <input type='text' id='job_detail_father' name='father_career' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $ft_data['career'] ."'>
                       </div>
                       <div class='form-group'>
                           <label>รายได้ของบิดา (ต่อปี)</label>
@@ -189,11 +189,11 @@
                   </div>
                   <div class='form-group'>
                       <label>ชื่อจริง</label>
-                      <input type='text' id='firstname_mother' name='mother_fst_name' pattern='[A-Za-zก-๙]{2,50}' disabled='disabled' value='". $mt_data['firstname'] ."'>
+                      <input type='text' id='firstname_mother' name='mother_fst_name' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $mt_data['firstname'] ."'>
                   </div>
                   <div class='form-group'>
                       <label>นามสกุล</label>
-                      <input type='text' id='lastname_mother' name='mother_lst_name' pattern='[A-Za-zก-๙]{2,50}' disabled='disabled' value='". $mt_data['lastname'] ."'>
+                      <input type='text' id='lastname_mother' name='mother_lst_name' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $mt_data['lastname'] ."'>
                   </div>
                   <div class='form-group'>
                       <label>เบอร์โทร</label>
@@ -214,7 +214,7 @@
                         </div>
                   <div class='form-group'>
                           <label>อาชีพ</label>
-                          <input type='text' id='job_detail_mother' name='mother_career' pattern='[A-Za-zก-๙]{2,50}' disabled='disabled' value='". $mt_data['career'] ."'>
+                          <input type='text' id='job_detail_mother' name='mother_career' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $mt_data['career'] ."'>
                       </div>
                       <div class='form-group'>
                           <label>รายได้ของมารดา (ต่อปี)</label>
@@ -245,11 +245,11 @@
                   </div>
                   <div class='form-group'>
                       <label>ชื่อจริง</label>
-                      <input type='text' id='firstname_guardian' name='guardian_fst_name' pattern='[A-Za-zก-๙]{2,50}' disabled='disabled' value='". $gd_data['firstname'] ."'>
+                      <input type='text' id='firstname_guardian' name='guardian_fst_name' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $gd_data['firstname'] ."'>
                   </div>
                   <div class='form-group'>
                       <label>นามสกุล</label>
-                      <input type='text' id='lastname_guardian' name='guardian_lst_name' pattern='[A-Za-zก-๙]{2,50}' disabled='disabled' value='". $gd_data['lastname'] ."'>
+                      <input type='text' id='lastname_guardian' name='guardian_lst_name' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $gd_data['lastname'] ."'>
                   </div>
                   <div class='form-group'>
                       <label>เบอร์โทร</label>
@@ -270,7 +270,7 @@
                         </div>
                   <div class='form-group'>
                           <label>อาชีพ</label>
-                          <input type='text' id='job_detail_guardian' name='guardian_career' pattern='[A-Za-zก-๙]{2,50}' disabled='disabled' value='". $gd_data['career'] ."'>
+                          <input type='text' id='job_detail_guardian' name='guardian_career' pattern='[A-Za-zก-๙\s]{1,50}' disabled='disabled' value='". $gd_data['career'] ."'>
                       </div>
                       <div class='form-group'>
                           <label>รายได้ของผู้ปกครอง (ต่อปี)</label>
