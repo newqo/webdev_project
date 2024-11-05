@@ -18,12 +18,19 @@ function closeNav() {
 function myFunctionMobile() {
   var dropdown = document.getElementById("myDropdown-menu-mobile");
   if (dropdown.style.display === "block") {
+    
     dropdown.style.display = "none";
   } else {
     dropdown.style.display = "block";
   }
 }
 
+
+//menu dropdown
+function myFunction() {
+  var myDropdown = document.getElementById("myDropdown-menu");
+  myDropdown.classList.toggle("show");
+}
 // user menu
 function myFunctionUser() {
   var myDropdownuser = document.getElementById("myDropdown-menu-user");
@@ -39,7 +46,6 @@ window.onclick = function(e) {
       myDropdown.classList.remove('show');
     }
   }
-  
   // For user menu dropdown
   if (!e.target.closest('.dropdown-menu-user')) {
     var myDropdownuser = document.getElementById("myDropdown-menu-user");

@@ -116,7 +116,33 @@
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label>ที่อยู่ปัจจุบัน (ที่สามารถติดต่อได้)*</label>
-                        <input type="text" id="user_address" name="user_address" pattern="[A-Za-z0-9ก-๙\s,./]{1,200}" maxlength="200" required>
+                        <input type="text" id="user_address" name="user_address" pattern="[A-Za-z0-9ก-๙\s,./]{1,100}" maxlength="100" placeholder="บ้านเลขที่ หมู่บ้าน ซอย" required>
+                    </div>
+                </div>    
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="province">จังหวัด *</label>
+                        <select id="province" name="province_name" required>
+                            <option value="">เลือกจังหวัด</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="district">อำเภอ/เขต *</label>
+                        <select id="dist" name="dist_name" required>
+                            <option value="">เลือกอำเภอ/เขต</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="sub-district">ตำบล/แขวง *</label>
+                        <select id="sub_dist" name="sub_dist_name" required>
+                            <option value="">เลือกตำบล/แขวง</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>รหัสไปรษณีย์ *</label>
+                        <input type="text" name="postcode" pattern="[0-9]{5}" maxlength="5" required>
                     </div>
                 </div>
             </div>   

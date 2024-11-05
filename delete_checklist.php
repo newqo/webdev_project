@@ -16,7 +16,7 @@
         $stmt3->bindParam(1, $_GET["Duration_id"]);
         $stmt3->execute();
         
-        // Commit transaction
+        // Commit transaction 
         $pdo->commit();
         // print_r($_POST);
         header("Location: dashboard.php");

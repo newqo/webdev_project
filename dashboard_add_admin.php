@@ -157,7 +157,7 @@ if (empty($_SESSION["national_id"]) || $_SESSION['role'] == 0 ) {
         </div>
         <div class="form-group">
             <label>Email</label>
-            <input type="email" name="Email" placeholder="example@email.com" maxlength='50' required>
+            <input type="email" name="Email" placeholder="example@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$" maxlength='50' required>
         </div>
         <div class="form-group">
             <label>เบอร์โทร</label>

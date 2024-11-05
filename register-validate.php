@@ -23,7 +23,10 @@ try {
     $stmt->bindParam(5, $_POST["email"]); // Email
     $stmt->bindParam(6, $_POST["phone_number"]); // phone_num
     $stmt->bindParam(7, $_POST["birthdate"]); // birthdate
-    $stmt->bindParam(8, $_POST["user_address"]); // address
+
+    $address = $_POST['user_address'] . " ตำบล " .$_POST['dist_name'] . " อำเภอ " . $_POST['sub_dist_name'] . " จังหวัด " . $_POST['province_name'] . " " . $_POST['postcode'];
+
+    $stmt->bindParam(8, $address); // address
     $stmt->bindParam(9, $_POST["password"]); // password
     $stmt->execute();
 

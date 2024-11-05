@@ -260,3 +260,68 @@ function Checking_span(){
         // console.log(bt.responseText);
     }
 }
+
+
+
+//จังหวัด อำเภอ ตำบล
+async function getDataFromAPI(){
+    let response = await fetch('address.json'); 
+    let rawData = await response.text();
+    let objectData = JSON.parse(rawData); 
+
+    let province = document.getElementById('province');
+    let dist = document.getElementById('dist');
+    let sub_dist = document.getElementById('sub_dist');
+
+    let provinces = {};
+
+    objectData.forEach(item => {
+        if (!provinces[item.province]) {
+            provinces[item.province] = {};
+        }
+        if (!provinces[item.province][item.amphoe]) {
+            provinces[item.province][item.amphoe] = [];
+        }
+        provinces[item.province][item.amphoe].push(item.district);
+    });
+
+    Object.keys(provinces).forEach(provinceName => {
+        let option = document.createElement('option');
+        option.innerHTML = provinceName;
+        option.value = provinceName;
+        province.appendChild(option);
+    });
+
+    province.addEventListener('change', function() {
+        dist.innerHTML = '<option>เลือกอำเภอ</option>'; 
+        sub_dist.innerHTML = '<option>เลือกตำบล</option>'; 
+
+        let selectedProvince = province.value;
+        if (provinces[selectedProvince]) {
+            Object.keys(provinces[selectedProvince]).forEach(amphoeName => {
+                let option = document.createElement('option');
+                option.innerHTML = amphoeName;
+                option.value = amphoeName;
+                dist.appendChild(option);
+            });
+        }
+    });
+
+    dist.addEventListener('change', function() {
+        sub_dist.innerHTML = '<option>เลือกตำบล</option>'; 
+
+        let selectedProvince = province.value;
+        let selectedAmphoe = dist.value;
+
+        if (provinces[selectedProvince] && provinces[selectedProvince][selectedAmphoe]) {
+            provinces[selectedProvince][selectedAmphoe].forEach(districtName => {
+                let option = document.createElement('option');
+                option.innerHTML = districtName;
+                option.value = districtName;
+                sub_dist.appendChild(option);
+            });
+        }
+    });
+}
+
+window.onload = getDataFromAPI; 
