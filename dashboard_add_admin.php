@@ -149,15 +149,15 @@ if (empty($_SESSION["national_id"]) || $_SESSION['role'] == 0 ) {
         </div>
         <div class="form-group">
             <label>ชื่อ</label>
-            <input type="text" name="firstname" pattern="[A-Za-zก-๙]{2,50}" required>
+            <input type="text" name="firstname" pattern="[A-Za-zก-๙\s]{1,50}" required>
         </div>
         <div class="form-group">
             <label>นามสกุล</label>
-            <input type="text" name="lastname" pattern="[A-Za-zก-๙]{2,50}" required>
+            <input type="text" name="lastname" pattern="[A-Za-zก-๙\s]{1,50}" required>
         </div>
         <div class="form-group">
             <label>Email</label>
-            <input type="email" name="Email" placeholder="example@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+            <input type="email" name="Email" placeholder="example@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$" maxlength='50' required>
         </div>
         <div class="form-group">
             <label>เบอร์โทร</label>
@@ -169,7 +169,7 @@ if (empty($_SESSION["national_id"]) || $_SESSION['role'] == 0 ) {
         </div>
         <div class="form-group">
             <label>รหัสผ่าน</label>
-            <input type="password" name="passwd" maxlength="100" pattern="[A-Za-z0-9_]{8,100}" placeholder="กรอกอย่างน้อย 8 ตัว" required>
+            <input type="password" name="passwd" maxlength="100" pattern=".{8,100}" placeholder="กรอกอย่างน้อย 8 ตัว" required>
         </div>
         <div class="submit-btn">
             <button type="submit" class="btn">เพิ่ม</button>

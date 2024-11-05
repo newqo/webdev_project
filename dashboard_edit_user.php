@@ -170,11 +170,11 @@
         </div>
         <div class="form-group">
             <label>ชื่อ</label>
-            <input type="text" name="firstname" pattern="[A-Za-zก-๙]{2,50}" value="<?=$row["ชื่อ"]?>" required>
+            <input type="text" name="firstname" pattern="[A-Za-zก-๙\s]{1,50}" value="<?=$row["ชื่อ"]?>" required>
         </div>
         <div class="form-group">
             <label>นามสกุล</label>
-            <input type="text" name="lastname" pattern="[A-Za-zก-๙]{2,50}" value="<?=$row["นามสกุล"]?>" required>
+            <input type="text" name="lastname" pattern="[A-Za-zก-๙\s]{1,50}" value="<?=$row["นามสกุล"]?>" required>
         </div>
         <div class="form-group">
             <label>ชั้นปี</label>
@@ -206,11 +206,11 @@
         </div>
         <div class="form-group">
             <label>อีเมลล์</label>
-            <input type="email" name="Email" value="<?=$row["อีเมลล์"]?>" placeholder="example@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+            <input type="email" name="Email" value="<?=$row["อีเมลล์"]?>" placeholder="example@email.com" maxlength='50' required>
         </div>
         <div class="form-group">
             <label>เบอร์โทรศัพท์</label>
-            <input type="text" name="phone_num"  value="<?=$row["เบอร์โทรศัพท์"]?>" placeholder="0981234567" maxlength="10" required>
+            <input type="text" name="phone_num"  value="<?=$row["เบอร์โทรศัพท์"]?>" placeholder="0981234567" pattern="[0-9]{10}" maxlength="10" required>
         </div>
         <div class="form-group">
             <label>วันเดือนปีเกิด</label>
@@ -218,7 +218,7 @@
         </div>
         <div class="form-group">
             <label>ที่อยู่</label>
-            <textarea name="Address" rows="4" cols="50" pattern="[A-Za-z0-9ก-๙\s,./]{2,200}" maxlength="200" required><?=$row["ที่อยู่"]?></textarea>
+            <textarea name="Address" rows="4" cols="50" pattern="[A-Za-z0-9ก-๙\s,./]{1,200}" maxlength="200" required><?=$row["ที่อยู่"]?></textarea>
         </div>
         <div class="submit-btn">
             <button type="submit" class="btn">แก้ไข</button>
